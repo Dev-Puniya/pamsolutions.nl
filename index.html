@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAM Solutions | Smart Hands & Break-Fix Support Services Netherlands</title>
-    <meta name="description" content="PAM Solutions - Professional Smart Hands and Break-Fix Support services. On-demand technical assistance and troubleshooting in the Netherlands. 24/7 availability.">
-    <meta name="keywords" content="smart hands, break-fix, IT support, technical support, Netherlands, datacenter support, field services">
+    <meta name="description" content="PAM Solutions - Professional Smart Hands, Break-Fix, Cloud and Remote Network Support services. On-demand technical assistance and troubleshooting in the Netherlands. 24/7 availability.">
+    <meta name="keywords" content="smart hands, break-fix, IT support, technical support, Netherlands, datacenter support, field services, cloud services, remote network">
     <link rel="canonical" href="https://pamsolutions.nl">
     
     <!-- Open Graph -->
@@ -25,6 +25,7 @@
             --primary-color: #1e40af;
             --secondary-color: #3b82f6;
             --accent-color: #f59e0b;
+            --success-color: #10b981;
             --dark-color: #1f2937;
             --text-color: #374151;
             --text-light: #6b7280;
@@ -33,6 +34,7 @@
             --border-color: #e5e7eb;
             --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         
         body {
@@ -120,7 +122,7 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: var(--primary-color);
+            background: var(--gradient-bg);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -167,15 +169,29 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: var(--gradient-bg);
             color: var(--white);
             padding: 120px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
         }
         
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
         
         .hero-badge {
@@ -187,6 +203,7 @@
             font-size: 0.875rem;
             font-weight: 500;
             margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
         }
         
         .hero h1 {
@@ -265,7 +282,7 @@
         
         .section-badge {
             display: inline-block;
-            background: var(--primary-color);
+            background: var(--gradient-bg);
             color: var(--white);
             padding: 6px 16px;
             border-radius: 20px;
@@ -307,6 +324,18 @@
             box-shadow: var(--shadow);
             transition: all 0.2s ease;
             border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-bg);
         }
         
         .service-card:hover {
@@ -317,7 +346,7 @@
         .service-icon {
             width: 60px;
             height: 60px;
-            background: var(--primary-color);
+            background: var(--gradient-bg);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -373,9 +402,9 @@
         /* Team Section */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
@@ -397,7 +426,7 @@
         .team-avatar {
             width: 80px;
             height: 80px;
-            background: var(--primary-color);
+            background: var(--gradient-bg);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -408,7 +437,7 @@
         }
         
         .team-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
             color: var(--dark-color);
             margin-bottom: 0.5rem;
@@ -424,6 +453,7 @@
         .team-card p:not(.team-role) {
             color: var(--text-light);
             line-height: 1.6;
+            font-size: 0.9rem;
         }
         
         /* Contact Section */
@@ -454,7 +484,7 @@
         .contact-icon {
             width: 48px;
             height: 48px;
-            background: var(--primary-color);
+            background: var(--gradient-bg);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -513,6 +543,7 @@
             font-size: 1rem;
             transition: all 0.2s ease;
             background: var(--white);
+            font-family: inherit;
         }
         
         .form-group input:focus,
@@ -524,7 +555,7 @@
         }
         
         .submit-btn {
-            background: var(--primary-color);
+            background: var(--gradient-bg);
             color: var(--white);
             padding: 14px 28px;
             border: none;
@@ -537,7 +568,7 @@
         }
         
         .submit-btn:hover {
-            background: var(--secondary-color);
+            opacity: 0.9;
             transform: translateY(-1px);
         }
         
@@ -709,8 +740,8 @@
                 <div class="hero-content">
                     <div class="hero-badge">🇳🇱 Based in Eindhoven • 24/7 Support</div>
                     <h1>We deliver global IT services, bringing professional engineers directly to you</h1>
-                    <p class="hero-subtitle">DC Support Services</p>
-                    <p class="hero-description">At PAM Solutions, we guarantee a quality service. We are dedicated to providing you with the best IT services for your business. Whether it's a hardware issue that needs fixing or a new OS that's required, we will ensure that everything is completed efficiently.</p>
+                    <p class="hero-subtitle">Cloud • Remote Network • Data Center Support Services</p>
+                    <p class="hero-description">At PAM Solutions, we guarantee a quality service. We are dedicated to providing you with the best IT services for your business. Whether it's cloud infrastructure, remote network management, or hardware that needs fixing, we ensure everything is completed efficiently.</p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn btn-primary">Get Support Now</a>
                         <a href="#services" class="btn btn-secondary">View Services</a>
@@ -725,7 +756,7 @@
                 <div class="section-header">
                     <div class="section-badge">Our Expertise</div>
                     <h2 class="section-title">Professional IT Support Services</h2>
-                    <p class="section-description">Every engineer we send out is fully qualified to complete tasks to an impeccably high standard. We have a highly skilled team of engineers, who know exactly how to help.</p>
+                    <p class="section-description">Every engineer we send out is fully qualified to complete tasks to an impeccably high standard. We have a highly skilled team who know exactly how to help with modern IT infrastructure.</p>
                 </div>
                 
                 <div class="services-grid">
@@ -742,9 +773,15 @@
                     </div>
                     
                     <div class="service-card fade-in">
-                        <div class="service-icon">💻</div>
-                        <h3>Remote Troubleshooting</h3>
-                        <p>Our experience and knowledge mean that we're able to quickly respond to your requests and deploy a qualified professional directly to you.</p>
+                        <div class="service-icon">☁️</div>
+                        <h3>Cloud Infrastructure</h3>
+                        <p>Complete cloud solutions including migration, management, and optimization. We help you leverage AWS, Azure, and Google Cloud platforms for maximum efficiency and cost savings.</p>
+                    </div>
+                    
+                    <div class="service-card fade-in">
+                        <div class="service-icon">🌐</div>
+                        <h3>Remote Network Services</h3>
+                        <p>Comprehensive remote network monitoring, configuration, and troubleshooting. Our experts manage your network infrastructure remotely, ensuring optimal performance and security.</p>
                     </div>
                     
                     <div class="service-card fade-in">
@@ -754,15 +791,9 @@
                     </div>
                     
                     <div class="service-card fade-in">
-                        <div class="service-icon">🔄</div>
-                        <h3>Preventive Maintenance</h3>
-                        <p>They can work on your device to get you back on track fast or be directed to a specific site. They can analyse the situation from the ground and report back.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
                         <div class="service-icon">📱</div>
-                        <h3>Field Services</h3>
-                        <p>Comprehensive on-site technical support at your location. Our field engineers provide installation, maintenance, and repair services across the Netherlands.</p>
+                        <h3>Managed IT Services</h3>
+                        <p>Proactive monitoring and management of your entire IT infrastructure. From endpoint management to security monitoring, we keep your business running smoothly 24/7.</p>
                     </div>
                 </div>
             </div>
@@ -785,8 +816,8 @@
                         <span class="stat-label">Service Uptime</span>
                     </div>
                     <div class="stat-item fade-in">
-                        <span class="stat-number">5+</span>
-                        <span class="stat-label">Years Experience</span>
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">Cloud Migrations</span>
                     </div>
                 </div>
             </div>
@@ -811,9 +842,16 @@
                     
                     <div class="team-card fade-in">
                         <div class="team-avatar">👨‍💻</div>
-                        <h3>Ayush Puniya</h3>
+                        <h3>Ayush Choudhary</h3>
                         <p class="team-role">CTO</p>
-                        <p>Overseeing technical operations and ensuring innovative solutions for our Smart Hands and Break-Fix services. Expert in IT infrastructure and emerging technologies.</p>
+                        <p>Overseeing technical operations and ensuring innovative solutions for our Smart Hands, Cloud, and Remote Network services. Expert in modern IT infrastructure and emerging technologies.</p>
+                    </div>
+                    
+                    <div class="team-card fade-in">
+                        <div class="team-avatar">👩‍💼</div>
+                        <h3>Priya P</h3>
+                        <p class="team-role">Admin & Support Manager</p>
+                        <p>Managing administrative operations and customer support excellence. Ensuring smooth coordination between technical teams and client requirements for optimal service delivery.</p>
                     </div>
                 </div>
             </div>
@@ -840,15 +878,6 @@
                             </div>
                         </div>
                         
-                        <div class="contact-item fade-in">
-                            <div class="contact-icon">✉️</div>
-                            <div class="contact-details">
-                                <h4>Email Support</h4>
-                                <p>info@pamsolutions.nl - General inquiries<br>
-                                support@pamsolutions.nl - Technical support<br>
-                                Response within 1 hour during business hours</p>
-                            </div>
-                        </div>
                         
                         <div class="contact-item fade-in">
                             <div class="contact-icon">📍</div>
@@ -869,7 +898,22 @@
                     
                     <div class="contact-form fade-in">
                         <h3>Request Support</h3>
-                        <form>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
                                 <input type="tel" id="phone" name="phone">
@@ -881,9 +925,10 @@
                                     <option value="">Select a service</option>
                                     <option value="emergency">Emergency Break-Fix</option>
                                     <option value="smart-hands">Smart Hands Support</option>
+                                    <option value="cloud">Cloud Infrastructure</option>
+                                    <option value="network">Remote Network Services</option>
                                     <option value="installation">Hardware Installation</option>
-                                    <option value="maintenance">Preventive Maintenance</option>
-                                    <option value="remote">Remote Troubleshooting</option>
+                                    <option value="managed">Managed IT Services</option>
                                     <option value="other">Other</option>
                                 </select>
                             </div>
@@ -920,8 +965,8 @@
                 <div class="hero-content">
                     <div class="hero-badge">🇳🇱 Gevestigd in Eindhoven • 24/7 Ondersteuning</div>
                     <h1>Wij leveren wereldwijde IT-diensten en brengen professionele ingenieurs direct naar u toe</h1>
-                    <p class="hero-subtitle">DC Ondersteuningsdiensten</p>
-                    <p class="hero-description">Bij PAM Solutions garanderen wij een kwaliteitsservice. Wij zijn toegewijd aan het bieden van de beste IT-diensten voor uw bedrijf. Of het nu gaat om een hardwareprobleem dat moet worden opgelost of een nieuw besturingssysteem dat vereist is, wij zorgen ervoor dat alles efficiënt wordt voltooid.</p>
+                    <p class="hero-subtitle">Cloud • Remote Network • Data Center Ondersteuningsdiensten</p>
+                    <p class="hero-description">Bij PAM Solutions garanderen wij een kwaliteitsservice. Wij zijn toegewijd aan het bieden van de beste IT-diensten voor uw bedrijf. Of het nu gaat om cloudinfrastructuur, remote netwerkbeheer of hardware die moet worden opgelost, wij zorgen ervoor dat alles efficiënt wordt voltooid.</p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn btn-primary">Krijg Nu Ondersteuning</a>
                         <a href="#services" class="btn btn-secondary">Bekijk Diensten</a>
@@ -936,7 +981,7 @@
                 <div class="section-header">
                     <div class="section-badge">Onze Expertise</div>
                     <h2 class="section-title">Professionele IT Ondersteuningsdiensten</h2>
-                    <p class="section-description">Elke ingenieur die wij uitzenden is volledig gekwalificeerd om taken tot een onberispelijk hoge standaard te voltooien. Wij hebben een zeer bekwaam team van ingenieurs die precies weten hoe te helpen.</p>
+                    <p class="section-description">Elke ingenieur die wij uitzenden is volledig gekwalificeerd om taken tot een onberispelijk hoge standaard te voltooien. Wij hebben een zeer bekwaam team dat precies weet hoe te helpen met moderne IT-infrastructuur.</p>
                 </div>
                 
                 <div class="services-grid">
@@ -953,9 +998,15 @@
                     </div>
                     
                     <div class="service-card fade-in">
-                        <div class="service-icon">💻</div>
-                        <h3>Remote Probleemoplossing</h3>
-                        <p>Onze ervaring en kennis betekenen dat wij in staat zijn om snel te reageren op uw verzoeken en een gekwalificeerde professional direct naar u toe te sturen.</p>
+                        <div class="service-icon">☁️</div>
+                        <h3>Cloud Infrastructuur</h3>
+                        <p>Complete cloudoplossingen inclusief migratie, beheer en optimalisatie. Wij helpen u gebruik te maken van AWS, Azure en Google Cloud platforms voor maximale efficiëntie en kostenbesparing.</p>
+                    </div>
+                    
+                    <div class="service-card fade-in">
+                        <div class="service-icon">🌐</div>
+                        <h3>Remote Netwerkdiensten</h3>
+                        <p>Uitgebreide remote netwerkmonitoring, configuratie en probleemoplossing. Onze experts beheren uw netwerkinfrastructuur op afstand en zorgen voor optimale prestaties en beveiliging.</p>
                     </div>
                     
                     <div class="service-card fade-in">
@@ -965,15 +1016,9 @@
                     </div>
                     
                     <div class="service-card fade-in">
-                        <div class="service-icon">🔄</div>
-                        <h3>Preventief Onderhoud</h3>
-                        <p>Zij kunnen aan uw apparaat werken om u snel weer op het goede spoor te krijgen of naar een specifieke locatie worden gestuurd. Zij kunnen de situatie ter plaatse analyseren en rapporteren.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
                         <div class="service-icon">📱</div>
-                        <h3>Veldservices</h3>
-                        <p>Uitgebreide technische ondersteuning ter plaatse op uw locatie. Onze veldingenieurs bieden installatie-, onderhouds- en reparatiediensten door heel Nederland.</p>
+                        <h3>Managed IT Services</h3>
+                        <p>Proactieve monitoring en beheer van uw gehele IT-infrastructuur. Van endpoint management tot beveiligingsmonitoring, wij houden uw bedrijf 24/7 soepel draaiend.</p>
                     </div>
                 </div>
             </div>
@@ -996,8 +1041,8 @@
                         <span class="stat-label">Service Uptime</span>
                     </div>
                     <div class="stat-item fade-in">
-                        <span class="stat-number">5+</span>
-                        <span class="stat-label">Jaar Ervaring</span>
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">Cloud Migraties</span>
                     </div>
                 </div>
             </div>
@@ -1022,9 +1067,16 @@
                     
                     <div class="team-card fade-in">
                         <div class="team-avatar">👨‍💻</div>
-                        <h3>Ayush Puniya</h3>
+                        <h3>Ayush Choudhary</h3>
                         <p class="team-role">CTO</p>
-                        <p>Houdt toezicht op technische operaties en zorgt voor innovatieve oplossingen voor onze Smart Hands en Break-Fix diensten. Expert in IT-infrastructuur en opkomende technologieën.</p>
+                        <p>Houdt toezicht op technische operaties en zorgt voor innovatieve oplossingen voor onze Smart Hands, Cloud en Remote Network diensten. Expert in moderne IT-infrastructuur en opkomende technologieën.</p>
+                    </div>
+                    
+                    <div class="team-card fade-in">
+                        <div class="team-avatar">👩‍💼</div>
+                        <h3>Priya P</h3>
+                        <p class="team-role">Admin & Support Manager</p>
+                        <p>Beheert administratieve operaties en zorgt voor uitstekende klantenondersteuning. Zorgt voor soepele coördinatie tussen technische teams en klanteneisen voor optimale serviceverlening.</p>
                     </div>
                 </div>
             </div>
@@ -1080,7 +1132,7 @@
                     
                     <div class="contact-form fade-in">
                         <h3>Vraag Ondersteuning Aan</h3>
-                        <form>
+                        <form id="contactFormNL">
                             <div class="form-group">
                                 <label for="name-nl">Volledige Naam *</label>
                                 <input type="text" id="name-nl" name="name" required>
@@ -1107,9 +1159,10 @@
                                     <option value="">Selecteer een service</option>
                                     <option value="emergency">Nood Break-Fix</option>
                                     <option value="smart-hands">Smart Hands Ondersteuning</option>
+                                    <option value="cloud">Cloud Infrastructuur</option>
+                                    <option value="network">Remote Netwerkdiensten</option>
                                     <option value="installation">Hardware Installatie</option>
-                                    <option value="maintenance">Preventief Onderhoud</option>
-                                    <option value="remote">Remote Probleemoplossing</option>
+                                    <option value="managed">Managed IT Services</option>
                                     <option value="other">Anders</option>
                                 </select>
                             </div>
@@ -1144,7 +1197,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>PAM Solutions</h4>
-                    <p>Professional Smart Hands and Break-Fix support services throughout the Netherlands. Your trusted partner for reliable technical assistance.</p>
+                    <p>Professional Smart Hands, Break-Fix, Cloud and Remote Network support services throughout the Netherlands. Your trusted partner for reliable technical assistance.</p>
                     <div class="kvk-info">
                         <p><strong>KvK:</strong> 92082025<br>
                         <strong>BTW:</strong> NL004326816B29</p>
@@ -1155,8 +1208,8 @@
                     <h4 data-en="Services" data-nl="Diensten">Services</h4>
                     <p><a href="#services" data-en="Smart Hands Support" data-nl="Smart Hands Ondersteuning">Smart Hands Support</a></p>
                     <p><a href="#services" data-en="Break-Fix Services" data-nl="Break-Fix Diensten">Break-Fix Services</a></p>
-                    <p><a href="#services" data-en="Remote Troubleshooting" data-nl="Remote Probleemoplossing">Remote Troubleshooting</a></p>
-                    <p><a href="#services" data-en="Hardware Installation" data-nl="Hardware Installatie">Hardware Installation</a></p>
+                    <p><a href="#services" data-en="Cloud Infrastructure" data-nl="Cloud Infrastructuur">Cloud Infrastructure</a></p>
+                    <p><a href="#services" data-en="Remote Network Services" data-nl="Remote Netwerkdiensten">Remote Network Services</a></p>
                 </div>
                 
                 <div class="footer-section">
@@ -1223,12 +1276,30 @@
             });
         });
         
-        // Form submission handling
-        document.querySelectorAll('form').forEach(form => {
+        // Form submission handling with proper form reset
+        function handleFormSubmission(form) {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
+                
+                // Show success message
                 alert('Thank you for your request! We will contact you within 1 hour during business hours, or within 2 hours for emergency support.');
+                
+                // Reset the form properly
+                this.reset();
             });
+        }
+        
+        // Apply form handling to both forms
+        document.addEventListener('DOMContentLoaded', function() {
+            const englishForm = document.getElementById('contactForm');
+            const dutchForm = document.getElementById('contactFormNL');
+            
+            if (englishForm) {
+                handleFormSubmission(englishForm);
+            }
+            if (dutchForm) {
+                handleFormSubmission(dutchForm);
+            }
         });
         
         // Mobile menu toggle
@@ -1278,19 +1349,4 @@
         });
     </script>
 </body>
-</html>="name">Full Name *</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="company">Company</label>
-                                <input type="text" id="company" name="company">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email Address *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for
+</html>
