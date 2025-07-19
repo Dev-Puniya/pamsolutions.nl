@@ -1,11 +1,1122 @@
-// Live Data Updates
-        function updateLiveData() {<!DOCTYPE html>
+.footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-section {
+            position: relative;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), rgba(255, 140, 0, 0.5));
+            border-radius: 2px;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #e0e0e0;
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+        
+        .footer-section a:hover {
+            color: #ffffff;
+            transform: translateX(8px);
+            text-shadow: 0 0 15px rgba(255, 140, 0, 0.5);
+        }
+        
+        .company-info {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .company-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+        }
+        
+        .company-info:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .company-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #f0f0f0;
+            font-weight: 500;
+        }
+        
+        .contact-info-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-item-footer {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .contact-item-footer:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(8px);
+            border-color: rgba(255, 140, 0, 0.5);
+            box-shadow: 0 5px 20px rgba(255, 140, 0, 0.2);
+        }
+        
+        .contact-icon-footer {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 1rem;
+            background: rgba(255, 140, 0, 0.1);
+            border-radius: 6px;
+        }
+        
+        .contact-item-footer span {
+            color: #f0f0f0;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-8px) scale(1.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+        }
+        
+        .social-links a.linkedin:hover {
+            background: linear-gradient(135deg, #0077b5, #005885);
+            border-color: #0077b5;
+            box-shadow: 0 20px 40px rgba(0, 119, 181, 0.5);
+        }
+        
+        .social-links a.youtube:hover {
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            border-color: #ff0000;
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.5);
+        }
+        
+        .social-links a.twitter:hover {
+            background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+            border-color: #1da1f2;
+            box-shadow: 0 20px 40px rgba(29, 161, 242, 0.5);
+        }
+        
+        .service-coverage {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.2), rgba(45, 55, 72, 0.15));
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-coverage::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+        }
+        
+        .service-coverage p {
+            margin: 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #f0f0f0;
+        }
+        
+        .service-coverage strong {
+            color: #ffffff;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-bottom p {
+            color: #c0c0c0;
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        /* Page Loader */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+        
+        .page-loader.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .loader-content {
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .features-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Live Data Banner -->
+    <div class="live-data-banner">
+        <span id="liveStatus">🟢 All Systems Operational</span> • 
+        <span id="currentDate"></span> • 
+        <span id="responseTime">Avg Response: 3.2h</span> • 
+        <span>🇳🇱 Netherlands Coverage Active</span>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <div class="logo-placeholder">PAM</div>
+                <div class="logo-text">
+                    <div class="logo-title">PAM Solutions</div>
+                    <div class="logo-subtitle">PROFESSIONAL IT SUPPORT</div>
+                </div>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#" onclick="showPage('home')" class="nav-link active">Home</a></li>
+                <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
+                <li><a href="#" onclick="showPage('services')" class="nav-link">Services</a></li>
+                <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <!-- HOME PAGE -->
+        <div class="page-content active" id="home-page">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <h1>Professional IT Support for Growing Businesses</h1>
+                    <p class="hero-subtitle">Smart Hands • Network Solutions • Business Support</p>
+                    <p class="hero-description">PAM Solutions delivers reliable IT support services across Netherlands and Europe. From network infrastructure to emergency response, we help growing businesses maintain smooth operations with professional expertise.</p>
+                    
+                    <!-- Value Propositions Banner -->
+                    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0; animation: slideInFromBottom 1s ease-out 0.6s both;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.9); padding: 0.75rem 1.5rem; border-radius: 25px; box-shadow: var(--shadow);">
+                            <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                            <span style="font-weight: 600; color: var(--dark-color);">No call-out charges</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.9); padding: 0.75rem 1.5rem; border-radius: 25px; box-shadow: var(--shadow);">
+                            <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                            <span style="font-weight: 600; color: var(--dark-color);">Fixed pricing available</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.9); padding: 0.75rem 1.5rem; border-radius: 25px; box-shadow: var(--shadow);">
+                            <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                            <span style="font-weight: 600; color: var(--dark-color);">Netherlands coverage</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: slideInFromBottom 1s ease-out 0.9s both;">
+                        <a href="#" onclick="showPage('contact')" class="btn btn-primary">
+                            <i class="fas fa-phone"></i>
+                            Get Support Quote
+                        </a>
+                        <a href="#" onclick="showPage('services')" class="btn btn-secondary">
+                            <i class="fas fa-cogs"></i>
+                            Our Services
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Why Choose PAM Solutions?</h2>
+                        <p class="section-description">We provide comprehensive IT support services designed for modern businesses that demand reliability, expertise, and rapid response times for their critical network infrastructure.</p>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>Business Hours + Emergency</h3>
+                            <p>Regular support during business hours with emergency assistance available when you need it most. Our team responds within 4 hours for urgent situations, ensuring your business stays operational.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Netherlands Coverage</h3>
+                            <p>On-site services throughout Netherlands with remote support capabilities. Local expertise and personalized service for growing businesses across the region.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h3>Experienced Professionals</h3>
+                            <p>Our team consists of experienced technicians with knowledge in business IT infrastructure, network technologies, and professional support services.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3>Reliable & Affordable</h3>
+                            <p>Professional service with transparent pricing and no hidden costs. We provide reliable IT support designed for growing businesses with budget-conscious solutions.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3>Smart Hands Services</h3>
+                            <p>Professional on-site technical assistance for datacenter operations, network hardware installations, and physical infrastructure management tasks.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>AI-Powered Support</h3>
+                            <p>Advanced AI assistance for faster problem resolution and automated monitoring. Our intelligent systems provide proactive support with machine learning capabilities for predictive maintenance.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support Banner -->
+            <section class="section">
+                <div class="container">
+                    <div class="support-banner">
+                        <h3>Need Professional IT Assistance?</h3>
+                        <p>Contact our experienced team for reliable support. We're here to help your business grow with professional IT solutions.</p>
+                        <div class="support-options">
+                            <a href="tel:+31617679029" class="support-btn">
+                                <i class="fas fa-phone"></i>
+                                Call: +31 6 1767 9029
+                            </a>
+                            <a href="https://wa.me/31617679029" class="support-btn whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                                WhatsApp Us
+                            </a>
+                            <a href="mailto:info@pamsolutions.nl" class="support-btn email">
+                                <i class="fas fa-envelope"></i>
+                                Email Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="section stats">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">Business Hours</span>
+                            <span class="stat-label">+ Emergency Support</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">&lt;4h</span>
+                            <span class="stat-label">Response Time</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Netherlands</span>
+                            <span class="stat-label">On-site Coverage</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div class="page-content" id="about-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">About PAM Solutions</h2>
+                        <p class="section-description">Founded in 2019, PAM Solutions has grown to become a trusted provider of enterprise IT support and network infrastructure services across Europe. Our mission is to ensure business continuity through reliable, professional technical assistance.</p>
+                    </div>
+
+                    <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+                        <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Our Story</h3>
+                        <p style="margin-bottom: 2rem; font-size: 1.125rem; line-height: 1.7;">PAM Solutions was established with a clear vision: to provide world-class IT support services that businesses can rely on. Starting in Eindhoven, Netherlands, we've expanded our capabilities to serve clients across Europe while maintaining our commitment to personalized service and technical excellence in network infrastructure and datacenter operations.</p>
+                        
+                        <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Our Mission</h3>
+                        <p style="margin-bottom: 2rem; font-size: 1.125rem; line-height: 1.7;">We believe that reliable network infrastructure is the backbone of modern business. Our mission is to provide comprehensive, professional IT support services that enable our clients to focus on their core business activities while we ensure their technology operates flawlessly.</p>
+                        
+                        <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Our Values</h3>
+                        <ul style="margin-bottom: 3rem; font-size: 1.125rem; line-height: 1.7; padding-left: 2rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Reliability:</strong> We deliver on our promises with consistent, dependable service</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Expertise:</strong> Our team maintains the highest technical standards and certifications</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Responsiveness:</strong> We're available when you need us most</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Partnership:</strong> We work closely with clients as an extension of their IT team</li>
+                        </ul>
+                    </div>
+
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h2 class="section-title">Our Team</h2>
+                        <p class="section-description">Meet the experienced professionals leading PAM Solutions to deliver exceptional IT support and network infrastructure services across Europe.</p>
+                    </div>
+                    
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <div class="team-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3>Manju Dukiya</h3>
+                            <p class="team-role">Founder & Managing Director</p>
+                            <p>Visionary founder who established PAM Solutions with extensive experience in enterprise IT infrastructure. Manju drives our strategic growth across European markets while maintaining our commitment to service excellence.</p>
+                        </div>
+                        
+                        <div class="team-card">
+                            <div class="team-avatar">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Dev Puniya</h3>
+                            <p class="team-role">Co-Founder & Technical Director</p>
+                            <p>Co-founder and technology expert overseeing all technical operations and service delivery. Dev ensures our Smart Hands and network infrastructure services leverage cutting-edge technologies and industry best practices.</p>
+                        </div>
+
+                        <div class="team-card">
+                            <div class="team-avatar">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Ayush Chaudhary</h3>
+                            <p class="team-role">Operations Manager</p>
+                            <p>Operations specialist ensuring seamless service delivery and operational excellence. Ayush manages customer relationships and oversees quality assurance across all European markets.</p>
+                        </div>
+
+                        <div class="team-card">
+                            <div class="team-avatar">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h3>Priya</h3>
+                            <p class="team-role">Support & Administration</p>
+                            <p>Dedicated support specialist managing customer service and administrative operations. Priya ensures smooth communication and efficient handling of all support requests and business processes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SERVICES PAGE -->
+        <div class="page-content" id="services-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Our Services</h2>
+                        <p class="section-description">Comprehensive IT support and network infrastructure solutions designed for mission-critical environments. Our experienced engineers provide expert assistance when and where you need it most.</p>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <h3>Smart Hands Services</h3>
+                            <p>On-site technical assistance by experienced engineers. We provide remote guidance, physical interventions, and complete infrastructure management to ensure your datacenter operations run smoothly.</p>
+                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
+                                <li>Hardware installation and replacement</li>
+                                <li>Cable management and connectivity</li>
+                                <li>Physical server maintenance</li>
+                                <li>Datacenter operations support</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3>Break-Fix Support</h3>
+                            <p>Rapid emergency response for critical system failures. Our expert team provides immediate diagnosis, replacement, and repair services to minimize downtime and restore operations quickly.</p>
+                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
+                                <li>Emergency hardware replacement</li>
+                                <li>System failure diagnosis</li>
+                                <li>Rapid incident response</li>
+                                <li>Root cause analysis</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h3>Network Infrastructure</h3>
+                            <p>Complete network design, implementation, and management services. From LAN/WAN setup to enterprise-grade networking solutions, we ensure optimal connectivity and performance.</p>
+                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
+                                <li>Network design and planning</li>
+                                <li>Switch and router configuration</li>
+                                <li>Network security implementation</li>
+                                <li>Performance optimization</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Remote Support</h3>
+                            <p>Expert remote diagnostics and troubleshooting across Europe. Our secure remote access capabilities allow us to resolve network and system issues quickly without the need for on-site visits.</p>
+                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
+                                <li>Secure remote access</li>
+                                <li>Network diagnostics</li>
+                                <li>Performance monitoring</li>
+                                <li>Configuration management</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h3>Infrastructure Management</h3>
+                            <p>Comprehensive server, network, and datacenter management. We provide installation, configuration, monitoring, and maintenance for all your critical infrastructure components.</p>
+                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
+                                <li>Server deployment and configuration</li>
+                                <li>Network infrastructure setup</li>
+                                <li>Storage management</li>
+                                <li>Security implementation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3>WhatsApp Business Support</h3>
+                            <p>Instant support through WhatsApp Business with real-time updates, quick responses, and multimedia troubleshooting guides. Get immediate assistance through your preferred messaging platform.</p>
+                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
+                                <li>Instant messaging support</li>
+                                <li>Photo/video diagnostics</li>
+                                <li>Real-time status updates</li>
+                                <li>Priority queue system</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 4rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">Service Coverage</h3>
+                        <p style="font-size: 1.125rem; color: var(--text-light); margin-bottom: 2rem;">On-site services throughout Netherlands • Remote support across Europe</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div class="page-content" id="contact-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Contact PAM Solutions</h2>
+                        <p class="section-description">Ready to experience professional IT support? Contact our expert team today for immediate assistance or to discuss your network infrastructure requirements.</p>
+                    </div>
+                    
+                    <div class="contact-content">
+                        <div class="contact-info">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 2rem; color: var(--dark-color);">Get in Touch</h3>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Business Hours + Emergency</h4>
+                                    <p>+31 6 1767 9029<br>Mon-Fri: 9AM-6PM + Emergency support available</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Email Support</h4>
+                                    <p>info@pamsolutions.nl<br>
+                                    General inquiries and technical support</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Service Coverage</h4>
+                                    <p>On-site services: Netherlands<br>Remote support: Europe-wide<br>Headquarters: Eindhoven, Netherlands</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Business Hours</h4>
+                                    <p>Monday - Friday: 9:00 AM - 6:00 PM CET<br>Emergency support: By appointment<br>Response time: Within 4 hours</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 2rem; color: var(--dark-color);">Request Support</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label for="name">Full Name *</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="company">Company *</label>
+                                    <input type="text" id="company" name="company" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Business Email *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="service">Service Type</label>
+                                    <select id="service" name="service">
+                                        <option value="">Select a service</option>
+                                        <option value="emergency">🚨 Emergency Break-Fix</option>
+                                        <option value="smart-hands">🤝 Smart Hands Support</option>
+                                        <option value="network">🌐 Network Infrastructure</option>
+                                        <option value="infrastructure">🏗️ Infrastructure Management</option>
+                                        <option value="remote">💻 Remote Support</option>
+                                        <option value="whatsapp">💬 WhatsApp Support</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="urgency">Priority Level</label>
+                                    <select id="urgency" name="urgency">
+                                        <option value="">Select priority</option>
+                                        <option value="critical">🔴 Critical (within 4 hours)</option>
+                                        <option value="high">🟡 High (same day)</option>
+                                        <option value="normal">🟢 Normal (next business day)</option>
+                                        <option value="low">🔵 Low (within 3 days)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Detailed Description *</label>
+                                    <textarea id="message" name="message" rows="4" required placeholder="Please provide detailed information about your technical requirements, current network infrastructure, or specific issues you're experiencing..."></textarea>
+                                </div>
+                                
+                                <button type="submit" class="submit-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Send Support Request
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>PAM Solutions</h4>
+                    <p>Professional IT support and network infrastructure services across Netherlands. Your trusted partner for Smart Hands, networking solutions, and business IT support with local expertise and reliable service.</p>
+                    <div class="company-info">
+                        <p><strong>Chamber of Commerce:</strong> 92082025<br>
+                        <strong>Founded:</strong> 2019 • Netherlands</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <a href="#" onclick="showPage('services')">Smart Hands Support</a>
+                    <a href="#" onclick="showPage('services')">Break-Fix Services</a>
+                    <a href="#" onclick="showPage('services')">Network Infrastructure</a>
+                    <a href="#" onclick="showPage('services')">Remote Support</a>
+                    <a href="#" onclick="showPage('services')">Infrastructure Management</a>
+                    <a href="#" onclick="showPage('services')">WhatsApp Business Support</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact & Support</h4>
+                    <div class="contact-info-footer">
+                        <div class="contact-item-footer">
+                            <div class="contact-icon-footer">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <span>+31 6 1767 9029</span>
+                        </div>
+                        <div class="contact-item-footer">
+                            <div class="contact-icon-footer">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <span>info@pamsolutions.nl</span>
+                        </div>
+                        <div class="contact-item-footer">
+                            <div class="contact-icon-footer">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <span>Eindhoven, Netherlands</span>
+                        </div>
+                        <div class="contact-item-footer">
+                            <div class="contact-icon-footer">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <span>Business Hours + Emergency</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <p>Stay connected for updates and IT insights</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/pamitsoultions/?viewAsMember=true" class="linkedin" target="_blank" title="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="youtube" title="YouTube (Coming Soon)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="twitter" title="X/Twitter (Coming Soon)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="service-coverage">
+                        <p><strong>Service Coverage:</strong><br>
+                        On-site: Netherlands<br>
+                        Remote: Netherlands + EU</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 PAM Solutions. All rights reserved. | Professional IT Support & Network Infrastructure Services • Netherlands-based • Growing Business Focus</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chat Widget -->
+    <div class="ai-chat-widget" onclick="openAIChat()" title="AI Assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- WhatsApp Widget -->
+    <div class="whatsapp-widget" onclick="openWhatsApp()" title="WhatsApp Support">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <script>
+        // Enhanced Page Navigation with Loading Effects
+        function showPage(pageId) {
+            const loader = document.getElementById('pageLoader');
+            const currentPage = document.querySelector('.page-content.active');
+            const targetPage = document.getElementById(pageId + '-page');
+            
+            if (!targetPage) {
+                console.error('Page not found:', pageId + '-page');
+                return;
+            }
+            
+            // Show loader
+            if (loader) {
+                loader.classList.add('active');
+            }
+            
+            // Add fade-out class to current page
+            if (currentPage) {
+                currentPage.classList.add('fade-out');
+            }
+            
+            setTimeout(() => {
+                // Hide all pages
+                document.querySelectorAll('.page-content').forEach(page => {
+                    page.classList.remove('active', 'fade-out');
+                });
+                
+                // Show selected page
+                targetPage.classList.add('active');
+                
+                // Update navigation
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Find and activate the clicked nav link
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    const linkText = link.textContent.toLowerCase();
+                    if ((pageId === 'home' && linkText === 'home') ||
+                        (pageId === 'about' && linkText === 'about') ||
+                        (pageId === 'services' && linkText === 'services') ||
+                        (pageId === 'contact' && linkText === 'contact')) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Hide loader
+                setTimeout(() => {
+                    if (loader) {
+                        loader.classList.remove('active');
+                    }
+                }, 300);
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // Close mobile menu if open
+                const navLinksContainer = document.querySelector('.nav-links');
+                if (navLinksContainer && navLinksContainer.style.display === 'flex') {
+                    toggleMobileMenu();
+                }
+                
+            }, 500);
+        }
+        
+        // Enhanced Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (!navLinks || !mobileMenu) return;
+            
+            const spans = mobileMenu.querySelectorAll('span');
+            
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+                spans.forEach(span => span.style.transform = '');
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(255, 255, 255, 0.95)';
+                navLinks.style.backdropFilter = 'blur(20px)';
+                navLinks.style.boxShadow = 'var(--shadow-lg)';
+                navLinks.style.padding = '20px';
+                navLinks.style.borderRadius = '0 0 12px 12px';
+                navLinks.style.border = '1px solid var(--border-color)';
+                navLinks.style.zIndex = '999';
+                
+                // Animate hamburger
+                if (spans.length >= 3) {
+                    spans[0].style.transform = 'rotate(45deg) translate(9px, 9px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(9px, -9px)';
+                }
+            }
+        }
+        
+        // Open AI Chat
+        function openAIChat() {
+            alert('🤖 Hi there! While our AI assistant is in development, our experienced team is ready to help you right now:\n\n📞 Phone: +31 6 1767 9029\n💬 WhatsApp: Click the green icon\n📧 Email: info@pamsolutions.nl\n\nWe typically respond within 4 hours during business days!');
+        }
+        
+        // Open WhatsApp
+        function openWhatsApp() {
+            const phoneNumber = '31617679029';
+            const message = 'Hello PAM Solutions! I would like to know more about your IT support services.';
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        }
+        
+        // Live Data Updates
+        function updateLiveData() {
+            const currentDateElement = document.getElementById('currentDate');
+            const responseTimeElement = document.getElementById('responseTime');
+            
+            if (currentDateElement) {
+                const now = new Date();
+                const dateOptions = { 
+                    weekday: 'short', 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZone: 'Europe/Amsterdam'
+                };
+                
+                currentDateElement.textContent = 
+                    now.toLocaleDateString('en-US', dateOptions) + ' CET';
+            }
+            
+            if (responseTimeElement) {
+                // Simulate live response time
+                const responseTime = (3 + Math.random() * 2).toFixed(1);
+                responseTimeElement.textContent = `Avg Response: ${responseTime}h`;
+            }
+        }
+        
+        // Enhanced Form Submission
+        function initializeFormHandlers() {
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = this.querySelector('.submit-btn');
+                    if (!submitBtn) return;
+                    
+                    const originalText = submitBtn.innerHTML;
+                    
+                    // Animation
+                    submitBtn.style.transform = 'perspective(1000px) rotateX(45deg)';
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        submitBtn.style.transform = 'perspective(1000px) rotateX(0deg)';
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Request Sent!';
+                        submitBtn.style.background = 'linear-gradient(135deg, var(--success-color), #059669)';
+                        
+                        setTimeout(() => {
+                            alert('Thank you for your request! Our expert team will contact you within 4 hours during business hours.');
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                            submitBtn.style.background = '';
+                            submitBtn.style.transform = '';
+                            form.reset();
+                        }, 2000);
+                    }, 500);
+                });
+            }
+        }
+        
+        // Enhanced Scroll Effects
+        function initializeScrollEffects() {
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                const scrollY = window.scrollY;
+                
+                if (header) {
+                    if (scrollY > 50) {
+                        header.style.background = 'rgba(255, 255, 255, 0.98)';
+                        header.style.backdropFilter = 'blur(20px)';
+                    } else {
+                        header.style.background = 'rgba(255, 255, 255, 0.95)';
+                        header.style.backdropFilter = 'blur(10px)';
+                    }
+                }
+            });
+        }
+        
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set home as active page
+            showPage('home');
+            
+            // Initialize live data
+            updateLiveData();
+            setInterval(updateLiveData, 30000);
+            
+            // Initialize all handlers
+            initializeFormHandlers();
+            initializeScrollEffects();
+        });
+    </script>
+</body>
+</html>
+                    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAM Solutions | Professional IT Support & Smart Hands Services</title>
-    <meta name="description" content="PAM Solutions provides enterprise-grade IT support, Smart Hands services, and network infrastructure solutions across Europe. Based in Netherlands with 24/7 expert assistance.">
+    <meta name="description" content="PAM Solutions provides enterprise-grade IT support, Smart Hands services, and network infrastructure solutions across Netherlands. Based in Netherlands with professional assistance.">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
@@ -16,12 +1127,12 @@
         }
         
         :root {
-            --primary-color: #2d3748;      /* Professional dark gray */
-            --secondary-color: #4a5568;    /* Medium gray */
-            --accent-color: #ff8c00;       /* Modern orange accent */
-            --secondary-accent: #ffa500;   /* Bright orange */
-            --success-color: #38a169;      /* Keep green for success */
-            --dark-color: #1a202c;         /* Very dark for headings */
+            --primary-color: #2d3748;
+            --secondary-color: #4a5568;
+            --accent-color: #ff8c00;
+            --secondary-accent: #ffa500;
+            --success-color: #38a169;
+            --dark-color: #1a202c;
             --text-color: #2d3748;
             --text-light: #4a5568;
             --text-muted: #718096;
@@ -49,7 +1160,7 @@
             padding: 0 24px;
         }
         
-        /* 3D Page Container */
+        /* Page Container */
         .page-container {
             perspective: 1200px;
             perspective-origin: center center;
@@ -57,20 +1168,24 @@
         
         /* Header */
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
-            box-shadow: var(--shadow);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 2000;
             transition: all 0.3s ease;
+            border-bottom: 2px solid var(--border-color);
+            width: 100%;
+            display: block;
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: 1.2rem 0;
+            min-height: 70px;
         }
         
         .logo {
@@ -197,7 +1312,7 @@
             transition: 0.3s;
         }
         
-        /* 3D Page Content with Advanced Transitions */
+        /* Page Content Transitions */
         .page-content {
             opacity: 0;
             transform: rotateY(-90deg) scale(0.8);
@@ -222,7 +1337,7 @@
             transform: rotateY(90deg) scale(0.8);
         }
         
-        /* Live Data Display */
+        /* Live Data Banner */
         .live-data-banner {
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
             background-size: 200% 100%;
@@ -232,9 +1347,17 @@
             text-align: center;
             font-size: 0.875rem;
             font-weight: 600;
+            position: relative;
+            z-index: 1000;
         }
         
-        /* Modern AI Chat Widget */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* AI Chat Widget */
         .ai-chat-widget {
             position: fixed;
             bottom: 80px;
@@ -266,7 +1389,7 @@
             100% { box-shadow: 0 0 0 0 rgba(255, 140, 0, 0); }
         }
         
-        /* WhatsApp Chat Widget */
+        /* WhatsApp Widget */
         .whatsapp-widget {
             position: fixed;
             bottom: 20px;
@@ -298,7 +1421,7 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
         
-        /* Modern Support Banner */
+        /* Support Banner */
         .support-banner {
             background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(255, 165, 0, 0.05));
             padding: 2rem;
@@ -377,13 +1500,7 @@
             box-shadow: 0 10px 25px rgba(66, 133, 244, 0.5);
         }
         
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Hero Section with 3D Effects */
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
             padding: 100px 0;
@@ -435,47 +1552,23 @@
         }
         
         @keyframes slideInFromTop {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @keyframes slideInFromLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         @keyframes slideInFromRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         @keyframes slideInFromBottom {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .btn {
@@ -490,7 +1583,6 @@
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
-            transform-style: preserve-3d;
         }
         
         .btn::before {
@@ -570,7 +1662,7 @@
             margin: 0 auto;
         }
         
-        /* Enhanced Feature Cards with 3D Effects */
+        /* Feature Cards */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -587,7 +1679,6 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            transform-style: preserve-3d;
         }
         
         .feature-card::before {
@@ -623,7 +1714,6 @@
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
             transition: all 0.3s ease;
-            position: relative;
         }
         
         .feature-card:hover .feature-icon {
@@ -631,31 +1721,12 @@
             background: linear-gradient(135deg, var(--accent-color), var(--success-color));
         }
         
-        /* Stats with Counter Animation */
+        /* Stats Section */
         .stats {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: var(--white);
             position: relative;
             overflow: hidden;
-        }
-        
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle fill="rgba(255,255,255,0.05)" cx="200" cy="200" r="100"/><circle fill="rgba(255,255,255,0.03)" cx="800" cy="600" r="150"/></svg>');
-            animation: backgroundMove 20s linear infinite;
-        }
-        
-        @keyframes backgroundMove {
-            0% { transform: translateX(0) translateY(0); }
-            25% { transform: translateX(-20px) translateY(-20px); }
-            50% { transform: translateX(20px) translateY(-20px); }
-            75% { transform: translateX(-20px) translateY(20px); }
-            100% { transform: translateX(0) translateY(0); }
         }
         
         .stats-grid {
@@ -693,7 +1764,7 @@
             opacity: 0.9;
         }
         
-        /* Enhanced Team Section */
+        /* Team Section */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -746,26 +1817,6 @@
             font-size: 2rem;
             color: var(--white);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .team-avatar::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(45deg);
-            animation: avatarShine 4s infinite;
-        }
-        
-        @keyframes avatarShine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
         }
         
         .team-card:hover .team-avatar {
@@ -785,7 +1836,7 @@
             margin-bottom: 1rem;
         }
         
-        /* Contact Form with Enhanced Effects */
+        /* Contact Form */
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -937,7 +1988,7 @@
             box-shadow: 0 10px 25px rgba(45, 55, 72, 0.3);
         }
         
-        /* Modern Footer Design - Much More Vibrant */
+        /* Footer */
         footer {
             background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
             color: var(--white);
@@ -946,1447 +1997,7 @@
             overflow: hidden;
         }
         
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(229, 62, 62, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(45, 55, 72, 0.15) 0%, transparent 50%),
-                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
-            animation: modernBackground 20s ease-in-out infinite;
-        }
-        
-        @keyframes modernBackground {
-            0%, 100% { opacity: 1; transform: rotate(0deg); }
-            50% { opacity: 0.9; transform: rotate(0.5deg); }
-        }
-        
         .footer-content {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 3rem;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .footer-section {
-            position: relative;
-        }
-        
-        .footer-section h4 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        
-        .footer-section h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), rgba(229, 62, 62, 0.5));
-            border-radius: 2px;
-        }
-        
-        .footer-section p,
-        .footer-section a {
-            color: #e0e0e0;
-            text-decoration: none;
-            line-height: 1.8;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            display: block;
-            margin-bottom: 0.75rem;
-            font-weight: 400;
-        }
-        
-        .footer-section a:hover {
-            color: #ffffff;
-            transform: translateX(8px);
-            text-shadow: 0 0 15px rgba(229, 62, 62, 0.5);
-        }
-        
-        /* Modern Company Info Card - More Visible */
-        .company-info {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .company-info::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
-        }
-        
-        .company-info:hover {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-        
-        .company-info p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #f0f0f0;
-            font-weight: 500;
-        }
-        
-        /* Modern Contact Items - Much More Visible */
-        .contact-info-footer {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .contact-item-footer {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-        
-        .contact-item-footer:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateX(8px);
-            border-color: rgba(229, 62, 62, 0.5);
-            box-shadow: 0 5px 20px rgba(229, 62, 62, 0.2);
-        }
-        
-        .contact-icon-footer {
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-color);
-            font-size: 1rem;
-            background: rgba(229, 62, 62, 0.1);
-            border-radius: 6px;
-        }
-        
-        .contact-item-footer span {
-            color: #f0f0f0;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        
-        /* Modern Social Links - More Vibrant */
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-        }
-        
-        .social-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s;
-        }
-        
-        .social-links a:hover::before {
-            left: 100%;
-        }
-        
-        .social-links a:hover {
-            transform: translateY(-8px) scale(1.15);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            color: #ffffff;
-        }
-        
-        .social-links a.linkedin:hover {
-            background: linear-gradient(135deg, #0077b5, #005885);
-            border-color: #0077b5;
-            box-shadow: 0 20px 40px rgba(0, 119, 181, 0.5);
-        }
-        
-        .social-links a.youtube:hover {
-            background: linear-gradient(135deg, #ff0000, #cc0000);
-            border-color: #ff0000;
-            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.5);
-        }
-        
-        .social-links a.twitter:hover {
-            background: linear-gradient(135deg, #1da1f2, #0d8bd9);
-            border-color: #1da1f2;
-            box-shadow: 0 20px 40px rgba(29, 161, 242, 0.5);
-        }
-        
-        /* Modern Service Coverage Badge - More Visible */
-        .service-coverage {
-            background: linear-gradient(135deg, rgba(229, 62, 62, 0.2), rgba(45, 55, 72, 0.15));
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(229, 62, 62, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-coverage::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-color), transparent);
-        }
-        
-        .service-coverage p {
-            margin: 0;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #f0f0f0;
-        }
-        
-        .service-coverage strong {
-            color: #ffffff;
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-        
-        /* Modern Footer Bottom - More Visible */
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .footer-bottom p {
-            color: #c0c0c0;
-            font-size: 0.9rem;
-            margin: 0;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-        
-        /* Responsive Modern Footer */
-        @media (max-width: 768px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-            
-            .contact-info-footer {
-                align-items: center;
-            }
-        }
-        
-        /* Page Transition Loading */
-        .page-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.5s ease;
-        }
-        
-        .page-loader.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        
-        .loader-content {
-            text-align: center;
-            color: var(--white);
-        }
-        
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top: 3px solid var(--white);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Floating Background Shapes */
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 20s infinite linear;
-        }
-        
-        .shape:nth-child(1) {
-            left: 10%;
-            animation-delay: 0s;
-            animation-duration: 25s;
-        }
-        
-        .shape:nth-child(2) {
-            left: 20%;
-            animation-delay: 5s;
-            animation-duration: 30s;
-        }
-        
-        .shape:nth-child(3) {
-            left: 70%;
-            animation-delay: 10s;
-            animation-duration: 35s;
-        }
-        
-        .shape:nth-child(4) {
-            left: 80%;
-            animation-delay: 15s;
-            animation-duration: 28s;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-            }
-        }
-        
-        /* Tech Floating Icons */
-        .tech-float {
-            position: absolute;
-            font-size: 2rem;
-            color: rgba(45, 55, 72, 0.1);
-            animation: techFloat 8s ease-in-out infinite;
-            z-index: -1;
-        }
-        
-        .tech-float:nth-child(1) { top: 15%; left: 80%; animation-delay: 0s; }
-        .tech-float:nth-child(2) { top: 60%; right: 85%; animation-delay: 2s; }
-        .tech-float:nth-child(3) { bottom: 30%; left: 10%; animation-delay: 4s; }
-        .tech-float:nth-child(4) { top: 40%; left: 5%; animation-delay: 6s; }
-        
-        @keyframes techFloat {
-            0%, 100% { transform: translateY(0px) rotateZ(0deg); opacity: 0.1; }
-            25% { transform: translateY(-20px) rotateZ(90deg); opacity: 0.3; }
-            50% { transform: translateY(0px) rotateZ(180deg); opacity: 0.1; }
-            75% { transform: translateY(-10px) rotateZ(270deg); opacity: 0.2; }
-        }
-        
-        /* 3D Morphing Shapes */
-        .morph-shape {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, rgba(45, 55, 72, 0.1), rgba(229, 62, 62, 0.1));
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation: morphing 10s ease-in-out infinite;
-            z-index: -1;
-        }
-        
-        @keyframes morphing {
-            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg) scale(1); }
-            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; transform: rotate(90deg) scale(1.1); }
-            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; transform: rotate(180deg) scale(0.9); }
-            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; transform: rotate(270deg) scale(1.05); }
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 16px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu {
-                display: flex;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .features-grid,
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Live Data Banner -->
-    <div class="live-data-banner">
-        <span id="liveStatus">🟢 All Systems Operational</span> • 
-        <span id="currentDate"></span> • 
-        <span id="responseTime">Avg Response: 1.2h</span> • 
-        <span>🌍 EU Coverage Active</span>
-    </div>
-
-    <!-- Floating Background Shapes -->
-    <div class="floating-shapes">
-        <div class="shape" style="width: 80px; height: 80px; background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); border-radius: 50%;"></div>
-        <div class="shape" style="width: 60px; height: 60px; background: linear-gradient(45deg, var(--accent-color), var(--success-color)); border-radius: 20px;"></div>
-        <div class="shape" style="width: 100px; height: 100px; background: linear-gradient(45deg, var(--secondary-color), var(--primary-color)); clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
-        <div class="shape" style="width: 70px; height: 70px; background: linear-gradient(45deg, var(--success-color), var(--primary-color)); border-radius: 15px;"></div>
-        
-        <!-- Morphing Shapes -->
-        <div class="morph-shape" style="top: 20%; left: 15%;"></div>
-        <div class="morph-shape" style="bottom: 25%; right: 20%; animation-delay: 3s;"></div>
-        <div class="morph-shape" style="top: 70%; left: 70%; animation-delay: 6s;"></div>
-    </div>
-
-    <!-- Tech Floating Icons (Network & Infrastructure) -->
-    <div class="tech-float"><i class="fas fa-server"></i></div>
-    <div class="tech-float"><i class="fas fa-network-wired"></i></div>
-    <div class="tech-float"><i class="fas fa-wifi"></i></div>
-    <div class="tech-float"><i class="fas fa-hdd"></i></div>
-
-    <!-- Page Loader -->
-    <div class="page-loader" id="pageLoader">
-        <div class="loader-content">
-            <div class="loader-spinner"></div>
-            <p>Loading...</p>
-            <!-- Stats Section -->
-            <section class="section stats">
-                <div class="container">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">Business Hours</span>
-                            <span class="stat-label">+ Emergency Support</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">&lt;4h</span>
-                            <span class="stat-label">Response Time</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">Netherlands</span>
-                            <span class="stat-label">On-site Coverage</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <a href="#" class="logo" onclick="showPage('home')">
-                <div class="logo-placeholder">PAM</div>
-                <div class="logo-text">
-                    <div class="logo-title">PAM Solutions</div>
-                    <div class="logo-subtitle">PROFESSIONAL IT SUPPORT</div>
-                </div>
-            </a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#" onclick="showPage('home')" class="nav-link active">Home</a></li>
-                <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
-                <li><a href="#" onclick="showPage('services')" class="nav-link">Services</a></li>
-                <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="mobile-menu" onclick="toggleMobileMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <div class="page-container">
-        <!-- HOME PAGE -->
-        <div class="page-content active" id="home-page">
-            <!-- Hero Section -->
-            <section class="hero">
-                <div class="container">
-                    <h1>Professional IT Support for Growing Businesses</h1>
-                    <p class="hero-subtitle">Smart Hands • Network Solutions • Business Support</p>
-                    <p class="hero-description">PAM Solutions delivers reliable IT support services across Netherlands and Europe. From network infrastructure to emergency response, we help growing businesses maintain smooth operations with professional expertise.</p>
-                    
-                    <!-- Value Propositions Banner -->
-                    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0; animation: slideInFromBottom 1s ease-out 0.6s both;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.9); padding: 0.75rem 1.5rem; border-radius: 25px; box-shadow: var(--shadow);">
-                            <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                            <span style="font-weight: 600; color: var(--dark-color);">No call-out charges</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.9); padding: 0.75rem 1.5rem; border-radius: 25px; box-shadow: var(--shadow);">
-                            <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                            <span style="font-weight: 600; color: var(--dark-color);">Fixed pricing available</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.9); padding: 0.75rem 1.5rem; border-radius: 25px; box-shadow: var(--shadow);">
-                            <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                            <span style="font-weight: 600; color: var(--dark-color);">Netherlands coverage</span>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: slideInFromBottom 1s ease-out 0.9s both;">
-                        <a href="#" onclick="showPage('contact')" class="btn btn-primary">
-                            <i class="fas fa-phone"></i>
-                            Get Support Quote
-                        </a>
-                        <a href="#" onclick="showPage('services')" class="btn btn-secondary">
-                            <i class="fas fa-cogs"></i>
-                            Our Services
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Features Section -->
-            <section class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Why Choose PAM Solutions?</h2>
-                        <p class="section-description">We provide comprehensive IT support services designed for modern businesses that demand reliability, expertise, and rapid response times for their critical network infrastructure.</p>
-                    </div>
-                    
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <h3>Business Hours + Emergency</h3>
-                            <p>Regular support during business hours with emergency assistance available when you need it most. Our team responds within 4 hours for urgent situations, ensuring your business stays operational.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <h3>Netherlands Coverage</h3>
-                            <p>On-site services throughout Netherlands with remote support capabilities. Local expertise and personalized service for growing businesses across the region.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-certificate"></i>
-                            </div>
-                            <h3>Experienced Professionals</h3>
-                            <p>Our team consists of experienced technicians with knowledge in business IT infrastructure, network technologies, and professional support services.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <h3>Reliable & Affordable</h3>
-                            <p>Professional service with transparent pricing and no hidden costs. We provide reliable IT support designed for growing businesses with budget-conscious solutions.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <h3>Smart Hands Services</h3>
-                            <p>Professional on-site technical assistance for datacenter operations, network hardware installations, and physical infrastructure management tasks.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <h3>AI-Powered Support</h3>
-                            <p>Advanced AI assistance for faster problem resolution and automated monitoring. Our intelligent systems provide 24/7 proactive support with machine learning capabilities for predictive maintenance.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-comments"></i>
-                            </div>
-                            <h3>Instant Communication</h3>
-                            <p>WhatsApp Business integration for immediate support requests and status updates. Get real-time assistance through your preferred messaging platform with our dedicated support team.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Support Banner -->
-            <section class="section">
-                <div class="container">
-                    <div class="support-banner">
-                        <h3>Need Professional IT Assistance?</h3>
-                        <p>Contact our experienced team for reliable support. We're here to help your business grow with professional IT solutions.</p>
-                        <div class="support-options">
-                            <a href="tel:+31617679029" class="support-btn">
-                                <i class="fas fa-phone"></i>
-                                Call: +31 6 1767 9029
-                            </a>
-                            <a href="https://wa.me/31617679029" class="support-btn whatsapp" target="_blank">
-                                <i class="fab fa-whatsapp"></i>
-                                WhatsApp Us
-                            </a>
-                            <a href="mailto:info@pamsolutions.nl" class="support-btn email">
-                                <i class="fas fa-envelope"></i>
-                                Email Us
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- ABOUT PAGE -->
-        <div class="page-content" id="about-page">
-            <section class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">About PAM Solutions</h2>
-                        <p class="section-description">Founded in 2019, PAM Solutions has grown to become a trusted provider of enterprise IT support and network infrastructure services across Europe. Our mission is to ensure business continuity through reliable, professional technical assistance.</p>
-                    </div>
-
-                    <div style="max-width: 800px; margin: 0 auto; text-align: left;">
-                        <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Our Story</h3>
-                        <p style="margin-bottom: 2rem; font-size: 1.125rem; line-height: 1.7;">PAM Solutions was established with a clear vision: to provide world-class IT support services that businesses can rely on. Starting in Eindhoven, Netherlands, we've expanded our capabilities to serve clients across Europe while maintaining our commitment to personalized service and technical excellence in network infrastructure and datacenter operations.</p>
-                        
-                        <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Our Mission</h3>
-                        <p style="margin-bottom: 2rem; font-size: 1.125rem; line-height: 1.7;">We believe that reliable network infrastructure is the backbone of modern business. Our mission is to provide comprehensive, professional IT support services that enable our clients to focus on their core business activities while we ensure their technology operates flawlessly.</p>
-                        
-                        <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Our Values</h3>
-                        <ul style="margin-bottom: 3rem; font-size: 1.125rem; line-height: 1.7; padding-left: 2rem;">
-                            <li style="margin-bottom: 0.5rem;"><strong>Reliability:</strong> We deliver on our promises with consistent, dependable service</li>
-                            <li style="margin-bottom: 0.5rem;"><strong>Expertise:</strong> Our team maintains the highest technical standards and certifications</li>
-                            <li style="margin-bottom: 0.5rem;"><strong>Responsiveness:</strong> We're available when you need us most, 24/7/365</li>
-                            <li style="margin-bottom: 0.5rem;"><strong>Partnership:</strong> We work closely with clients as an extension of their IT team</li>
-                        </ul>
-                    </div>
-
-                    <div class="section-header" style="margin-top: 4rem;">
-                        <h2 class="section-title">Our Team</h2>
-                        <p class="section-description">Meet the experienced professionals leading PAM Solutions to deliver exceptional IT support and network infrastructure services across Europe.</p>
-                    </div>
-                    
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <div class="team-avatar">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <h3>Manju Dukiya</h3>
-                            <p class="team-role">Founder & Managing Director</p>
-                            <p>Visionary founder who established PAM Solutions with extensive experience in enterprise IT infrastructure. Manju drives our strategic growth across European markets while maintaining our commitment to service excellence.</p>
-                        </div>
-                        
-                        <div class="team-card">
-                            <div class="team-avatar">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <h3>Dev Puniya</h3>
-                            <p class="team-role">Co-Founder & Technical Director</p>
-                            <p>Co-founder and technology expert overseeing all technical operations and service delivery. Dev ensures our Smart Hands and network infrastructure services leverage cutting-edge technologies and industry best practices.</p>
-                        </div>
-
-                        <div class="team-card">
-                            <div class="team-avatar">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h3>Ayush Chaudhary</h3>
-                            <p class="team-role">Operations Manager</p>
-                            <p>Operations specialist ensuring seamless service delivery and operational excellence. Ayush manages customer relationships and oversees quality assurance across all European markets.</p>
-                        </div>
-
-                        <div class="team-card">
-                            <div class="team-avatar">
-                                <i class="fas fa-headset"></i>
-                            </div>
-                            <h3>Priya</h3>
-                            <p class="team-role">Support & Administration</p>
-                            <p>Dedicated support specialist managing customer service and administrative operations. Priya ensures smooth communication and efficient handling of all support requests and business processes.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- SERVICES PAGE -->
-        <div class="page-content" id="services-page">
-            <section class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Our Services</h2>
-                        <p class="section-description">Comprehensive IT support and network infrastructure solutions designed for mission-critical environments. Our certified engineers provide expert assistance when and where you need it most.</p>
-                    </div>
-                    
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                            <h3>Smart Hands Services</h3>
-                            <p>On-site technical assistance by certified engineers. We provide remote guidance, physical interventions, and complete infrastructure management to ensure your datacenter operations run smoothly around the clock.</p>
-                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
-                                <li>Hardware installation and replacement</li>
-                                <li>Cable management and connectivity</li>
-                                <li>Physical server maintenance</li>
-                                <li>Datacenter operations support</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <h3>Break-Fix Support</h3>
-                            <p>Rapid emergency response for critical system failures. Our 24/7 expert team provides immediate diagnosis, replacement, and repair services to minimize downtime and restore operations quickly.</p>
-                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
-                                <li>Emergency hardware replacement</li>
-                                <li>System failure diagnosis</li>
-                                <li>Rapid incident response</li>
-                                <li>Root cause analysis</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-network-wired"></i>
-                            </div>
-                            <h3>Network Infrastructure</h3>
-                            <p>Complete network design, implementation, and management services. From LAN/WAN setup to enterprise-grade networking solutions, we ensure optimal connectivity and performance.</p>
-                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
-                                <li>Network design and planning</li>
-                                <li>Switch and router configuration</li>
-                                <li>Network security implementation</li>
-                                <li>Performance optimization</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <h3>Remote Support</h3>
-                            <p>Expert remote diagnostics and troubleshooting across Europe. Our secure remote access capabilities allow us to resolve network and system issues quickly without the need for on-site visits.</p>
-                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
-                                <li>Secure remote access</li>
-                                <li>Network diagnostics</li>
-                                <li>Performance monitoring</li>
-                                <li>Configuration management</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-server"></i>
-                            </div>
-                            <h3>Infrastructure Management</h3>
-                            <p>Comprehensive server, network, and datacenter management. We provide installation, configuration, monitoring, and maintenance for all your critical infrastructure components.</p>
-                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
-                                <li>Server deployment and configuration</li>
-                                <li>Network infrastructure setup</li>
-                                <li>Storage management</li>
-                                <li>Security implementation</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <h3>AI-Powered Diagnostics</h3>
-                            <p>Advanced artificial intelligence for automated system monitoring, predictive maintenance, and intelligent troubleshooting. Our AI systems learn from your infrastructure to prevent issues before they occur.</p>
-                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
-                                <li>Predictive failure analysis</li>
-                                <li>Automated problem resolution</li>
-                                <li>Machine learning optimization</li>
-                                <li>Intelligent alerting systems</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <h3>WhatsApp Business Support</h3>
-                            <p>Instant support through WhatsApp Business with real-time updates, quick responses, and multimedia troubleshooting guides. Get immediate assistance through your preferred messaging platform.</p>
-                            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light);">
-                                <li>Instant messaging support</li>
-                                <li>Photo/video diagnostics</li>
-                                <li>Real-time status updates</li>
-                                <li>Priority queue system</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 4rem;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">Service Coverage</h3>
-                        <p style="font-size: 1.125rem; color: var(--text-light); margin-bottom: 2rem;">On-site services throughout Netherlands • Remote support across Europe</p>
-                        <a href="#" onclick="showPage('contact')" class="btn btn-primary">
-                            <i class="fas fa-phone"></i>
-                            Request Service Quote
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- CONTACT PAGE -->
-        <div class="page-content" id="contact-page">
-            <section class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Contact PAM Solutions</h2>
-                        <p class="section-description">Ready to experience professional IT support? Contact our expert team today for immediate assistance or to discuss your network infrastructure requirements.</p>
-                    </div>
-                    
-                    <div class="contact-content">
-                        <div class="contact-info">
-                            <h3 style="font-size: 1.5rem; margin-bottom: 2rem; color: var(--dark-color);">Get in Touch</h3>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <h4>24/7 Emergency Hotline</h4>
-                                    <p>+31 6 1133 1118<br>Available around the clock for urgent support</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <h4>Email Support</h4>
-                                    <p>info@pamsolutions.nl<br>
-                                    General inquiries and technical support</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <h4>Service Coverage</h4>
-                                    <p>On-site services: Netherlands<br>Remote support: Europe-wide<br>Headquarters: Eindhoven, Netherlands</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <h4>Business Hours</h4>
-                                    <p>Monday - Friday: 8:00 AM - 6:00 PM CET<br>Weekend & Holiday: Emergency support<br>24/7/365 for critical issues</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-form">
-                            <h3 style="font-size: 1.5rem; margin-bottom: 2rem; color: var(--dark-color);">Request Support</h3>
-                            <form>
-                                <div class="form-group">
-                                    <label for="name">Full Name *</label>
-                                    <input type="text" id="name" name="name" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="company">Company *</label>
-                                    <input type="text" id="company" name="company" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="email">Business Email *</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="tel" id="phone" name="phone">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="service">Service Type</label>
-                                    <select id="service" name="service">
-                                        <option value="">Select a service</option>
-                                        <option value="emergency">🚨 Emergency Break-Fix</option>
-                                        <option value="smart-hands">🤝 Smart Hands Support</option>
-                                        <option value="network">🌐 Network Infrastructure</option>
-                                        <option value="infrastructure">🏗️ Infrastructure Management</option>
-                                        <option value="monitoring">📊 Proactive Monitoring</option>
-                                        <option value="ai-support">🤖 AI-Powered Diagnostics</option>
-                                        <option value="whatsapp">💬 WhatsApp Support</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="urgency">Priority Level</label>
-                                    <select id="urgency" name="urgency">
-                                        <option value="">Select priority</option>
-                                        <option value="critical">🔴 Critical (within 2 hours)</option>
-                                        <option value="high">🟡 High (same day)</option>
-                                        <option value="normal">🟢 Normal (next business day)</option>
-                                        <option value="low">🔵 Low (within 3 days)</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="message">Detailed Description *</label>
-                                    <textarea id="message" name="message" rows="4" required placeholder="Please provide detailed information about your technical requirements, current network infrastructure, or specific issues you're experiencing..."></textarea>
-                                </div>
-                                
-                                <button type="submit" class="submit-btn">
-                                    <i class="fas fa-paper-plane"></i>
-                                    Send Support Request
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>PAM Solutions</h4>
-                                                <p>Professional IT support and network infrastructure services across Netherlands. Your trusted partner for Smart Hands, networking solutions, and business IT support with local expertise and reliable service.</p>
-                    <div class="company-info">
-                        <p><strong>Chamber of Commerce:</strong> 92082025<br>
-                        <strong>Founded:</strong> 2019 • Netherlands</p>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Our Services</h4>
-                    <a href="#" onclick="showPage('services')">Smart Hands Support</a>
-                    <a href="#" onclick="showPage('services')">Break-Fix Services</a>
-                    <a href="#" onclick="showPage('services')">Network Infrastructure</a>
-                    <a href="#" onclick="showPage('services')">Remote Support</a>
-                    <a href="#" onclick="showPage('services')">Infrastructure Management</a>
-                    <a href="#" onclick="showPage('services')">Proactive Monitoring</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Contact & Support</h4>
-                    <div class="contact-info-footer">
-                        <div class="contact-item-footer">
-                            <div class="contact-icon-footer">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <span>+31 6 1767 9029</span>
-                        </div>
-                        <div class="contact-item-footer">
-                            <div class="contact-icon-footer">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <span>info@pamsolutions.nl</span>
-                        </div>
-                        <div class="contact-item-footer">
-                            <div class="contact-icon-footer">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <span>Eindhoven, Netherlands</span>
-                        </div>
-                        <div class="contact-item-footer">
-                            <div class="contact-icon-footer">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <span>Business Hours + Emergency</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <p>Stay connected for updates and IT insights</p>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/company/pamitsoultions/?viewAsMember=true" class="linkedin" target="_blank" title="LinkedIn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="youtube" title="YouTube (Coming Soon)">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="twitter" title="X/Twitter (Coming Soon)">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="service-coverage">
-                        <p><strong>Service Coverage:</strong><br>
-                        On-site: Netherlands<br>
-                        Remote: Netherlands + EU</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 PAM Solutions. All rights reserved. | Professional IT Support & Network Infrastructure Services • Netherlands-based • Growing Business Focus</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- AI Chat Widget -->
-    <div class="ai-chat-widget" onclick="openAIChat()" title="AI Assistant">
-        <i class="fas fa-robot"></i>
-    </div>
-
-    <!-- WhatsApp Widget -->
-    <div class="whatsapp-widget" onclick="openWhatsApp()" title="WhatsApp Support">
-        <i class="fab fa-whatsapp"></i>
-    </div>
-
-    <script>
-        // Enhanced 3D Page Navigation with Loading Effects
-        function showPage(pageId) {
-            const loader = document.getElementById('pageLoader');
-            const currentPage = document.querySelector('.page-content.active');
-            const targetPage = document.getElementById(pageId + '-page');
-            
-            // Show loader
-            loader.classList.add('active');
-            
-            // Add fade-out class to current page
-            if (currentPage) {
-                currentPage.classList.add('fade-out');
-            }
-            
-            setTimeout(() => {
-                // Hide all pages
-                document.querySelectorAll('.page-content').forEach(page => {
-                    page.classList.remove('active', 'fade-out');
-                });
-                
-                // Show selected page
-                targetPage.classList.add('active');
-                
-                // Update navigation
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                });
-                
-                // Find and activate the clicked nav link
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    if (link.onclick && link.onclick.toString().includes(pageId)) {
-                        link.classList.add('active');
-                    }
-                });
-                
-                // Hide loader
-                setTimeout(() => {
-                    loader.classList.remove('active');
-                }, 300);
-                
-                // Scroll to top
-                window.scrollTo(0, 0);
-                
-                // Close mobile menu if open
-                const navLinksContainer = document.querySelector('.nav-links');
-                if (navLinksContainer.style.display === 'flex') {
-                    toggleMobileMenu();
-                }
-                
-                // Trigger entrance animations for the new page
-                triggerPageAnimations();
-                
-            }, 500);
-        }
-        
-        // Trigger animations for page elements
-        function triggerPageAnimations() {
-            const animatedElements = document.querySelectorAll('.feature-card, .team-card, .stat-item');
-            animatedElements.forEach((element, index) => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-                setTimeout(() => {
-                    element.style.transition = 'all 0.6s ease';
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        }
-        
-        // Enhanced Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const spans = mobileMenu.querySelectorAll('span');
-            
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.display = 'none';
-                spans.forEach(span => span.style.transform = '');
-            } else {
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'rgba(255, 255, 255, 0.95)';
-                navLinks.style.backdropFilter = 'blur(20px)';
-                navLinks.style.boxShadow = 'var(--shadow-lg)';
-                navLinks.style.padding = '20px';
-                navLinks.style.borderRadius = '0 0 12px 12px';
-                navLinks.style.border = '1px solid var(--border-color)';
-                navLinks.style.zIndex = '999';
-                
-                // Animate hamburger
-                spans[0].style.transform = 'rotate(45deg) translate(9px, 9px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(9px, -9px)';
-            }
-        }
-        
-        // Enhanced Form Submission with 3D Effects
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const submitBtn = this.querySelector('.submit-btn');
-                    const originalText = submitBtn.innerHTML;
-                    
-                    // 3D button animation
-                    submitBtn.style.transform = 'perspective(1000px) rotateX(45deg)';
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-                    submitBtn.disabled = true;
-                    
-                    setTimeout(() => {
-                        submitBtn.style.transform = 'perspective(1000px) rotateX(0deg)';
-                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Request Sent!';
-                        submitBtn.style.background = 'linear-gradient(135deg, var(--success-color), #059669)';
-                        
-                        setTimeout(() => {
-                            // Create success particle effect
-                            createParticleEffect(submitBtn);
-                            
-                            setTimeout(() => {
-                                alert('Thank you for your request! Our expert team will contact you within 1 hour during business hours, or within 2 hours for emergency support.');
-                                submitBtn.innerHTML = originalText;
-                                submitBtn.disabled = false;
-                                submitBtn.style.background = '';
-                                submitBtn.style.transform = '';
-                                form.reset();
-                            }, 1000);
-                        }, 2000);
-                    }, 500);
-                });
-            }
-        });
-        
-        // Particle Effect for Success Animation
-        function createParticleEffect(element) {
-            const rect = element.getBoundingClientRect();
-            const particles = 20;
-            
-            for (let i = 0; i < particles; i++) {
-                const particle = document.createElement('div');
-                particle.style.cssText = `
-                    position: fixed;
-                    left: ${rect.left + rect.width / 2}px;
-                    top: ${rect.top + rect.height / 2}px;
-                    width: 6px;
-                    height: 6px;
-                    background: var(--success-color);
-                    border-radius: 50%;
-                    pointer-events: none;
-                    z-index: 10000;
-                    animation: particle-explosion 1s ease-out forwards;
-                `;
-                
-                const angle = (i / particles) * Math.PI * 2;
-                const velocity = 100;
-                const vx = Math.cos(angle) * velocity;
-                const vy = Math.sin(angle) * velocity;
-                
-                particle.style.setProperty('--vx', vx + 'px');
-                particle.style.setProperty('--vy', vy + 'px');
-                
-                document.body.appendChild(particle);
-                
-                setTimeout(() => {
-                    particle.remove();
-                }, 1000);
-            }
-        }
-        
-        // Add particle animation CSS
-        const particleStyles = document.createElement('style');
-        particleStyles.textContent = `
-            @keyframes particle-explosion {
-                0% {
-                    transform: translate(0, 0) scale(1);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translate(var(--vx), var(--vy)) scale(0);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(particleStyles);
-        
-        // Enhanced Scroll Effects
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            const scrollY = window.scrollY;
-            
-            if (scrollY > 50) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.backdropFilter = 'blur(20px)';
-                header.style.transform = 'translateY(0)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            }
-            
-            // Parallax effect for floating shapes
-            const shapes = document.querySelectorAll('.shape');
-            shapes.forEach((shape, index) => {
-                const speed = 0.5 + (index * 0.1);
-                shape.style.transform = `translateY(${scrollY * speed}px) rotate(${scrollY * 0.1}deg)`;
-            });
-        });
-        
-        // Open AI Chat
-        function openAIChat() {
-            alert('🤖 Hi there! While our AI assistant is in development, our experienced team is ready to help you right now:\n\n📞 Phone: +31 6 1767 9029\n💬 WhatsApp: Click the green icon\n📧 Email: info@pamsolutions.nl\n\nWe typically respond within 4 hours during business days!');
-        }
-        
-        // Open WhatsApp
-        function openWhatsApp() {
-            const phoneNumber = '31617679029';
-            const message = 'Hello PAM Solutions! I would like to know more about your IT support services.';
-            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, '_blank');
-        }
-            const now = new Date();
-            const dateOptions = { 
-                weekday: 'short', 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                timeZone: 'Europe/Amsterdam'
-            };
-            
-            document.getElementById('currentDate').textContent = 
-                now.toLocaleDateString('en-US', dateOptions) + ' CET';
-            
-            // Simulate live response time
-            const responseTime = (0.8 + Math.random() * 0.8).toFixed(1);
-            document.getElementById('responseTime').textContent = `Avg Response: ${responseTime}h`;
-        }
-        
-        // Initialize Page with Animations
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set home as active page
-            showPage('home');
-            
-            // Initialize live data
-            updateLiveData();
-            setInterval(updateLiveData, 30000);
-            
-            // Initialize entrance animations
-            setTimeout(() => {
-                triggerPageAnimations();
-            }, 500);
-        });
-        
-        // Add ripple effect to all buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('.btn, .submit-btn');
-            
-            buttons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const ripple = document.createElement('span');
-                    const rect = this.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size / 2;
-                    const y = e.clientY - rect.top - size / 2;
-                    
-                    ripple.style.cssText = `
-                        position: absolute;
-                        width: ${size}px;
-                        height: ${size}px;
-                        left: ${x}px;
-                        top: ${y}px;
-                        background: rgba(255, 255, 255, 0.5);
-                        border-radius: 50%;
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        pointer-events: none;
-                        z-index: 1;
-                    `;
-                    
-                    this.style.position = 'relative';
-                    this.style.overflow = 'hidden';
-                    this.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 600);
-                });
-            });
-        });
-        
-        // Add ripple animation CSS
-        const rippleStyles = document.createElement('style');
-        rippleStyles.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(rippleStyles);
-        
-        // 3D Hover Effects for Cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.feature-card, .team-card, .contact-item');
-            
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function(e) {
-                    this.style.transform = 'perspective(1000px) rotateX(5deg) translateY(-10px)';
-                });
-                
-                card.addEventListener('mouseleave', function(e) {
-                    this.style.transform = 'perspective(1000px) rotateX(0deg) translateY(0px)';
-                });
-                
-                card.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
-                    
-                    this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-                });
-            });
-        });
-        
-        // Intersection Observer for Scroll Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0) scale(1)';
-                }
-            });
-        }, observerOptions);
-        
-        // Observe elements for scroll animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const animatedElements = document.querySelectorAll('.feature-card, .team-card, .stat-item');
-            animatedElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px) scale(0.9)';
-                el.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                observer.observe(el);
-            });
-        });
-    </script>
-</body>
-</html>
