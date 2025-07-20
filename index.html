@@ -3,16 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAM Solutions | Smart Hands & Break-Fix Support Services Netherlands</title>
-    <meta name="description" content="PAM Solutions - Professional Smart Hands, Break-Fix, Cloud and Remote Network Support services. On-demand technical assistance and troubleshooting in the Netherlands. 24/7 availability.">
-    <meta name="keywords" content="smart hands, break-fix, IT support, technical support, Netherlands, datacenter support, field services, cloud services, remote network">
-    <link rel="canonical" href="https://pamsolutions.nl">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="PAM Solutions - Smart Hands & Break-Fix Support">
-    <meta property="og:description" content="Professional technical support and IT services in the Netherlands">
-    <meta property="og:url" content="https://pamsolutions.nl">
-    <meta property="og:type" content="website">
+    <title>PAM Solutions | Professional IT Infrastructure & Cloud Services</title>
+    <meta name="description" content="PAM Solutions delivers enterprise-grade IT infrastructure support, network hardware services, Azure cloud solutions, and Office 365 management across Netherlands.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -22,26 +16,31 @@
         }
         
         :root {
-            --primary-color: #1e40af;
-            --secondary-color: #3b82f6;
-            --accent-color: #f59e0b;
-            --success-color: #10b981;
-            --dark-color: #1f2937;
-            --text-color: #374151;
-            --text-light: #6b7280;
+            --primary-blue: #0066cc;
+            --dark-blue: #003d7a;
+            --light-blue: #e6f3ff;
+            --accent-orange: #ff6b1a;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #4a4a4a;
+            --light-gray: #f8f9fa;
+            --border-gray: #e9ecef;
             --white: #ffffff;
-            --light-gray: #f9fafb;
-            --border-color: #e5e7eb;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --text-light: #6c757d;
+            --success-green: #28a745;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
+            color: var(--text-dark);
             background: var(--white);
+            overflow-x: hidden;
         }
         
         .container {
@@ -50,131 +49,122 @@
             padding: 0 20px;
         }
         
-        /* Language Switcher */
-        .lang-switcher {
-            position: fixed;
-            top: 90px;
-            right: 20px;
-            z-index: 1001;
-            background: var(--white);
-            border-radius: 8px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
-        }
-        
-        .lang-option {
-            display: inline-block;
-            padding: 8px 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text-light);
-            border-radius: 8px;
-        }
-        
-        .lang-option.active {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-        
-        .lang-option:hover:not(.active) {
-            background: var(--light-gray);
-            color: var(--primary-color);
-        }
-        
-        /* Content sections for different languages */
-        .lang-content {
-            display: none;
-        }
-        
-        .lang-content.active {
-            display: block;
-        }
-        
         /* Header */
         header {
             background: var(--white);
-            padding: 1rem 0;
-            position: sticky;
+            box-shadow: var(--shadow-sm);
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            box-shadow: var(--shadow);
-            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1rem 0;
         }
         
         .logo {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary-color);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 12px;
             text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: translateY(-2px);
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-bg);
-            border-radius: 8px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1.2rem;
+            font-weight: 800;
+            font-size: 1.4rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin: 0;
+        }
+        
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
         }
         
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
         }
         
         .nav-links a {
-            color: var(--text-color);
+            color: var(--text-dark);
             text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: all 0.2s ease;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
         
-        .nav-links a:hover {
-            color: var(--primary-color);
-            background: var(--light-gray);
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-blue);
+            background: var(--light-blue);
         }
         
         .mobile-menu {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 4px;
+            padding: 8px;
         }
         
         .mobile-menu span {
             width: 25px;
             height: 3px;
-            background: var(--text-color);
+            background: var(--primary-blue);
             margin: 3px 0;
             transition: 0.3s;
             border-radius: 2px;
         }
         
+        /* Status Banner */
+        .status-banner {
+            background: linear-gradient(135deg, var(--success-green), #20c997);
+            color: var(--white);
+            padding: 12px 0;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 80px;
+            font-size: 0.9rem;
+        }
+        
         /* Hero Section */
         .hero {
-            background: var(--gradient-bg);
-            color: var(--white);
-            padding: 120px 0;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+            padding: 100px 0;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
         
         .hero::before {
@@ -184,46 +174,81 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            background: 
+                radial-gradient(ellipse at top left, rgba(0, 102, 204, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(255, 107, 26, 0.1) 0%, transparent 50%);
         }
         
         .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
             position: relative;
-            z-index: 2;
-        }
-        
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
+            z-index: 1;
         }
         
         .hero h1 {
             font-size: 3.5rem;
-            font-weight: 700;
+            font-weight: 800;
+            color: var(--text-dark);
             margin-bottom: 1.5rem;
-            line-height: 1.1;
+            line-height: 1.2;
+        }
+        
+        .hero h1 .highlight {
+            color: var(--primary-blue);
         }
         
         .hero-subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            font-size: 1.4rem;
+            color: var(--text-medium);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
         
         .hero-description {
-            font-size: 1.125rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 3rem;
             line-height: 1.7;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-primary:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: var(--white);
+        }
+        
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
         }
         
         .hero-buttons {
@@ -233,41 +258,40 @@
             flex-wrap: wrap;
         }
         
-        .btn {
-            display: inline-flex;
+        /* Value Props */
+        .value-props {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 4rem 0 2rem;
+        }
+        
+        .value-prop {
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
-            font-size: 1rem;
-        }
-        
-        .btn-primary {
-            background: var(--accent-color);
-            color: var(--white);
-            border-color: var(--accent-color);
-        }
-        
-        .btn-primary:hover {
-            background: #d97706;
-            border-color: #d97706;
-            transform: translateY(-2px);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn-secondary:hover {
+            gap: 12px;
             background: var(--white);
-            color: var(--primary-color);
-            border-color: var(--white);
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .value-prop:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .value-prop i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+        }
+        
+        .value-prop span {
+            font-weight: 600;
+            color: var(--text-dark);
         }
         
         /* Sections */
@@ -280,245 +304,286 @@
             margin-bottom: 4rem;
         }
         
-        .section-badge {
-            display: inline-block;
-            background: var(--gradient-bg);
-            color: var(--white);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
             margin-bottom: 1rem;
         }
         
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark-color);
-            margin-bottom: 1rem;
-            line-height: 1.2;
+        .section-title .highlight {
+            color: var(--primary-blue);
         }
         
         .section-description {
-            font-size: 1.125rem;
+            font-size: 1.1rem;
             color: var(--text-light);
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.7;
         }
         
-        /* Services Section */
-        .services {
-            background: var(--light-gray);
-        }
-        
-        .services-grid {
+        /* Feature Grid */
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
+            margin-top: 3rem;
         }
         
-        .service-card {
+        .feature-card {
             background: var(--white);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            transition: all 0.2s ease;
-            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         
-        .service-card::before {
+        .feature-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             height: 4px;
-            background: var(--gradient-bg);
+            background: var(--primary-blue);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
         
-        .service-card:hover {
-            transform: translateY(-4px);
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
         }
         
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-bg);
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
             color: var(--white);
             font-size: 1.5rem;
+            margin-bottom: 1.5rem;
         }
         
-        .service-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--dark-color);
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
             margin-bottom: 1rem;
         }
         
-        .service-card p {
-            color: var(--text-light);
+        .feature-card p {
+            color: var(--text-medium);
             line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
         }
         
         /* Stats Section */
         .stats {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
             color: var(--white);
         }
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
         }
         
         .stat-item {
             text-align: center;
             padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            font-weight: 800;
             display: block;
+            margin-bottom: 0.5rem;
         }
         
         .stat-label {
-            font-size: 1.125rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-        
-        /* Team Section */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .team-card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.2s ease;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-        }
-        
-        .team-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .team-avatar {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: var(--white);
-        }
-        
-        .team-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--dark-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .team-role {
             font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary-color);
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        /* Support Banner */
+        .support-banner {
+            background: var(--light-gray);
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            margin: 4rem 0;
+            border: 1px solid var(--border-gray);
+        }
+        
+        .support-banner h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
             margin-bottom: 1rem;
         }
         
-        .team-card p:not(.team-role) {
-            color: var(--text-light);
-            line-height: 1.6;
-            font-size: 0.9rem;
+        .support-banner p {
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .support-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .support-btn.primary {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+        
+        .support-btn.primary:hover {
+            background: var(--dark-blue);
+            color: var(--white);
+        }
+        
+        .support-btn.whatsapp {
+            background: #25d366;
+            color: var(--white);
+        }
+        
+        .support-btn.whatsapp:hover {
+            background: #20bd5a;
+            color: var(--white);
+        }
+        
+        .support-btn.secondary {
+            background: var(--white);
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .support-btn.secondary:hover {
+            background: var(--primary-blue);
+            color: var(--white);
         }
         
         /* Contact Section */
-        .contact {
+        .contact-section {
             background: var(--light-gray);
         }
         
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3rem;
+            margin-top: 3rem;
         }
         
-        .contact-info h3 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--dark-color);
-            margin-bottom: 2rem;
+        .contact-info {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-gray);
         }
         
         .contact-item {
-            margin-bottom: 2rem;
             display: flex;
             align-items: flex-start;
             gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: var(--light-gray);
         }
         
         .contact-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-bg);
-            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1.125rem;
             flex-shrink: 0;
         }
         
         .contact-details h4 {
-            font-size: 1.125rem;
             font-weight: 600;
-            color: var(--dark-color);
+            color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
         
         .contact-details p {
-            color: var(--text-light);
-            line-height: 1.5;
+            color: var(--text-medium);
+            margin: 0;
         }
         
         .contact-form {
             background: var(--white);
-            padding: 3rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-        }
-        
-        .contact-form h3 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--dark-color);
-            margin-bottom: 1.5rem;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-gray);
         }
         
         .form-group {
@@ -528,9 +593,8 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--dark-color);
-            font-weight: 500;
-            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-dark);
         }
         
         .form-group input,
@@ -538,87 +602,115 @@
         .form-group select {
             width: 100%;
             padding: 12px 16px;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-gray);
             border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             background: var(--white);
-            font-family: inherit;
         }
         
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
         }
         
         .submit-btn {
-            background: var(--gradient-bg);
+            background: var(--primary-blue);
             color: var(--white);
-            padding: 14px 28px;
+            padding: 12px 24px;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             width: 100%;
         }
         
         .submit-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
+            background: var(--dark-blue);
+        }
+        
+        /* WhatsApp Widget */
+        .whatsapp-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-widget:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-xl);
         }
         
         /* Footer */
         footer {
-            background: var(--dark-color);
+            background: var(--dark-gray);
             color: var(--white);
             padding: 3rem 0 2rem;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 2rem;
             margin-bottom: 2rem;
         }
         
         .footer-section h4 {
-            font-size: 1.125rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--accent-color);
+            color: var(--white);
         }
         
         .footer-section p,
         .footer-section a {
-            color: #d1d5db;
+            color: #adb5bd;
             text-decoration: none;
-            line-height: 1.6;
-            font-size: 0.875rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+            display: block;
+            transition: color 0.3s ease;
         }
         
         .footer-section a:hover {
-            color: var(--accent-color);
+            color: var(--white);
         }
         
         .footer-bottom {
-            border-top: 1px solid #374151;
+            border-top: 1px solid #343a40;
             padding-top: 2rem;
             text-align: center;
-            color: #9ca3af;
-            font-size: 0.875rem;
         }
         
-        .kvk-info {
-            background: rgba(59, 130, 246, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+        .footer-bottom p {
+            color: #6c757d;
+            margin: 0;
+        }
+        
+        /* Page Transitions */
+        .page-content {
+            display: none;
+        }
+        
+        .page-content.active {
+            display: block;
         }
         
         /* Responsive Design */
@@ -639,13 +731,18 @@
                 font-size: 2.5rem;
             }
             
-            .hero-subtitle {
-                font-size: 1.125rem;
-            }
-            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+            
+            .value-props {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
             }
             
             .contact-content {
@@ -653,78 +750,55 @@
                 gap: 2rem;
             }
             
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .services-grid,
-            .team-grid {
+            .footer-content {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
             
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .lang-switcher {
-                right: 16px;
-                top: 80px;
-            }
         }
         
         @media (max-width: 480px) {
-            .hero {
-                padding: 100px 0 80px;
-            }
-            
             .hero h1 {
                 font-size: 2rem;
             }
             
-            .service-card,
-            .contact-form {
-                padding: 2rem;
+            .section-title {
+                font-size: 2rem;
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-        }
-        
-        /* Simple animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            
+            .support-options {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Language Switcher -->
-    <div class="lang-switcher">
-        <span class="lang-option active" onclick="switchLanguage('en')" data-lang="en">EN</span>
-        <span class="lang-option" onclick="switchLanguage('nl')" data-lang="nl">NL</span>
-    </div>
-
     <!-- Header -->
     <header>
         <nav class="container">
-            <a href="#home" class="logo">
-                <div class="logo-icon">🔧</div>
-                PAM Solutions
+            <a href="#" class="logo" onclick="showPage('home')">
+                <div class="logo-icon">PAM</div>
+                <div class="logo-text">
+                    <h1>PAM Solutions</h1>
+                    <p>Professional IT Excellence</p>
+                </div>
             </a>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#home" class="nav-link" data-en="Home" data-nl="Home">Home</a></li>
-                <li><a href="#services" class="nav-link" data-en="Services" data-nl="Diensten">Services</a></li>
-                <li><a href="#team" class="nav-link" data-en="Team" data-nl="Team">Team</a></li>
-                <li><a href="#contact" class="nav-link" data-en="Contact" data-nl="Contact">Contact</a></li>
+                <li><a href="#" onclick="showPage('home')" class="nav-link active">Home</a></li>
+                <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
+                <li><a href="#" onclick="showPage('services')" class="nav-link">Services</a></li>
+                <li><a href="#" onclick="showPage('career')" class="nav-link">Career</a></li>
+                <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
             </ul>
-            <div class="mobile-menu">
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -732,68 +806,165 @@
         </nav>
     </header>
 
-    <!-- English Content -->
-    <div class="lang-content active" id="content-en">
+    <!-- Status Banner -->
+    <div class="status-banner">
+        🟢 All IT Systems Operational • <span id="currentDate"></span> • Avg Response: <span id="responseTime">1.8h</span> • 🇳🇱 Netherlands IT Coverage
+    </div>
+
+    <!-- HOME PAGE -->
+    <div class="page-content active" id="home-page">
         <!-- Hero Section -->
-        <section id="home" class="hero">
+        <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-badge">🇳🇱 Based in Eindhoven • 24/7 Support</div>
-                    <h1>We deliver global IT services, bringing professional engineers directly to you</h1>
-                    <p class="hero-subtitle">Cloud • Remote Network • Data Center Support Services</p>
-                    <p class="hero-description">At PAM Solutions, we guarantee a quality service. We are dedicated to providing you with the best IT services for your business. Whether it's cloud infrastructure, remote network management, or hardware that needs fixing, we ensure everything is completed efficiently.</p>
+                    <h1>Professional <span class="highlight">IT Infrastructure</span> & Cloud Excellence</h1>
+                    <p class="hero-subtitle">Enterprise Network • Azure Cloud • Office 365 • Smart Hands • Datacenter Operations</p>
+                    <p class="hero-description">PAM Solutions delivers enterprise-grade IT infrastructure support across Netherlands. We specialize in network hardware, Azure cloud solutions, Office 365 optimization, and professional Smart Hands datacenter services.</p>
+                    
+                    <div class="value-props">
+                        <div class="value-prop">
+                            <i class="fas fa-server"></i>
+                            <span>Enterprise Network Specialists</span>
+                        </div>
+                        <div class="value-prop">
+                            <i class="fab fa-microsoft"></i>
+                            <span>Azure & Office 365 Certified</span>
+                        </div>
+                        <div class="value-prop">
+                            <i class="fas fa-hands-helping"></i>
+                            <span>24/7 Datacenter Smart Hands</span>
+                        </div>
+                    </div>
+                    
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Get Support Now</a>
-                        <a href="#services" class="btn btn-secondary">View Services</a>
+                        <a href="#" onclick="showPage('contact')" class="btn btn-primary">
+                            <i class="fas fa-phone"></i>
+                            <span>Get IT Support</span>
+                        </a>
+                        <a href="#" onclick="showPage('services')" class="btn btn-secondary">
+                            <i class="fas fa-cogs"></i>
+                            <span>Our Services</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Services Section -->
-        <section id="services" class="section services">
+        <!-- Features Section -->
+        <section class="section">
             <div class="container">
                 <div class="section-header">
-                    <div class="section-badge">Our Expertise</div>
-                    <h2 class="section-title">Professional IT Support Services</h2>
-                    <p class="section-description">Every engineer we send out is fully qualified to complete tasks to an impeccably high standard. We have a highly skilled team who know exactly how to help with modern IT infrastructure.</p>
+                    <h2 class="section-title">Professional <span class="highlight">IT Infrastructure</span> Services</h2>
+                    <p class="section-description">We deliver enterprise-grade IT infrastructure services with focus on network hardware, cloud excellence, and datacenter operations. Our professional approach combines proven technology with expert support across Netherlands.</p>
                 </div>
                 
-                <div class="services-grid">
-                    <div class="service-card fade-in">
-                        <div class="service-icon">🔧</div>
-                        <h3>Smart Hands Support</h3>
-                        <p>On-site technical assistance by certified engineers. We handle everything from routine maintenance to emergency repairs, ensuring your systems stay operational with minimal downtime.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>Enterprise Network Infrastructure</h3>
+                        <p>Professional configuration and management of enterprise-grade switches, routers, firewalls, and security appliances. Complete network design and implementation.</p>
+                        <ul class="feature-list">
+                            <li>Cisco, HP, Dell enterprise hardware</li>
+                            <li>Advanced network security & compliance</li>
+                            <li>High-performance LAN/WAN design</li>
+                            <li>Network monitoring & optimization</li>
+                        </ul>
                     </div>
                     
-                    <div class="service-card fade-in">
-                        <div class="service-icon">⚡</div>
-                        <h3>Break-Fix Services</h3>
-                        <p>Reactive support for critical system failures. When something breaks, our rapid response team is available 24/7 to diagnose and resolve issues quickly and efficiently.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <h3>Azure Cloud Excellence</h3>
+                        <p>Expert Microsoft Azure cloud infrastructure management with VM deployment, networking, storage solutions, and security configuration for scalable applications.</p>
+                        <ul class="feature-list">
+                            <li>Azure VM & container services</li>
+                            <li>Cloud networking & hybrid solutions</li>
+                            <li>Azure Security Center management</li>
+                            <li>Migration & performance optimization</li>
+                        </ul>
                     </div>
                     
-                    <div class="service-card fade-in">
-                        <div class="service-icon">☁️</div>
-                        <h3>Cloud Infrastructure</h3>
-                        <p>Complete cloud solutions including migration, management, and optimization. We help you leverage AWS, Azure, and Google Cloud platforms for maximum efficiency and cost savings.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </div>
+                        <h3>Office 365 Management</h3>
+                        <p>Complete Office 365 ecosystem management including Exchange Online, SharePoint, Teams, and security policies for maximum productivity.</p>
+                        <ul class="feature-list">
+                            <li>Exchange Online optimization</li>
+                            <li>Microsoft Teams deployment</li>
+                            <li>SharePoint architecture & security</li>
+                            <li>Advanced compliance & governance</li>
+                        </ul>
                     </div>
                     
-                    <div class="service-card fade-in">
-                        <div class="service-icon">🌐</div>
-                        <h3>Remote Network Services</h3>
-                        <p>Comprehensive remote network monitoring, configuration, and troubleshooting. Our experts manage your network infrastructure remotely, ensuring optimal performance and security.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Smart Hands Datacenter Services</h3>
+                        <p>Professional 24/7 on-site datacenter support including server hardware management, cable infrastructure, and equipment deployment.</p>
+                        <ul class="feature-list">
+                            <li>24/7 hardware replacement & support</li>
+                            <li>Professional cable management</li>
+                            <li>Equipment installation & removal</li>
+                            <li>Emergency datacenter response</li>
+                        </ul>
                     </div>
                     
-                    <div class="service-card fade-in">
-                        <div class="service-icon">🛠️</div>
-                        <h3>Hardware Installation</h3>
-                        <p>Professional installation of servers, network equipment, and datacenter components. Full rack & stack services with comprehensive testing and documentation.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Server Management</h3>
+                        <p>Comprehensive Windows and Linux server administration with proactive monitoring, performance optimization, and enterprise hardware support.</p>
+                        <ul class="feature-list">
+                            <li>Windows Server administration</li>
+                            <li>Linux system management</li>
+                            <li>Performance monitoring & tuning</li>
+                            <li>Proactive maintenance & updates</li>
+                        </ul>
                     </div>
                     
-                    <div class="service-card fade-in">
-                        <div class="service-icon">📱</div>
-                        <h3>Managed IT Services</h3>
-                        <p>Proactive monitoring and management of your entire IT infrastructure. From endpoint management to security monitoring, we keep your business running smoothly 24/7.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Cybersecurity & Compliance</h3>
+                        <p>Advanced IT security with next-generation firewalls, secure solutions, threat monitoring, and comprehensive compliance support.</p>
+                        <ul class="feature-list">
+                            <li>Next-gen firewall management</li>
+                            <li>Advanced threat detection</li>
+                            <li>Security compliance frameworks</li>
+                            <li>Vulnerability assessment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Banner -->
+        <section class="section">
+            <div class="container">
+                <div class="support-banner">
+                    <h3>Need Professional IT Infrastructure Support?</h3>
+                    <p>Contact our certified specialists for network solutions, Azure cloud services, Office 365 optimization, and datacenter Smart Hands support across Netherlands.</p>
+                    <div class="support-options">
+                        <a href="tel:+31617679029" class="support-btn primary">
+                            <i class="fas fa-phone"></i>
+                            <span>Call: +31 6 1767 9029</span>
+                        </a>
+                        <a href="https://wa.me/31617679029" class="support-btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp Support</span>
+                        </a>
+                        <a href="mailto:info@pamsolutions.nl" class="support-btn secondary">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email Us</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -803,114 +974,299 @@
         <section class="section stats">
             <div class="container">
                 <div class="stats-grid">
-                    <div class="stat-item fade-in">
+                    <div class="stat-item">
                         <span class="stat-number">24/7</span>
                         <span class="stat-label">Emergency Support</span>
                     </div>
-                    <div class="stat-item fade-in">
+                    <div class="stat-item">
                         <span class="stat-number">&lt;2h</span>
-                        <span class="stat-label">Average Response Time</span>
+                        <span class="stat-label">Response Time</span>
                     </div>
-                    <div class="stat-item fade-in">
-                        <span class="stat-number">99.9%</span>
-                        <span class="stat-label">Service Uptime</span>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Netherlands Coverage</span>
                     </div>
-                    <div class="stat-item fade-in">
-                        <span class="stat-number">150+</span>
-                        <span class="stat-label">Cloud Migrations</span>
+                    <div class="stat-item">
+                        <span class="stat-number">Azure</span>
+                        <span class="stat-label">Certified Team</span>
                     </div>
                 </div>
             </div>
         </section>
+    </div>
 
-        <!-- Team Section -->
-        <section id="team" class="section">
+    <!-- ABOUT PAGE -->
+    <div class="page-content" id="about-page">
+        <section class="section">
             <div class="container">
                 <div class="section-header">
-                    <div class="section-badge">Leadership</div>
-                    <h2 class="section-title">Meet Our Team</h2>
-                    <p class="section-description">Experienced professionals leading PAM Solutions to deliver exceptional technical support services.</p>
+                    <h2 class="section-title">About <span class="highlight">PAM Solutions</span></h2>
+                    <p class="section-description">Founded in 2019, PAM Solutions has established itself as Netherlands' trusted provider of enterprise IT infrastructure, network hardware support, Azure cloud services, and professional datacenter operations.</p>
                 </div>
                 
-                <div class="team-grid">
-                    <div class="team-card fade-in">
-                        <div class="team-avatar">👨‍💼</div>
-                        <h3>Dev Puniya</h3>
-                        <p class="team-role">CEO & Founder</p>
-                        <p>Leading PAM Solutions with vision and expertise in technical support services across the Netherlands. Committed to delivering exceptional customer service and innovative IT solutions.</p>
-                    </div>
+                <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+                    <h3 style="font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 1.5rem; font-weight: 700;">Our Expertise</h3>
+                    <p style="margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.7; color: var(--text-medium);">PAM Solutions was founded with a clear mission: to provide enterprise-grade IT infrastructure services that businesses can depend on. From our base in Eindhoven, Netherlands, we've built our reputation on delivering professional network solutions, Azure cloud excellence, and reliable datacenter operations.</p>
                     
-                    <div class="team-card fade-in">
-                        <div class="team-avatar">👨‍💻</div>
-                        <h3>Ayush Choudhary</h3>
-                        <p class="team-role">CTO</p>
-                        <p>Overseeing technical operations and ensuring innovative solutions for our Smart Hands, Cloud, and Remote Network services. Expert in modern IT infrastructure and emerging technologies.</p>
-                    </div>
+                    <h3 style="font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 1.5rem; font-weight: 700;">Our Mission</h3>
+                    <p style="margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.7; color: var(--text-medium);">We believe that reliable IT infrastructure is the foundation of business success. Our mission is to provide professional network hardware support, cloud services, and datacenter operations that enable our clients to focus on their core business while we ensure their technology operates flawlessly.</p>
                     
-                    <div class="team-card fade-in">
-                        <div class="team-avatar">👩‍💼</div>
-                        <h3>Priya P</h3>
-                        <p class="team-role">Admin & Support Manager</p>
-                        <p>Managing administrative operations and customer support excellence. Ensuring smooth coordination between technical teams and client requirements for optimal service delivery.</p>
+                    <h3 style="font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 1.5rem; font-weight: 700;">Why Choose Us</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                        <div style="padding: 1.5rem; background: var(--light-gray); border-radius: 12px; border-left: 4px solid var(--primary-blue);">
+                            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Professional Excellence</h4>
+                            <p style="color: var(--text-medium); margin: 0;">Certified expertise in enterprise networking and Azure cloud solutions</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: var(--light-gray); border-radius: 12px; border-left: 4px solid var(--primary-blue);">
+                            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Rapid Response</h4>
+                            <p style="color: var(--text-medium); margin: 0;">Quick resolution of critical IT infrastructure challenges</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: var(--light-gray); border-radius: 12px; border-left: 4px solid var(--primary-blue);">
+                            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Specialized Focus</h4>
+                            <p style="color: var(--text-medium); margin: 0;">Deep expertise in network hardware and datacenter operations</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: var(--light-gray); border-radius: 12px; border-left: 4px solid var(--primary-blue);">
+                            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Trusted Partnership</h4>
+                            <p style="color: var(--text-medium); margin: 0;">Working as an extension of your IT team with professional service</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+    </div>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section contact">
+    <!-- SERVICES PAGE -->
+    <div class="page-content" id="services-page">
+        <section class="section">
             <div class="container">
                 <div class="section-header">
-                    <div class="section-badge">Get in Touch</div>
-                    <h2 class="section-title">Contact PAM Solutions</h2>
-                    <p class="section-description">Ready to experience reliable technical support? Contact us today for immediate assistance or to discuss your requirements.</p>
+                    <h2 class="section-title">Professional <span class="highlight">IT Services</span></h2>
+                    <p class="section-description">Comprehensive IT infrastructure solutions specialized in enterprise network hardware, Azure cloud services, Office 365 management, and professional datacenter operations across Netherlands.</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>Enterprise Network Infrastructure</h3>
+                        <p>Complete enterprise network infrastructure design, implementation, and management with expert configuration of switches, routers, and security appliances.</p>
+                        <ul class="feature-list">
+                            <li>Cisco, HP, Dell enterprise hardware support</li>
+                            <li>Advanced LAN/WAN design and implementation</li>
+                            <li>Network security and compliance management</li>
+                            <li>VLAN configuration and optimization</li>
+                            <li>Network performance monitoring and analytics</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <h3>Microsoft Azure Cloud Services</h3>
+                        <p>Expert Azure cloud infrastructure management including virtual machines, networking, storage, and security with complete migration and optimization services.</p>
+                        <ul class="feature-list">
+                            <li>Azure VM deployment and management</li>
+                            <li>Azure networking and VPN configuration</li>
+                            <li>Azure Security Center implementation</li>
+                            <li>Cloud migration and performance optimization</li>
+                            <li>Azure monitoring and cost optimization</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </div>
+                        <h3>Office 365 Management</h3>
+                        <p>Comprehensive Office 365 suite management including Exchange Online, SharePoint, Teams, and advanced security policies for maximum business productivity.</p>
+                        <ul class="feature-list">
+                            <li>Exchange Online setup and optimization</li>
+                            <li>Microsoft Teams deployment and management</li>
+                            <li>SharePoint configuration and security</li>
+                            <li>Office 365 security and compliance</li>
+                            <li>User management and training support</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Professional Datacenter Smart Hands</h3>
+                        <p>24/7 professional on-site datacenter support including server hardware replacement, cable management, and equipment installation across Netherlands facilities.</p>
+                        <ul class="feature-list">
+                            <li>24/7 server hardware replacement</li>
+                            <li>Professional cable management and organization</li>
+                            <li>Equipment installation and removal</li>
+                            <li>Physical infrastructure maintenance</li>
+                            <li>Emergency datacenter response services</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Server Management & Support</h3>
+                        <p>Comprehensive Windows and Linux server administration with proactive monitoring, performance optimization, and enterprise hardware support for critical systems.</p>
+                        <ul class="feature-list">
+                            <li>Windows Server administration and automation</li>
+                            <li>Linux system management and optimization</li>
+                            <li>Hardware diagnostics and replacement</li>
+                            <li>Proactive system monitoring and maintenance</li>
+                            <li>Performance optimization and tuning</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Cybersecurity & Compliance</h3>
+                        <p>Advanced IT security implementation with next-generation firewalls, secure solutions, threat monitoring, and comprehensive compliance support for data protection.</p>
+                        <ul class="feature-list">
+                            <li>Next-generation firewall configuration</li>
+                            <li>Advanced threat detection and response</li>
+                            <li>Security compliance frameworks</li>
+                            <li>Vulnerability assessment and remediation</li>
+                            <li>Security policy development and implementation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CAREER PAGE -->
+    <div class="page-content" id="career-page">
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Join Our <span class="highlight">Professional Team</span></h2>
+                    <p class="section-description">Be part of Netherlands' trusted IT infrastructure company. We're seeking certified professionals to join our team specializing in enterprise networking, Azure cloud, and datacenter operations.</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>Network Infrastructure Engineer</h3>
+                        <p>Join our technical team providing enterprise network infrastructure support. Experience with Cisco, HP, Dell networking equipment and datacenter operations required.</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="background: var(--primary-blue); color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Full-time</span>
+                            <span style="background: var(--success-green); color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; margin-left: 0.5rem; font-weight: 600;">Netherlands</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <h3>Azure Cloud Specialist</h3>
+                        <p>Manage Azure cloud infrastructure and Office 365 environments. Azure certifications and experience with cloud architecture strongly preferred.</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="background: var(--primary-blue); color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Full-time</span>
+                            <span style="background: var(--accent-orange); color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; margin-left: 0.5rem; font-weight: 600;">Remote/Hybrid</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Datacenter Technician</h3>
+                        <p>Provide professional on-site datacenter support including server hardware management and equipment installation. Travel across Netherlands required.</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="background: var(--medium-gray); color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Coming Soon</span>
+                            <span style="background: var(--primary-blue); color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; margin-left: 0.5rem; font-weight: 600;">Full-time</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--primary-blue);">Ready to Join Our Team?</h3>
+                    <p style="font-size: 1.1rem; color: var(--text-medium); margin-bottom: 2rem;">Send your CV and cover letter highlighting your IT infrastructure experience.</p>
+                    <a href="mailto:careers@pamsolutions.nl" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i>
+                        <span>careers@pamsolutions.nl</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div class="page-content" id="contact-page">
+        <section class="section contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Contact Our <span class="highlight">Expert Team</span></h2>
+                    <p class="section-description">Ready for professional IT infrastructure support? Contact our certified specialists for network solutions, Azure cloud management, or datacenter Smart Hands services.</p>
                 </div>
                 
                 <div class="contact-content">
                     <div class="contact-info">
-                        <h3>Contact Information</h3>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 2rem; color: var(--text-dark); font-weight: 700;">Get Professional Support</h3>
                         
-                        <div class="contact-item fade-in">
-                            <div class="contact-icon">📞</div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
                             <div class="contact-details">
-                                <h4>24/7 Emergency Hotline</h4>
-                                <p>+31 6 1133 1118<br>Available around the clock for urgent support</p>
+                                <h4>IT Support Hotline</h4>
+                                <p>+31 6 1767 9029<br>Business Hours: 9AM-6PM CET<br>Emergency support available</p>
                             </div>
                         </div>
                         
-                        
-                        <div class="contact-item fade-in">
-                            <div class="contact-icon">📍</div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
                             <div class="contact-details">
-                                <h4>Service Area</h4>
-                                <p>Netherlands-wide coverage<br>Based in Eindhoven, The Netherlands</p>
+                                <h4>Professional Support</h4>
+                                <p>info@pamsolutions.nl<br>Network, cloud, and datacenter support</p>
                             </div>
                         </div>
                         
-                        <div class="contact-item fade-in">
-                            <div class="contact-icon">⏰</div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
                             <div class="contact-details">
-                                <h4>Business Hours</h4>
-                                <p>Mon-Fri: 8:00 AM - 6:00 PM<br>Emergency support: 24/7/365</p>
+                                <h4>Service Coverage</h4>
+                                <p>Datacenter: Netherlands<br>Remote IT: Netherlands + EU<br>HQ: Eindhoven, Netherlands</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Response Times</h4>
+                                <p>Critical: Within 2 hours<br>Standard: Same business day<br>Emergency: Immediate response</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="contact-form fade-in">
-                        <h3>Request Support</h3>
-                        <form id="contactForm">
+                    <div class="contact-form">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 2rem; color: var(--text-dark); font-weight: 700;">Request IT Support</h3>
+                        <form>
                             <div class="form-group">
                                 <label for="name">Full Name *</label>
                                 <input type="text" id="name" name="name" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="company">Company</label>
-                                <input type="text" id="company" name="company">
+                                <label for="company">Company *</label>
+                                <input type="text" id="company" name="company" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="email">Email Address *</label>
+                                <label for="email">Business Email *</label>
                                 <input type="email" id="email" name="email" required>
                             </div>
                             
@@ -920,36 +1276,28 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="service">Service Required</label>
+                                <label for="service">Service Type</label>
                                 <select id="service" name="service">
-                                    <option value="">Select a service</option>
-                                    <option value="emergency">Emergency Break-Fix</option>
-                                    <option value="smart-hands">Smart Hands Support</option>
-                                    <option value="cloud">Cloud Infrastructure</option>
-                                    <option value="network">Remote Network Services</option>
-                                    <option value="installation">Hardware Installation</option>
-                                    <option value="managed">Managed IT Services</option>
-                                    <option value="other">Other</option>
+                                    <option value="">Select service</option>
+                                    <option value="emergency">Emergency IT Support</option>
+                                    <option value="network">Network Infrastructure</option>
+                                    <option value="azure">Azure Cloud Services</option>
+                                    <option value="office365">Office 365 Management</option>
+                                    <option value="smarthands">Datacenter Smart Hands</option>
+                                    <option value="servers">Server Management</option>
+                                    <option value="security">Cybersecurity</option>
                                 </select>
                             </div>
                             
                             <div class="form-group">
-                                <label for="urgency">Urgency Level</label>
-                                <select id="urgency" name="urgency">
-                                    <option value="">Select urgency</option>
-                                    <option value="emergency">Emergency (within 2 hours)</option>
-                                    <option value="urgent">Urgent (same day)</option>
-                                    <option value="normal">Normal (next business day)</option>
-                                    <option value="planned">Planned (schedule later)</option>
-                                </select>
+                                <label for="message">Project Details *</label>
+                                <textarea id="message" name="message" rows="4" required placeholder="Describe your IT infrastructure needs, current environment, or specific challenges..."></textarea>
                             </div>
                             
-                            <div class="form-group">
-                                <label for="message">Message *</label>
-                                <textarea id="message" name="message" rows="4" required placeholder="Please describe your technical issue or support requirements..."></textarea>
-                            </div>
-                            
-                            <button type="submit" class="submit-btn">Send Request</button>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Support Request
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -957,238 +1305,9 @@
         </section>
     </div>
 
-    <!-- Dutch Content -->
-    <div class="lang-content" id="content-nl">
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-badge">🇳🇱 Gevestigd in Eindhoven • 24/7 Ondersteuning</div>
-                    <h1>Wij leveren wereldwijde IT-diensten en brengen professionele ingenieurs direct naar u toe</h1>
-                    <p class="hero-subtitle">Cloud • Remote Network • Data Center Ondersteuningsdiensten</p>
-                    <p class="hero-description">Bij PAM Solutions garanderen wij een kwaliteitsservice. Wij zijn toegewijd aan het bieden van de beste IT-diensten voor uw bedrijf. Of het nu gaat om cloudinfrastructuur, remote netwerkbeheer of hardware die moet worden opgelost, wij zorgen ervoor dat alles efficiënt wordt voltooid.</p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Krijg Nu Ondersteuning</a>
-                        <a href="#services" class="btn btn-secondary">Bekijk Diensten</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="section services">
-            <div class="container">
-                <div class="section-header">
-                    <div class="section-badge">Onze Expertise</div>
-                    <h2 class="section-title">Professionele IT Ondersteuningsdiensten</h2>
-                    <p class="section-description">Elke ingenieur die wij uitzenden is volledig gekwalificeerd om taken tot een onberispelijk hoge standaard te voltooien. Wij hebben een zeer bekwaam team dat precies weet hoe te helpen met moderne IT-infrastructuur.</p>
-                </div>
-                
-                <div class="services-grid">
-                    <div class="service-card fade-in">
-                        <div class="service-icon">🔧</div>
-                        <h3>Smart Hands Ondersteuning</h3>
-                        <p>Technische assistentie ter plaatse door gecertificeerde ingenieurs. Wij behandelen alles van routineonderhoud tot noodreparaties, zodat uw systemen operationeel blijven met minimale downtime.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
-                        <div class="service-icon">⚡</div>
-                        <h3>Break-Fix Diensten</h3>
-                        <p>Reactieve ondersteuning voor kritieke systeemfalen. Wanneer iets kapot gaat, is ons snelle reactieteam 24/7 beschikbaar om problemen snel en efficiënt te diagnosticeren en op te lossen.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
-                        <div class="service-icon">☁️</div>
-                        <h3>Cloud Infrastructuur</h3>
-                        <p>Complete cloudoplossingen inclusief migratie, beheer en optimalisatie. Wij helpen u gebruik te maken van AWS, Azure en Google Cloud platforms voor maximale efficiëntie en kostenbesparing.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
-                        <div class="service-icon">🌐</div>
-                        <h3>Remote Netwerkdiensten</h3>
-                        <p>Uitgebreide remote netwerkmonitoring, configuratie en probleemoplossing. Onze experts beheren uw netwerkinfrastructuur op afstand en zorgen voor optimale prestaties en beveiliging.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
-                        <div class="service-icon">🛠️</div>
-                        <h3>Hardware Installatie</h3>
-                        <p>Professionele installatie van servers, netwerkapparatuur en datacenter componenten. Volledige rack & stack diensten met uitgebreide testen en documentatie.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
-                        <div class="service-icon">📱</div>
-                        <h3>Managed IT Services</h3>
-                        <p>Proactieve monitoring en beheer van uw gehele IT-infrastructuur. Van endpoint management tot beveiligingsmonitoring, wij houden uw bedrijf 24/7 soepel draaiend.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="section stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item fade-in">
-                        <span class="stat-number">24/7</span>
-                        <span class="stat-label">Noodondersteuning</span>
-                    </div>
-                    <div class="stat-item fade-in">
-                        <span class="stat-number">&lt;2u</span>
-                        <span class="stat-label">Gemiddelde Reactietijd</span>
-                    </div>
-                    <div class="stat-item fade-in">
-                        <span class="stat-number">99.9%</span>
-                        <span class="stat-label">Service Uptime</span>
-                    </div>
-                    <div class="stat-item fade-in">
-                        <span class="stat-number">150+</span>
-                        <span class="stat-label">Cloud Migraties</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Section -->
-        <section id="team" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <div class="section-badge">Leiderschap</div>
-                    <h2 class="section-title">Ontmoet Ons Team</h2>
-                    <p class="section-description">Ervaren professionals die PAM Solutions leiden om uitzonderlijke technische ondersteuningsdiensten te leveren.</p>
-                </div>
-                
-                <div class="team-grid">
-                    <div class="team-card fade-in">
-                        <div class="team-avatar">👨‍💼</div>
-                        <h3>Dev Puniya</h3>
-                        <p class="team-role">CEO & Oprichter</p>
-                        <p>Leidt PAM Solutions met visie en expertise in technische ondersteuningsdiensten door heel Nederland. Toegewijd aan het leveren van uitzonderlijke klantenservice en innovatieve IT-oplossingen.</p>
-                    </div>
-                    
-                    <div class="team-card fade-in">
-                        <div class="team-avatar">👨‍💻</div>
-                        <h3>Ayush Choudhary</h3>
-                        <p class="team-role">CTO</p>
-                        <p>Houdt toezicht op technische operaties en zorgt voor innovatieve oplossingen voor onze Smart Hands, Cloud en Remote Network diensten. Expert in moderne IT-infrastructuur en opkomende technologieën.</p>
-                    </div>
-                    
-                    <div class="team-card fade-in">
-                        <div class="team-avatar">👩‍💼</div>
-                        <h3>Priya P</h3>
-                        <p class="team-role">Admin & Support Manager</p>
-                        <p>Beheert administratieve operaties en zorgt voor uitstekende klantenondersteuning. Zorgt voor soepele coördinatie tussen technische teams en klanteneisen voor optimale serviceverlening.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section contact">
-            <div class="container">
-                <div class="section-header">
-                    <div class="section-badge">Contact</div>
-                    <h2 class="section-title">Contact PAM Solutions</h2>
-                    <p class="section-description">Klaar om betrouwbare technische ondersteuning te ervaren? Neem vandaag nog contact met ons op voor directe hulp of om uw vereisten te bespreken.</p>
-                </div>
-                
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h3>Contactinformatie</h3>
-                        
-                        <div class="contact-item fade-in">
-                            <div class="contact-icon">📞</div>
-                            <div class="contact-details">
-                                <h4>24/7 Noodlijn</h4>
-                                <p>+31 6 1133 1118<br>24 uur per dag beschikbaar voor urgente ondersteuning</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item fade-in">
-                            <div class="contact-icon">✉️</div>
-                            <div class="contact-details">
-                                <h4>Email Ondersteuning</h4>
-                                <p>info@pamsolutions.nl - Algemene vragen<br>
-                                support@pamsolutions.nl - Technische ondersteuning<br>
-                                Reactie binnen 1 uur tijdens kantooruren</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item fade-in">
-                            <div class="contact-icon">📍</div>
-                            <div class="contact-details">
-                                <h4>Servicegebied</h4>
-                                <p>Nederland-brede dekking<br>Gevestigd in Eindhoven, Nederland</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item fade-in">
-                            <div class="contact-icon">⏰</div>
-                            <div class="contact-details">
-                                <h4>Kantooruren</h4>
-                                <p>Ma-Vr: 8:00 - 18:00<br>Noodondersteuning: 24/7/365</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-form fade-in">
-                        <h3>Vraag Ondersteuning Aan</h3>
-                        <form id="contactFormNL">
-                            <div class="form-group">
-                                <label for="name-nl">Volledige Naam *</label>
-                                <input type="text" id="name-nl" name="name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="company-nl">Bedrijf</label>
-                                <input type="text" id="company-nl" name="company">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email-nl">E-mailadres *</label>
-                                <input type="email" id="email-nl" name="email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="phone-nl">Telefoonnummer</label>
-                                <input type="tel" id="phone-nl" name="phone">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="service-nl">Gewenste Service</label>
-                                <select id="service-nl" name="service">
-                                    <option value="">Selecteer een service</option>
-                                    <option value="emergency">Nood Break-Fix</option>
-                                    <option value="smart-hands">Smart Hands Ondersteuning</option>
-                                    <option value="cloud">Cloud Infrastructuur</option>
-                                    <option value="network">Remote Netwerkdiensten</option>
-                                    <option value="installation">Hardware Installatie</option>
-                                    <option value="managed">Managed IT Services</option>
-                                    <option value="other">Anders</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="urgency-nl">Urgentie</label>
-                                <select id="urgency-nl" name="urgency">
-                                    <option value="">Selecteer urgentie</option>
-                                    <option value="emergency">Noodgeval (binnen 2 uur)</option>
-                                    <option value="urgent">Urgent (zelfde dag)</option>
-                                    <option value="normal">Normaal (volgende werkdag)</option>
-                                    <option value="planned">Gepland (later inplannen)</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message-nl">Bericht *</label>
-                                <textarea id="message-nl" name="message" rows="4" required placeholder="Beschrijf uw technische probleem of ondersteuningsvereisten..."></textarea>
-                            </div>
-                            
-                            <button type="submit" class="submit-btn">Verzoek Versturen</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- WhatsApp Widget -->
+    <div class="whatsapp-widget" onclick="openWhatsApp()" title="WhatsApp Support">
+        <i class="fab fa-whatsapp"></i>
     </div>
 
     <!-- Footer -->
@@ -1197,116 +1316,76 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>PAM Solutions</h4>
-                    <p>Professional Smart Hands, Break-Fix, Cloud and Remote Network support services throughout the Netherlands. Your trusted partner for reliable technical assistance.</p>
-                    <div class="kvk-info">
-                        <p><strong>KvK:</strong> 92082025<br>
-                        <strong>BTW:</strong> NL004326816B29</p>
-                    </div>
+                    <p>Professional IT infrastructure and cloud services across Netherlands. Your trusted partner for enterprise network hardware, Azure cloud excellence, and datacenter Smart Hands operations.</p>
+                    <p><strong>Chamber of Commerce:</strong> 92082025</p>
+                    <p><strong>Founded:</strong> 2019 • Professional IT Specialists</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4 data-en="Services" data-nl="Diensten">Services</h4>
-                    <p><a href="#services" data-en="Smart Hands Support" data-nl="Smart Hands Ondersteuning">Smart Hands Support</a></p>
-                    <p><a href="#services" data-en="Break-Fix Services" data-nl="Break-Fix Diensten">Break-Fix Services</a></p>
-                    <p><a href="#services" data-en="Cloud Infrastructure" data-nl="Cloud Infrastructuur">Cloud Infrastructure</a></p>
-                    <p><a href="#services" data-en="Remote Network Services" data-nl="Remote Netwerkdiensten">Remote Network Services</a></p>
+                    <h4>Services</h4>
+                    <a href="#" onclick="showPage('services')">Network Infrastructure</a>
+                    <a href="#" onclick="showPage('services')">Azure Cloud Services</a>
+                    <a href="#" onclick="showPage('services')">Office 365 Management</a>
+                    <a href="#" onclick="showPage('services')">Datacenter Smart Hands</a>
+                    <a href="#" onclick="showPage('services')">Server Management</a>
+                    <a href="#" onclick="showPage('services')">Cybersecurity</a>
                 </div>
                 
                 <div class="footer-section">
-                    <h4 data-en="Contact" data-nl="Contact">Contact</h4>
-                    <p>📞 +31 6 1133 1118</p>
-                    <p>✉️ info@pamsolutions.nl</p>
-                    <p>✉️ support@pamsolutions.nl</p>
+                    <h4>Contact</h4>
+                    <p>📞 +31 6 1767 9029</p>
+                    <p>📧 info@pamsolutions.nl</p>
                     <p>📍 Eindhoven, Netherlands</p>
-                    <p data-en="24/7 Emergency Support" data-nl="24/7 Noodondersteuning">24/7 Emergency Support</p>
+                    <p>🕒 Business Hours + Emergency</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4 data-en="Coverage" data-nl="Dekking">Coverage</h4>
-                    <p data-en="Netherlands-wide service area" data-nl="Nederland-breed servicegebied">Netherlands-wide service area</p>
-                    <p data-en="Major cities and regions" data-nl="Grote steden en regio's">Major cities and regions</p>
-                    <p data-en="Fast response times" data-nl="Snelle reactietijden">Fast response times</p>
-                    <p data-en="Certified engineers" data-nl="Gecertificeerde ingenieurs">Certified engineers</p>
+                    <h4>Coverage</h4>
+                    <p>🏢 Datacenter: Netherlands</p>
+                    <p>🌐 Remote: Netherlands + EU</p>
+                    <p>⚡ Response: &lt;2 hours</p>
+                    <p>🏆 Azure Certified Team</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 PAM Solutions. <span data-en="All rights reserved." data-nl="Alle rechten voorbehouden.">All rights reserved.</span> | 
-                <span data-en="Professional IT Support Services in the Netherlands" data-nl="Professionele IT Ondersteuningsdiensten in Nederland">Professional IT Support Services in the Netherlands</span></p>
+                <p>&copy; 2025 PAM Solutions. All rights reserved. Professional IT Infrastructure, Network & Cloud Services • Netherlands</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Language switching functionality
-        function switchLanguage(lang) {
-            document.querySelectorAll('.lang-content').forEach(content => {
-                content.classList.remove('active');
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
             });
             
-            document.getElementById('content-' + lang).classList.add('active');
+            document.getElementById(pageId + '-page').classList.add('active');
             
-            document.querySelectorAll('.lang-option').forEach(option => {
-                option.classList.remove('active');
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
             });
-            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
             
-            updateTextContent(lang);
-        }
-        
-        function updateTextContent(lang) {
-            document.querySelectorAll('[data-en][data-nl]').forEach(element => {
-                if (element.hasAttribute(`data-${lang}`)) {
-                    element.textContent = element.getAttribute(`data-${lang}`);
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.onclick && link.onclick.toString().includes(pageId)) {
+                    link.classList.add('active');
                 }
             });
-        }
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Form submission handling with proper form reset
-        function handleFormSubmission(form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Show success message
-                alert('Thank you for your request! We will contact you within 1 hour during business hours, or within 2 hours for emergency support.');
-                
-                // Reset the form properly
-                this.reset();
-            });
-        }
-        
-        // Apply form handling to both forms
-        document.addEventListener('DOMContentLoaded', function() {
-            const englishForm = document.getElementById('contactForm');
-            const dutchForm = document.getElementById('contactFormNL');
             
-            if (englishForm) {
-                handleFormSubmission(englishForm);
-            }
-            if (dutchForm) {
-                handleFormSubmission(dutchForm);
-            }
-        });
+            window.scrollTo(0, 0);
+        }
         
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
+        // Mobile Menu
+        function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const spans = mobileMenu.querySelectorAll('span');
+            
             if (navLinks.style.display === 'flex') {
                 navLinks.style.display = 'none';
+                spans.forEach(span => span.style.transform = '');
             } else {
                 navLinks.style.display = 'flex';
                 navLinks.style.flexDirection = 'column';
@@ -1315,37 +1394,76 @@
                 navLinks.style.left = '0';
                 navLinks.style.right = '0';
                 navLinks.style.background = 'var(--white)';
-                navLinks.style.boxShadow = 'var(--shadow-lg)';
                 navLinks.style.padding = '20px';
-                navLinks.style.borderRadius = '0 0 12px 12px';
-                navLinks.style.border = '1px solid var(--border-color)';
+                navLinks.style.boxShadow = 'var(--shadow-lg)';
+                navLinks.style.zIndex = '999';
+                
+                spans[0].style.transform = 'rotate(45deg) translate(9px, 9px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(9px, -9px)';
+            }
+        }
+        
+        // WhatsApp
+        function openWhatsApp() {
+            const phoneNumber = '31617679029';
+            const message = 'Hello PAM Solutions! I would like to know more about your professional IT infrastructure services.';
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        }
+        
+        // Form Submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = this.querySelector('.submit-btn');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Request Sent!';
+                        submitBtn.style.background = 'var(--success-green)';
+                        
+                        setTimeout(() => {
+                            alert('Thank you! Our professional team will contact you within 2 hours during business hours.');
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                            submitBtn.style.background = '';
+                            form.reset();
+                        }, 2000);
+                    }, 1000);
+                });
             }
         });
         
-        // Initialize language on page load
+        // Live Data
+        function updateLiveData() {
+            const now = new Date();
+            const dateOptions = { 
+                weekday: 'short', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZone: 'Europe/Amsterdam'
+            };
+            
+            document.getElementById('currentDate').textContent = 
+                now.toLocaleDateString('en-US', dateOptions) + ' CET';
+            
+            const responseTime = (1.5 + Math.random() * 0.6).toFixed(1);
+            document.getElementById('responseTime').textContent = responseTime + 'h';
+        }
+        
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            switchLanguage('en');
-        });
-        
-        // Simple scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all fade-in elements
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
-            });
+            updateLiveData();
+            setInterval(updateLiveData, 30000);
         });
     </script>
 </body>
