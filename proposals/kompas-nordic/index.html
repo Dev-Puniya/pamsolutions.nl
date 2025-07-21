@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Proposal Access - PAM Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        
+        .proposal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .access-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .access-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .access-btn:active {
+            transform: translateY(0);
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            margin-top: 15px;
+            padding: 12px;
+            background: #fdf2f2;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+            display: none;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .security-note {
+            margin-top: 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f1f2f6 0%, #e8eaf6 100%);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #95a5a6;
+        }
+        
+        .contact-info a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .github-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            backdrop-filter: blur(10px);
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .github-badge {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <div class="logo">PAM Solutions</div>
+        <div class="tagline">Professional IT Infrastructure Services</div>
+        
+        <div class="proposal-title">
+            Microsoft 365 & Intune<br>Implementation Proposal<br>
+            <small style="font-size: 0.9rem; opacity: 0.8;">Kompas Nordic Netherlands</small>
+        </div>
+        
+        <form id="accessForm">
+            <div class="form-group">
+                <label for="clientCode">🔐 Secure Access Code:</label>
+                <input type="password" id="clientCode" placeholder="Enter your access code" required autocomplete="off">
+            </div>
+            
+            <button type="submit" class="access-btn">
+                🔓 Access Confidential Proposal
+            </button>
+        </form>
+        
+        <div class="error-message" id="errorMessage">
+            ❌ Invalid access code. Please verify your code or contact PAM Solutions.
+        </div>
+        
+        <div class="security-note">
+            🔒 <strong>Confidential Document</strong><br>
+            This proposal contains proprietary and confidential information. Access is restricted to authorized personnel only. Session will auto-expire after 30 minutes of inactivity.
+        </div>
+        
+        <div class="contact-info">
+            For access assistance contact:<br>
+            📧 <a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a><br>
+            📞 <a href="tel:+31611331118">+31 6 1133 1118</a>
+        </div>
+    </div>
+    
+    <div class="github-badge">
+        🔒 Secured by PAM Solutions
+    </div>
+    
+    <script>
+        // Configure your secure access codes here
+        const VALID_ACCESS_CODES = [
+            'KOMPAS-2025-NL',
+            'NORDIC-SECURE-789',
+            'PAM-PROPOSAL-KN25'
+        ];
+        
+        // Initialize form handling
+        document.getElementById('accessForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const enteredCode = document.getElementById('clientCode').value.trim().toUpperCase();
+            const errorMessage = document.getElementById('errorMessage');
+            const submitBtn = document.querySelector('.access-btn');
+            
+            // Show loading state
+            submitBtn.innerHTML = '🔄 Verifying...';
+            submitBtn.disabled = true;
+            
+            // Simulate security check delay
+            setTimeout(() => {
+                if (VALID_ACCESS_CODES.includes(enteredCode)) {
+                    // Access granted - redirect to proposal
+                    submitBtn.innerHTML = '✅ Access Granted';
+                    submitBtn.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+                    
+                    setTimeout(() => {
+                        window.location.href = './proposal.html';
+                    }, 1000);
+                    
+                    // Optional: Track successful access
+                    console.log('Proposal accessed:', {
+                        timestamp: new Date(),
+                        code: enteredCode,
+                        userAgent: navigator.userAgent
+                    });
+                    
+                } else {
+                    // Access denied
+                    errorMessage.style.display = 'block';
+                    errorMessage.style.animation = 'shake 0.5s ease-in-out';
+                    document.getElementById('clientCode').value = '';
+                    document.getElementById('clientCode').focus();
+                    
+                    // Reset button
+                    submitBtn.innerHTML = '🔓 Access Confidential Proposal';
+                    submitBtn.disabled = false;
+                    
+                    // Hide error after 5 seconds
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 5000);
+                }
+            }, 1500); // 1.5 second delay for security appearance
+        });
+        
+        // Security features
+        let inactivityTimer;
+        let warningTimer;
+        
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            clearTimeout(warningTimer);
+            
+            // Warning after 25 minutes
+            warningTimer = setTimeout(() => {
+                if (confirm('Session will expire in 5 minutes due to inactivity. Continue?')) {
+                    resetInactivityTimer();
+                }
+            }, 25 * 60 * 1000);
+            
+            // Auto-expire after 30 minutes
+            inactivityTimer = setTimeout(() => {
+                alert('Session expired due to inactivity. Please refresh to continue.');
+                window.location.reload();
+            }, 30 * 60 * 1000);
+        }
+        
+        // Track user activity
+        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+            document.addEventListener(event, resetInactivityTimer, true);
+        });
+        
+        resetInactivityTimer();
+        
+        // Disable right-click and F12 for added security
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+            }
+        });
+        
+        // Focus on input field when page loads
+        window.addEventListener('load', () => {
+            document.getElementById('clientCode').focus();
+        });
+    </script>
+</body>
+</html>
