@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft 365 & Intune Implementation Proposal - Kompas Nordic Netherlands</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #ffffff;
+        }
+        
+        .page {
+            min-height: 100vh;
+            padding: 40px;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page:last-child {
+            page-break-after: avoid;
+        }
+        
+        /* Cover Page */
+        .cover-page {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            background-size: cover;
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cover-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .client-name {
+            font-size: 2.2rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.15);
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            margin-bottom: 60px;
+        }
+        
+        .confidential-box {
+            background: rgba(231, 76, 60, 0.9);
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin-bottom: 60px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .confidential-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .confidential-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .company-info {
+            text-align: center;
+        }
+        
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .company-tagline {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .company-location {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .contact-info {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .logo-section h1 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .page-number {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        /* Page Title */
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .subsection-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        /* Content Styles */
+        p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-table th {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .pricing-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .pricing-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #27ae60;
+        }
+        
+        .recommended {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .recommended h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .email-structure {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .migration-steps {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .migration-step {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 10px;
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+        
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 15px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .benefit-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+        
+        .benefit-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #bdc3c7;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                font-size: 12pt;
+            }
+            
+            .page {
+                margin: 0;
+                padding: 20mm;
+                min-height: auto;
+            }
+            
+            .cover-title {
+                font-size: 2.5rem;
+            }
+            
+            .cover-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .client-name {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div class="page cover-page">
+        <div class="cover-content">
+            <h1 class="cover-title">Microsoft 365 & Intune</h1>
+            <p class="cover-subtitle">Complete Implementation Proposal</p>
+            
+            <div class="client-name">Kompas Nordic Netherlands</div>
+            
+            <div class="confidential-box">
+                <div class="confidential-title">CONFIDENTIAL PROPOSAL</div>
+                <div class="confidential-text">
+                    This document contains proprietary and confidential information.<br>
+                    Not for distribution without written consent from PAM Solutions.
+                </div>
+            </div>
+            
+            <div class="company-info">
+                <div class="company-name">PAM Solutions</div>
+                <div class="company-tagline">Professional IT Infrastructure Services</div>
+                <div class="company-location">Eindhoven, Netherlands</div>
+                <div class="contact-info">
+                    📞 +31 6 1133 1118 | ✉️ info@pamsolutions.nl<br>
+                    🌐 https://pamsolutions.nl
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-section">
+                <h1>PAM Solutions</h1>
+            </div>
+            <div class="page-number">
+                Page 1
+            </div>
+        </div>
+        
+        <h1 class="page-title">Executive Summary</h1>
+        
+        <div class="section-title">Project Overview</div>
+        <p>PAM Solutions proposes a complete Microsoft 365 Business Premium and Intune implementation for Kompas Nordic Netherlands. This independent setup will provide enterprise-grade IT infrastructure for your expanding Netherlands operations, completely separate from your Denmark entity.</p>
+        
+        <div class="highlight-box">
+            <h3 style="margin-bottom: 15px;">Key Benefits:</h3>
+            <ul>
+                <li>Professional @kompas-nordic.com email addresses for enhanced credibility</li>
+                <li>Secure document management for sensitive client data (passports, payments, preferences)</li>
+                <li>Mobile collaboration capabilities for field operations during tours</li>
+                <li>GDPR/Dutch AVG compliance for client data protection</li>
+                <li>24/7 emergency support with Netherlands-wide coverage</li>
+                <li>Scalable solution supporting business growth</li>
+            </ul>
+        </div>
+        
+        <div class="section-title">Investment Options</div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-title">Essential Business Package</div>
+                <p><strong>Implementation:</strong> €14,568<br>
+                <strong>Monthly Support:</strong> €526<br>
+                <strong>Best For:</strong> Small travel companies (3-4 users)</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">Complete Business Package</div>
+                <p><strong>Implementation:</strong> €18,949<br>
+                <strong>Monthly Support:</strong> €702<br>
+                <strong>Best For:</strong> Comprehensive enterprise setup</p>
+            </div>
+        </div>
+        
+        <div class="recommended">
+            <h3>Recommended: Essential Business Package</h3>
+            <p><strong>€14,568 implementation + €526/month support</strong><br>
+            Plus €103/month Microsoft 365 licensing (paid direct to Microsoft)</p>
+        </div>
+        
+        <div class="section-title">Why Choose PAM Solutions</div>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-title">24/7 Emergency Support</div>
+                <p>Critical issue response for business continuity during peak travel seasons</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">Netherlands-wide Coverage</div>
+                <p>Local expertise with fast response times across all Dutch regions</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">Travel Industry Expertise</div>
+                <p>Proven experience with tourism companies and client data protection</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">No Hidden Costs</div>
+                <p>Transparent pricing with travel and emergency support included</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            PAM Solutions | 📞 +31 6 1133 1118 | ✉️ info@pamsolutions.nl | 🌐 pamsolutions.nl | 📍 Eindhoven, Netherlands
+        </div>
+    </div>
+
+    <!-- Understanding Your Business -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-section">
+                <h1>PAM Solutions</h1>
+            </div>
+            <div class="page-number">
+                Page 2
+            </div>
+        </div>
+        
+        <h1 class="page-title">Understanding Your Business</h1>
+        
+        <div class="section-title">Kompas Nordic Netherlands - Current Situation</div>
+        
+        <div class="subsection-title">Business Profile</div>
+        <ul>
+            <li><strong>Company:</strong> Kompas Nordic DMC Netherlands</li>
+            <li><strong>Business:</strong> Luxury travel and destination management specializing in Nordic experiences</li>
+            <li><strong>Services:</strong> Group travel, MICE programs, luxury Nordic adventures, corporate travel</li>
+            <li><strong>Team Size:</strong> 3-4 users initially, with growth potential</li>
+            <li><strong>Operations:</strong> Independent Netherlands entity (separate from Denmark operations)</li>
+        </ul>
+        
+        <div class="subsection-title">Current Challenges</div>
+        <ul>
+            <li>No professional IT infrastructure in place</li>
+            <li>Using personal email accounts for business communications</li>
+            <li>Basic file storage without proper backup or security</li>
+            <li>No standardized collaboration tools for team coordination</li>
+            <li>Lack of compliance framework for client data protection</li>
+            <li>No disaster recovery or business continuity planning</li>
+        </ul>
+        
+        <div class="subsection-title">Business Requirements</div>
+        <ul>
+            <li><strong>Professional Communication:</strong> @kompas-nordic.com email addresses</li>
+            <li><strong>Secure Data Management:</strong> Protection for client passports, payment info, preferences</li>
+            <li><strong>Mobile Collaboration:</strong> Field operations capability during tours</li>
+            <li><strong>Regulatory Compliance:</strong> GDPR/Dutch AVG compliance requirements</li>
+            <li><strong>Business Continuity:</strong> Backup and disaster recovery capabilities</li>
+            <li><strong>Scalability:</strong> Solution that grows with business expansion</li>
+        </ul>
+        
+        <div class="section-title">Why Professional IT Infrastructure Matters for Travel Companies</div>
+        
+        <div class="highlight-box">
+            <h3>Critical Data Handled:</h3>
+            <ul>
+                <li>Client passport and identification information</li>
+                <li>Payment and financial details</li>
+                <li>Personal travel preferences and medical information</li>
+                <li>Emergency contact information</li>
+                <li>Detailed travel itineraries and bookings</li>
+                <li>Supplier contracts and confidential agreements</li>
+            </ul>
+        </div>
+        
+        <div class="subsection-title">Business Impact of Poor IT Infrastructure:</div>
+        <ul>
+            <li><strong>Security Risks:</strong> Data breaches can destroy client trust and result in significant GDPR fines</li>
+            <li><strong>Professional Image:</strong> Personal email addresses damage credibility with high-end clients</li>
+            <li><strong>Operational Efficiency:</strong> Poor collaboration tools slow down response times during critical booking periods</li>
+            <li><strong>Business Continuity:</strong> System failures during peak travel seasons can be catastrophic</li>
+            <li><strong>Compliance Violations:</strong> GDPR non-compliance can result in fines up to €20,000 for SMEs</li>
+        </ul>
+        
+        <div class="footer">
+            PAM Solutions | 📞 +31 6 1133 1118 | ✉️ info@pamsolutions.nl | 🌐 pamsolutions.nl | 📍 Eindhoven, Netherlands
+        </div>
+    </div>
+
+    <!-- Technical Solution Overview -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-section">
+                <h1>PAM Solutions</h1>
+            </div>
+            <div class="page-number">
+                Page 3
+            </div>
+        </div>
+        
+        <h1 class="page-title">Technical Solution Overview</h1>
+        
+        <div class="section-title">Microsoft 365 Business Premium Implementation</div>
+        
+        <div class="subsection-title">Core Platform Setup</div>
+        <ul>
+            <li><strong>Tenant Configuration:</strong> New Microsoft 365 tenant for Netherlands operations</li>
+            <li><strong>Domain Integration:</strong> Professional @kompas-nordic.com email addresses</li>
+            <li><strong>Data Residency:</strong> EU West (Netherlands) data center location</li>
+            <li><strong>User Accounts:</strong> Role-based email addresses for professional communication</li>
+            <li><strong>Licensing:</strong> Business Premium licenses with advanced security features</li>
+        </ul>
+        
+        <div class="subsection-title">Proposed Email Structure</div>
+        <div class="email-structure">
+            <ul>
+                <li><strong>info@kompas-nordic.com</strong> - Management and general inquiries</li>
+                <li><strong>bookings@kompas-nordic.com</strong> - Travel coordinator and reservations</li>
+                <li><strong>sales@kompas-nordic.com</strong> - Sales manager and new business</li>
+                <li><strong>operations@kompas-nordic.com</strong> - Operations manager and logistics</li>
+            </ul>
+        </div>
+        
+        <div class="section-title">Security & Compliance Framework</div>
+        
+        <div class="subsection-title">Multi-Factor Authentication (MFA)</div>
+        <ul>
+            <li>Microsoft Authenticator app setup for all users</li>
+            <li>SMS backup authentication configuration</li>
+            <li>Conditional access policies for enhanced security</li>
+            <li>Legacy authentication blocking</li>
+        </ul>
+        
+        <div class="subsection-title">GDPR/Dutch AVG Compliance</div>
+        <ul>
+            <li>Data residency verification within EU boundaries</li>
+            <li>Privacy settings and data protection configuration</li>
+            <li>Retention policies aligned with Dutch regulations</li>
+            <li>Client data access controls and audit trails</li>
+            <li>Conditional Access policies (14+ security policies like Denmark setup)</li>
+            <li>Microsoft Edge browser data loss prevention</li>
+        </ul>
+        
+        <div class="section-title">Device Management with Microsoft Intune</div>
+        
+        <div class="subsection-title">Device Security</div>
+        <ul>
+            <li>Compliance policies for Windows, iOS, and Android devices</li>
+            <li>BitLocker encryption enforcement for data protection</li>
+            <li>Mobile Application Management (MAM) policies</li>
+            <li>Lost/stolen device protection and remote wipe capabilities</li>
+        </ul>
+        
+        <div class="subsection-title">Application Management</div>
+        <ul>
+            <li>Automated deployment of Microsoft 365 Apps suite</li>
+            <li>Business-specific applications (Adobe Reader, WhatsApp Business)</li>
+            <li>Third-party app integrations and Power Platform apps</li>
+            <li>Microsoft Edge browser policies and security settings</li>
+            <li>App protection policies for data security</li>
+            <li>Centralized app management and updates</li>
+        </ul>
+        
+        <div class="footer">
+            PAM Solutions | 📞 +31 6 1133 1118 | ✉️ info@pamsolutions.nl | 🌐 pamsolutions.nl | 📍 Eindhoven, Netherlands
+        </div>
+    </div>
+
+    <!-- Collaboration & Document Management -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-section">
+                <h1>PAM Solutions</h1>
+            </div>
+            <div class="page-number">
+                Page 4
+            </div>
+        </div>
+        
+        <h1 class="page-title">Collaboration & Document Management</h1>
+        
+        <div class="section-title">Microsoft Teams Configuration</div>
+        
+        <div class="subsection-title">Team Structure for Travel Business</div>
+        <ul>
+            <li><strong>General Channel:</strong> Team-wide discussions and announcements</li>
+            <li><strong>Bookings & Reservations:</strong> Client booking coordination and status updates</li>
+            <li><strong>Sales & Marketing:</strong> New business discussions and marketing activities</li>
+            <li><strong>Operations & Logistics:</strong> Tour coordination and supplier management</li>
+            <li><strong>Client Updates:</strong> Important client communications and feedback</li>
+        </ul>
+        
+        <div class="subsection-title">External Collaboration</div>
+        <ul>
+            <li>Client meeting capabilities with external participants</li>
+            <li>Secure file sharing with suppliers and partners</li>
+            <li>Recording capabilities for training and reference</li>
+            <li>Mobile access for field operations during tours</li>
+        </ul>
+        
+        <div class="section-title">SharePoint Document Libraries</div>
+        
+        <div class="subsection-title">Client Management Hub</div>
+        <ul>
+            <li><strong>Client Profiles:</strong> Individual client folders with preferences and history</li>
+            <li><strong>Active Bookings:</strong> Current trip planning documents and itineraries</li>
+            <li><strong>Completed Tours:</strong> Archive of finished trips for reference</li>
+            <li><strong>Client Feedback:</strong> Reviews, testimonials, and improvement suggestions</li>
+        </ul>
+        
+        <div class="subsection-title">Operations Hub</div>
+        <ul>
+            <li><strong>Supplier Contracts:</strong> Hotel, transport, and guide agreements</li>
+            <li><strong>Tour Templates:</strong> Standard itinerary templates for efficiency</li>
+            <li><strong>Logistics Planning:</strong> Transportation and accommodation coordination</li>
+            <li><strong>Emergency Procedures:</strong> Crisis management and contact information</li>
+        </ul>
+        
+        <div class="subsection-title">Marketing & Sales Hub</div>
+        <ul>
+            <li><strong>Brochures & Catalogs:</strong> Marketing materials and promotional content</li>
+            <li><strong>Photography:</strong> High-resolution destination photos and tour images</li>
+            <li><strong>Pricing Sheets:</strong> Current pricing structures and package details</li>
+            <li><strong>Partnership Materials:</strong> B2B marketing resources and collaboration tools</li>
+        </ul>
+        
+        <div class="section-title">OneDrive for Business</div>
+        
+        <div class="subsection-title">Personal Workspace Configuration</div>
+        <ul>
+            <li>1TB storage per user for personal work files</li>
+            <li>Known Folder Move setup for automatic Desktop, Documents, Pictures backup</li>
+            <li>Offline sync capabilities for remote work during tours</li>
+            <li>Mobile access for field operations and client meetings</li>
+            <li>Version history and file recovery capabilities</li>
+        </ul>
+        
+        <div class="footer">
+            PAM Solutions | 📞 +31 6 1133 1118 | ✉️ info@pamsolutions.nl | 🌐 pamsolutions.nl | 📍 Eindhoven, Netherlands
+        </div>
+    </div>
+
+    <!-- Data Migration & Business Continuity -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-section">
+                <h1>PAM Solutions</h1>
+                <p>Professional IT Infrastructure Services</p>
+            </div>
+            <div class="contact-section">
+                📞 +31 6 1133 1118<br>
+                ✉️ info@pamsolutions.nl<br>
+                🌐 pamsolutions.nl<br>
+                📍 Eindhoven, Netherlands
+            </div>
+        </div>
+        
+        <h1 class="page-title">Data Migration & Business Continuity</h1>
+        
+        <div class="section-title">Comprehensive Data Migration</div>
+        
+        <div class="subsection-title">Email Migration Services</div>
+        <ul>
+            <li>Migration from existing email platforms (Gmail, Outlook.com, etc.)</li>
+            <li>Historical email preservation and organization</li>
+            <li>Contact database migration with proper categorization</li>
+            <li>Calendar events and scheduling migration</li>
+            <li>Gradual transition to minimize business disruption</li>
+        </ul>
+        
+        <div class="subsection-title">Document Migration Strategy</div>
+        <div class="migration-steps">
+            <div class="migration-step">
+                <div class="step-number">1</div>
+                <h3>Critical Documents</h3>
+                <p>Active contracts, current bookings, supplier contacts</p>
+            </div>
+            <div class="migration-step">
+                <div class="step-number">2</div>
+                <h3>Operational Files</h3>
+                <p>Tour templates, marketing materials, historical data</p>
+            </div>
+            <div class="migration-step">
+                <div class="step-number">3</div>
+                <h3>Archive Materials</h3>
+                <p>Completed tours, old contracts, reference documents</p>
+            </div>
+        </div>
+        
+        <div class="section-title">Backup & Recovery Implementation</div>
+        
+        <div class="subsection-title">Microsoft 365 Backup Configuration</div>
+        <ul>
+            <li><strong>Exchange Online Backup:</strong> Email, calendar, and contact protection</li>
+            <li><strong>SharePoint Backup:</strong> Document libraries and site content protection</li>
+            <li><strong>OneDrive Backup:</strong> Personal files and folder synchronization</li>
+            <li><strong>Retention Policies:</strong> 30-day backup retention with automated scheduling</li>
+        </ul>
+        
+        <div class="subsection-title">Disaster Recovery Planning</div>
+        <ul>
+            <li>Recovery procedures documentation and testing</li>
+            <li>Emergency contact lists and escalation procedures</li>
+            <li>Business continuity testing and validation</li>
+            <li>Staff training on recovery procedures</li>
+        </ul>
+        
+        <div class="subsection-title">Automatic PC Backup</div>
+        <ul>
+            <li>OneDrive Known Folder Move for Desktop, Documents, Pictures</li>
+            <li>Automatic synchronization across all devices</li>
+            <li>Version history and file recovery capabilities</li>
+            <li>Mobile access to all synchronized files</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <h3>Business Continuity Benefits:</h3>
+            <ul>
+                <li><strong>Zero Data Loss:</strong> Automatic backup ensures no client information is ever lost</li>
+                <li><strong>Rapid Recovery:</strong> Quick restoration of critical business functions</li>
+                <li><strong>Mobile Access:</strong> Access to all files and emails from any device, anywhere</li>
+                <li><strong>Version Control:</strong> Ability to restore previous versions of important documents</li>
+                <li><strong>Compliance:</strong> Audit trails and data retention meet regulatory requirements</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            PAM Solutions | 📞 +31 6 1133 1118 | ✉️ info@pamsolutions.nl | 🌐 pamsolutions.nl | 📍 Eindhoven, Netherlands
+        </div>
+    </div>
+
+    <!-- Investment & Pricing -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-section">
+                <h1>PAM Solutions</h1>
+            </div>
+            <div class="page-number">
+                Page 6
+            </div>
+        </div>
+        
+        <h1 class="page-title">Investment & Pricing</h1>
+        
+        <div class="section-title">Package Comparison</div>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Features</th>
+                    <th>Essential Business</th>
+                    <th>Complete Business</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Implementation Hours</strong></td>
+                    <td>82 hours</td>
+                    <td>108 hours</td>
+                </tr>
+                <tr>
+                    <td><strong>User Training</strong></td>
+                    <td>6 hours essential training</td>
+                    <td>10 hours comprehensive training</td>
+                </tr>
+                <tr>
+                    <td><strong>Backup Configuration</strong></td>
+                    <td>Standard backup setup</td>
+                    <td>Advanced disaster recovery</td>
+                </tr>
+                <tr>
+                    <td><strong>Warranty Period</strong></td>
+                    <td>60-day warranty</td>
+                    <td>90-day warranty</td>
+                </tr>
+                <tr>
+                    <td><strong>Monthly Support Hours</strong></td>
+                    <td>3 hours business support</td>
+                    <td>4 hours comprehensive support</td>
+                </tr>
+                <tr>
+                    <td><strong>Emergency Support</strong></td>
+                    <td>Business hours (9:00-17:00)</td>
+                    <td>24/7 emergency hotline</td>
+                </tr>
+                <tr>
+                    <td><strong>On-site Support</strong></td>
+                    <td>€350 per visit</td>
+                    <td>Included (Netherlands-wide)</td>
+                </tr>
+                <tr style="background: #f8f9fa; font-weight: 600;">
+                    <td><strong>Implementation Price</strong></td>
+                    <td class="price">€14,568</td>
+                    <td class="price">€18,949</td>
+                </tr>
+                <tr style="background: #f8f9fa; font-weight: 600;">
+                    <td><strong>Monthly Support</strong></td>
+                    <td class="price">€526</td>
+                    <td class="price">€702</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">Microsoft 365 Licensing</div>
+        <div class="highlight-box">
+            <p><strong>Microsoft 365 Business Premium:</strong> €103 per user per month<br>
+            <em>(Paid directly to Microsoft - not included in PAM Solutions pricing)</em></p>
+            <p><strong>Total Monthly Cost for 4 Users:</strong><br>
+            Essential Package: €526 (support) + €412 (M365 licensing) = <strong>€938/month</strong><br>
+            Complete Package: €702 (support) + €412 (M365 licensing) = <strong>€1,114/month</strong></p>
+        </div>
+        
+        <div class="section-title">Payment Terms</div>
+        <ul>
+            <li><strong>Implementation:</strong> 50% upon contract signing, 50% upon completion</li>
+            <li><strong>Monthly Support:</strong> Billed monthly in advance</li>
+            <li><strong>Microsoft 365 Licensing:</strong> Billed directly by Microsoft</li>
+            <li><strong>Payment Terms:</strong> 14 days net for implementation, monthly automatic for support</li>
+            <li><strong>Currency:</strong> All prices in EUR, exclusive of VAT</li>
+        </ul>
+        
+        <div class="footer">
+            PAM Solutions | 📞 +31 6 1133 1118 | ✉️ info@pamsolutions.nl | 🌐 pamsolutions.nl | 📍 Eindhoven, Netherlands
+        </div>
+    </div>
+
+    <!-- Implementation Timeline -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-section">
+                <h1>PAM Solutions</h1>
+            </div>
+            <div class="page-number">
+                Page 7
+            </div>
+        </div>
+        
+        <h1 class="page-title">Implementation Timeline & Next Steps</h1>
+        
+        <div class="section-title">Project Timeline</div>
+        <div class="migration-steps">
+            <div class="migration-step">
+                <div class="step-number">Week 1</div>
+                <h3>Initial Setup</h3>
+                <p>Tenant creation, domain verification, user account setup, and security configuration</p>
+            </div>
+            <div class="migration-step">
+                <div class="step-number">Week 2</div>
+                <h3>Data Migration</h3>
+                <p>Email migration, document transfer, and Teams/SharePoint structure implementation</p>
+            </div>
+            <div class="migration-step">
+                <div class="step-number">Week 3</div>
+                <h3>Training & Testing</h3>
+                <p>User training sessions, system testing, and final configuration adjustments</p>
+            </div>
+            <div class="migration-step">
+                <div class="step-number">Week 4</div>
+                <h3>Go-Live</h3>
+                <p>Final cutover, post-implementation support, and documentation handover</p>
+            </div>
+        </div>
+        
+        <div class="section-title">What's Included</div>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-title">Complete Setup</div>
+                <p>Full Microsoft 365 and Intune configuration matching proven Denmark model with 14+ conditional access policies</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">Data Migration</div>
+                <p>Seamless transfer of all existing emails, contacts, calendars, and documents</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">User Training</div>
+                <p>Comprehensive training for all team members on new systems and workflows</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">Security Implementation</div>
+                <p>Multi-factor authentication, device policies, browser controls, and GDPR compliance setup</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">App Integration</div>
+                <p>Third-party app integrations, Power Platform setup, and centralized app management</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">Ongoing Support</div>
+                <p>Monthly maintenance, updates, and 24/7 emergency support coverage</p>
+            </div>
+        </div>
+        
+        <div class="section-title">Your Investment Protection</div>
+        <ul>
+            <li><strong>60-90 Day Warranty:</strong> Full support and fixes for any implementation issues</li>
+            <li><strong>Performance Guarantee:</strong> Systems will meet specified performance requirements</li>
+            <li><strong>Data Security Guarantee:</strong> Full GDPR compliance and data protection</li>
+            <li><strong>Training Guarantee:</strong> Staff will be proficient in all systems before go-live</li>
+            <li><strong>24/7 Emergency Support:</strong> Critical issue resolution during business operations</li>
+        </ul>
+        
+        <div class="footer">
+            PAM Solutions | 📞 +31 6 1133 1118 | ✉️ info@pamsolutions.nl | 🌐 pamsolutions.nl | 📍 Eindhoven, Netherlands
+        </div>
+    </div>
+
+    <!-- Closing & Next Steps -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-section">
+                <h1>PAM Solutions</h1>
+            </div>
+            <div class="page-number">
+                Page 8
+            </div>
+        </div>
+        
+        <h1 class="page-title">Ready to Transform Your IT Infrastructure?</h1>
+        
+        <div class="section-title">Why Act Now?</div>
+        <div class="highlight-box">
+            <h3>Your Current Situation Presents Risks:</h3>
+            <ul>
+                <li><strong>Data Vulnerability:</strong> Client information stored without proper security</li>
+                <li><strong>Compliance Exposure:</strong> GDPR violations can result in significant fines</li>
+                <li><strong>Professional Image:</strong> Personal emails damage credibility with luxury clients</li>
+                <li><strong>Business Continuity:</strong> No backup means potential data loss during peak season</li>
+                <li><strong>Growth Limitations:</strong> Current setup cannot scale with business expansion</li>
+            </ul>
+        </div>
+        
+        <div class="section-title">Your Next Steps</div>
+        <div class="migration-steps">
+            <div class="migration-step">
+                <div class="step-number">1</div>
+                <h3>Review Proposal</h3>
+                <p>Discuss internally and confirm package selection</p>
+            </div>
+            <div class="migration-step">
+                <div class="step-number">2</div>
+                <h3>Schedule Meeting</h3>
+                <p>Call us to discuss details and ask questions</p>
+            </div>
+            <div class="migration-step">
+                <div class="step-number">3</div>
+                <h3>Sign Contract</h3>
+                <p>Approve proposal and begin implementation</p>
+            </div>
+            <div class="migration-step">
+                <div class="step-number">4</div>
+                <h3>Go Live</h3>
+                <p>Start operating with professional IT infrastructure</p>
+            </div>
+        </div>
+        
+        <div class="recommended">
+            <h3>Ready to Get Started?</h3>
+            <p><strong>Contact PAM Solutions Today</strong><br>
+            📞 <strong>+31 6 1133 1118</strong> | ✉️ <strong>info@pamsolutions.nl</strong></p>
+            <p style="margin-top: 15px; font-size: 1rem;">We're available for immediate consultation and can begin implementation within 1 week of contract signing.</p>
+        </div>
+        
+        <div class="section-title">Thank You</div>
+        <p>Thank you for considering PAM Solutions for your Microsoft 365 and Intune implementation. We understand the unique challenges facing travel companies in the Netherlands, and we're committed to providing you with a secure, scalable, and professional IT infrastructure that will support your business growth.</p>
+        
+        <p>Our team is ready to answer any questions and provide additional clarification on any aspect of this proposal. We look forward to partnering with Kompas Nordic Netherlands and supporting your continued success in the luxury travel market.</p>
+        
+        <div style="margin-top: 40px; padding: 25px; background: #f8f9fa; border-radius: 10px; text-align: center;">
+            <p style="font-size: 1.1rem; font-weight: 600; color: #2c3e50;">
+                <strong>PAM Solutions - Professional IT Infrastructure Services</strong><br>
+                <span style="font-size: 1rem; font-weight: 400;">Your Technology Partner for Business Success</span>
+            </p>
+            <div style="margin-top: 15px; font-size: 0.95rem; color: #7f8c8d;">
+                📍 Eindhoven, Netherlands | 📞 +31 6 1133 1118<br>
+                ✉️ info@pamsolutions.nl | 🌐 https://pamsolutions.nl<br>
+                KvK: 92082025 | BTW: NL004326816B29
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div style="text-align: center; font-style: italic; color: #95a5a6;">
+                This proposal is valid for 30 days from the date of issue.<br>
+                All pricing is in EUR and excludes VAT.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
