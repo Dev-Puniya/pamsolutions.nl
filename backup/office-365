@@ -1,0 +1,2902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft 365 Implementation Wizard - Kompas Nordic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .progress-container {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            background: #fff;
+            height: 100%;
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .phase-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .phase-header:hover {
+            background: #f8f9fa;
+        }
+        
+        .phase-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .phase-number {
+            background: #e74c3c;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .phase-number.completed {
+            background: #27ae60;
+        }
+        
+        .phase-info h2 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .phase-info p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .phase-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+        
+        .time-estimate {
+            background: #3498db;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .completion-status {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+        
+        .expand-icon {
+            font-size: 1.5rem;
+            color: #bdc3c7;
+            transition: transform 0.3s ease;
+        }
+        
+        .expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+        
+        .phase-content {
+            display: none;
+            margin-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 20px;
+        }
+        
+        .phase-content.active {
+            display: block;
+        }
+        
+        .step-group {
+            margin-bottom: 25px;
+        }
+        
+        .step-group-title {
+            background: #34495e;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid #ecf0f1;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .step.completed {
+            background: #d5f4e6;
+            border-color: #27ae60;
+        }
+        
+        .step-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #bdc3c7;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            margin-top: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .step-checkbox.checked {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+        
+        .step-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .step-description {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .step-details {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        
+        .step-details summary {
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+        
+        .step-details[open] summary {
+            margin-bottom: 12px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 8px;
+        }
+        
+        .detailed-steps {
+            margin-top: 10px;
+        }
+        
+        .detailed-steps ol {
+            margin-left: 20px;
+        }
+        
+        .detailed-steps li {
+            margin-bottom: 8px;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #f39c12;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .warning-box strong {
+            color: #d68910;
+        }
+        
+        .danger-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-left: 4px solid #e74c3c;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .danger-box strong {
+            color: #c0392b;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-left: 4px solid #27ae60;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .success-box strong {
+            color: #1e7e34;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-left: 4px solid #17a2b8;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .info-box strong {
+            color: #0c5460;
+        }
+        
+        .code-snippet {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 8px 0;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .phase-summary {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .phase-summary h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .requirements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .requirement-item {
+            background: white;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #3498db;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .phase-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .step {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 Microsoft 365 Implementation Wizard</h1>
+            <p>Step-by-step guide for Kompas Nordic Netherlands setup</p>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text" id="progress-text">0% Complete - Ready to start!</div>
+            </div>
+        </div>
+
+        <!-- Phase 1: Pre-Implementation Planning -->
+        <div class="phase-container" data-phase="1">
+            <div class="phase-header" onclick="togglePhase(1)">
+                <div class="phase-title">
+                    <div class="phase-number" id="phase-1-number">1</div>
+                    <div class="phase-info">
+                        <h2>Pre-Implementation Planning</h2>
+                        <p>Gather information and prepare for setup</p>
+                    </div>
+                </div>
+                <div class="phase-status">
+                    <div class="time-estimate">2-4 hours</div>
+                    <div class="completion-status" id="phase-1-status">0/8 completed</div>
+                    <div class="expand-icon">▼</div>
+                </div>
+            </div>
+            
+            <div class="phase-content" id="phase-1-content">
+                <div class="phase-summary">
+                    <h4>What you'll accomplish:</h4>
+                    <p>Before starting the technical setup, you need to gather all the necessary information and credentials from the client. This phase ensures you have everything ready for a smooth implementation.</p>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">📋 Information Gathering</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Verify domain ownership (kompas-nordic.com)</div>
+                            <div class="step-description">Confirm client has admin access to their domain registrar</div>
+                            <details class="step-details">
+                                <summary>Click for detailed instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Ask the client to provide:</strong></p>
+                                    <ol>
+                                        <li>Domain registrar name (GoDaddy, Namecheap, etc.)</li>
+                                        <li>Login credentials or confirmation they have admin access</li>
+                                        <li>Current DNS settings (if any)</li>
+                                    </ol>
+                                    <div class="warning-box">
+                                        <strong>Important:</strong> Without domain admin access, you cannot complete the setup. This must be confirmed before proceeding.
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Collect user information</div>
+                            <div class="step-description">Get full names and preferred email addresses for each user</div>
+                            <details class="step-details">
+                                <summary>Click for detailed instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>For each user, collect:</strong></p>
+                                    <ol>
+                                        <li>Full name (First Last)</li>
+                                        <li>Preferred email format (john.smith@kompas-nordic.com)</li>
+                                        <li>Job title/role</li>
+                                        <li>Current email addresses (for migration)</li>
+                                        <li>Mobile phone number (for MFA setup)</li>
+                                    </ol>
+                                    <div class="info-box">
+                                        <strong>Suggested email addresses:</strong><br>
+                                        • info@kompas-nordic.com (shared)<br>
+                                        • bookings@kompas-nordic.com (shared)<br>
+                                        • sales@kompas-nordic.com (shared)<br>
+                                        • operations@kompas-nordic.com (shared)
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Assess current on-premises server</div>
+                            <div class="step-description">Document server specifications and applications</div>
+                            <details class="step-details">
+                                <summary>Click for detailed instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Information to gather about their server:</strong></p>
+                                    <ol>
+                                        <li>Operating System (Windows Server version)</li>
+                                        <li>Total storage space and available space</li>
+                                        <li>What applications are installed</li>
+                                        <li>How many users access the server</li>
+                                        <li>What files/data are stored on it</li>
+                                        <li>Current backup solution (if any)</li>
+                                        <li>Network shares and folder structure</li>
+                                    </ol>
+                                    <div class="warning-box">
+                                        <strong>Key Question:</strong> Do they need to keep the server running, or can everything move to the cloud?
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Document network infrastructure</div>
+                            <div class="step-description">Record internet speed, router info, and network setup</div>
+                            <details class="step-details">
+                                <summary>Click for detailed instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Network information needed:</strong></p>
+                                    <ol>
+                                        <li>Internet speed (upload/download) - test at speedtest.net</li>
+                                        <li>Internet provider name</li>
+                                        <li>Router/modem model and admin access</li>
+                                        <li>Any firewalls or security devices</li>
+                                        <li>WiFi network names and passwords</li>
+                                    </ol>
+                                    <div class="info-box">
+                                        <strong>Minimum Requirements:</strong> 25 Mbps download, 3 Mbps upload for Microsoft 365
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">💻 Device Inventory</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create device inventory list</div>
+                            <div class="step-description">Document all computers, phones, and tablets to be managed</div>
+                            <details class="step-details">
+                                <summary>Click for detailed instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>For each device, record:</strong></p>
+                                    <ol>
+                                        <li>Device type (laptop, desktop, phone, tablet)</li>
+                                        <li>Operating system and version</li>
+                                        <li>Who uses the device</li>
+                                        <li>Current condition (new, old, needs replacement)</li>
+                                        <li>Whether it needs to be managed by Intune</li>
+                                    </ol>
+                                    <div class="success-box">
+                                        <strong>Tip:</strong> Take photos of device labels/serial numbers for easier identification later
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Plan device backup strategy</div>
+                            <div class="step-description">Determine how to backup existing data before migration</div>
+                            <details class="step-details">
+                                <summary>Click for detailed instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Backup planning:</strong></p>
+                                    <ol>
+                                        <li>Identify critical data on each device</li>
+                                        <li>Choose backup method (external drive, cloud, network)</li>
+                                        <li>Schedule backup time (usually weekend)</li>
+                                        <li>Verify backup space requirements</li>
+                                        <li>Test backup and restore process first</li>
+                                    </ol>
+                                    <div class="danger-box">
+                                        <strong>Critical:</strong> Never start migration without complete backups!
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">📝 Documentation Setup</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create project documentation folder</div>
+                            <div class="step-description">Set up organized folder structure for project files</div>
+                            <details class="step-details">
+                                <summary>Click for detailed instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Create this folder structure:</strong></p>
+                                    <div class="code-snippet">
+Kompas Nordic Project/
+├── 01-Planning/
+│   ├── Client Information.docx
+│   ├── Device Inventory.xlsx
+│   └── Network Assessment.docx
+├── 02-Credentials/
+│   ├── Admin Passwords.txt (encrypted)
+│   └── User Accounts.xlsx
+├── 03-Configuration/
+│   ├── Screenshots/
+│   └── Settings Documentation/
+└── 04-Training Materials/
+    ├── User Guides/
+    └── Quick Reference/</div>
+                                    <div class="warning-box">
+                                        <strong>Security:</strong> Use password manager for sensitive credentials, not plain text files
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Set up secure password management</div>
+                            <div class="step-description">Install and configure password manager for project credentials</div>
+                            <details class="step-details">
+                                <summary>Click for detailed instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Recommended password managers:</strong></p>
+                                    <ol>
+                                        <li>Bitwarden (free, secure)</li>
+                                        <li>1Password (paid, business features)</li>
+                                        <li>LastPass (freemium)</li>
+                                    </ol>
+                                    <p><strong>What to store:</strong></p>
+                                    <ul>
+                                        <li>Microsoft 365 admin account</li>
+                                        <li>Domain registrar login</li>
+                                        <li>User account passwords</li>
+                                        <li>Recovery codes</li>
+                                    </ul>
+                                    <div class="info-box">
+                                        <strong>Best Practice:</strong> Create separate vault/folder specifically for this project
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 2: Microsoft 365 Tenant Creation -->
+        <div class="phase-container" data-phase="2">
+            <div class="phase-header" onclick="togglePhase(2)">
+                <div class="phase-title">
+                    <div class="phase-number" id="phase-2-number">2</div>
+                    <div class="phase-info">
+                        <h2>Microsoft 365 Tenant Creation</h2>
+                        <p>Set up the core Microsoft 365 environment</p>
+                    </div>
+                </div>
+                <div class="phase-status">
+                    <div class="time-estimate">3-4 hours</div>
+                    <div class="completion-status" id="phase-2-status">0/6 completed</div>
+                    <div class="expand-icon">▼</div>
+                </div>
+            </div>
+            
+            <div class="phase-content" id="phase-2-content">
+                <div class="phase-summary">
+                    <h4>What you'll accomplish:</h4>
+                    <p>Create the Microsoft 365 tenant, verify the domain, and set up the basic structure. This creates the foundation for everything else.</p>
+                    
+                    <div class="requirements-list">
+                        <div class="requirement-item">✅ Domain admin access confirmed</div>
+                        <div class="requirement-item">✅ Business email for signup</div>
+                        <div class="requirement-item">✅ Credit card for verification</div>
+                        <div class="requirement-item">✅ User list prepared</div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">🏗️ Initial Tenant Setup</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Sign up for Microsoft 365 Business Premium trial</div>
+                            <div class="step-description">Create the new Microsoft 365 tenant</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Open web browser and go to: <strong>https://www.microsoft.com/en-us/microsoft-365/business</strong></li>
+                                        <li>Click the blue <strong>"See plans and pricing"</strong> button</li>
+                                        <li>Find <strong>"Microsoft 365 Business Premium"</strong> and click <strong>"Try free for 1 month"</strong></li>
+                                        <li>On the signup page, enter: <strong>admin@kompas-nordic.com</strong> (we'll set this up after domain verification)</li>
+                                        <li>Click <strong>"Set up account"</strong></li>
+                                        <li>Choose <strong>"Set up a new business"</strong></li>
+                                        <li>Enter business information:
+                                            <ul>
+                                                <li>First name: Your name</li>
+                                                <li>Last name: Your surname</li>
+                                                <li>Business phone number: +31 6 1133 1118</li>
+                                                <li>Company name: Kompas Nordic Netherlands</li>
+                                                <li>Company size: 2-4 people</li>
+                                            </ul>
+                                        </li>
+                                        <li>Create a temporary tenant name: <strong>kompasnordic-nl</strong></li>
+                                        <li>This will create: kompasnordic-nl.onmicrosoft.com</li>
+                                        <li>Set up a strong password and save it in your password manager</li>
+                                        <li>Complete phone verification when prompted</li>
+                                    </ol>
+                                    <div class="success-box">
+                                        <strong>Success indicator:</strong> You should see the Microsoft 365 admin center with a welcome message
+                                    </div>
+                                    <div class="warning-box">
+                                        <strong>Important:</strong> Write down the tenant name (kompasnordic-nl.onmicrosoft.com) - you'll need this later!
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Add custom domain (kompas-nordic.com)</div>
+                            <div class="step-description">Connect the client's domain to Microsoft 365</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>In Microsoft 365 admin center, click <strong>"Settings"</strong> in the left menu</li>
+                                        <li>Click <strong>"Domains"</strong></li>
+                                        <li>Click <strong>"Add domain"</strong> button</li>
+                                        <li>Type: <strong>kompas-nordic.com</strong></li>
+                                        <li>Click <strong>"Use this domain"</strong></li>
+                                        <li>Choose <strong>"I'll manage my own DNS records"</strong> (recommended)</li>
+                                        <li>Microsoft will show you a TXT record to add</li>
+                                        <li>Copy the TXT record details (something like: MS=ms12345678)</li>
+                                    </ol>
+                                    <p><strong>Now add the DNS record:</strong></p>
+                                    <ol>
+                                        <li>Log into the domain registrar (GoDaddy, Namecheap, etc.)</li>
+                                        <li>Find DNS settings or DNS management</li>
+                                        <li>Look for option to add TXT record</li>
+                                        <li>Add new TXT record:
+                                            <ul>
+                                                <li>Name/Host: @ (or leave blank)</li>
+                                                <li>Value: The MS= code from Microsoft</li>
+                                                <li>TTL: 3600 (1 hour)</li>
+                                            </ul>
+                                        </li>
+                                        <li>Save the DNS changes</li>
+                                        <li>Go back to Microsoft 365 and click <strong>"Verify"</strong></li>
+                                        <li>Wait up to 15 minutes for verification</li>
+                                    </ol>
+                                    <div class="info-box">
+                                        <strong>Verification may take time:</strong> DNS changes can take 15 minutes to 4 hours to propagate. Be patient!
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Configure DNS records for email</div>
+                            <div class="step-description">Set up MX, SPF, DKIM, and DMARC records</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>After domain verification, Microsoft will show you DNS records to add:</strong></p>
+                                    
+                                    <p><strong>1. MX Record (Mail Exchange):</strong></p>
+                                    <ul>
+                                        <li>Name: @ (or leave blank)</li>
+                                        <li>Value: kompas-nordic-com.mail.protection.outlook.com</li>
+                                        <li>Priority: 0</li>
+                                        <li>TTL: 3600</li>
+                                    </ul>
+                                    
+                                    <p><strong>2. CNAME Records:</strong></p>
+                                    <ul>
+                                        <li>autodiscover → autodiscover.outlook.com</li>
+                                        <li>selector1._domainkey → selector1-kompas-nordic-com._domainkey.kompasnordicnl.onmicrosoft.com</li>
+                                        <li>selector2._domainkey → selector2-kompas-nordic-com._domainkey.kompasnordicnl.onmicrosoft.com</li>
+                                    </ul>
+                                    
+                                    <p><strong>3. TXT Records:</strong></p>
+                                    <ul>
+                                        <li>SPF: "v=spf1 include:spf.protection.outlook.com -all"</li>
+                                        <li>DMARC: "v=DMARC1; p=none; rua=mailto:admin@kompas-nordic.com"</li>
+                                    </ul>
+                                    
+                                    <div class="warning-box">
+                                        <strong>Important:</strong> Add these records exactly as shown by Microsoft. The values might be slightly different for your tenant.
+                                    </div>
+                                    
+                                    <p><strong>Steps to add records:</strong></p>
+                                    <ol>
+                                        <li>Go to your domain registrar's DNS settings</li>
+                                        <li>Add each record type (MX, CNAME, TXT) with the values provided</li>
+                                        <li>Save all changes</li>
+                                        <li>Wait 15-60 minutes</li>
+                                        <li>Return to Microsoft 365 and click "Verify" for each record</li>
+                                    </ol>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">👥 User Account Creation</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create user accounts</div>
+                            <div class="step-description">Add individual user accounts for each team member</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>In Microsoft 365 admin center, click <strong>"Users"</strong> in the left menu</li>
+                                        <li>Click <strong>"Active users"</strong></li>
+                                        <li>Click <strong>"Add a user"</strong> button</li>
+                                        <li>Fill in user information:
+                                            <ul>
+                                                <li>First name: John</li>
+                                                <li>Last name: Smith</li>
+                                                <li>Display name: John Smith</li>
+                                                <li>Username: john.smith@kompas-nordic.com</li>
+                                            </ul>
+                                        </li>
+                                        <li>Password settings:
+                                            <ul>
+                                                <li>Choose <strong>"Let me create the password"</strong></li>
+                                                <li>Create strong temporary password: TempPass2024!</li>
+                                                <li>Check <strong>"Require this user to change their password when they first sign in"</strong></li>
+                                                <li>Uncheck <strong>"Send password in email"</strong></li>
+                                            </ul>
+                                        </li>
+                                        <li>Product licenses:
+                                            <ul>
+                                                <li>Select location: <strong>Netherlands</strong></li>
+                                                <li>Check <strong>"Microsoft 365 Business Premium"</strong></li>
+                                            </ul>
+                                        </li>
+                                        <li>Optional settings: Add job title and department</li>
+                                        <li>Click <strong>"Finish adding"</strong></li>
+                                        <li>Save the username and temporary password securely</li>
+                                        <li>Repeat for each user</li>
+                                    </ol>
+                                    <div class="success-box">
+                                        <strong>Repeat this process for each user.</strong> Typical users for travel company:
+                                        <ul>
+                                            <li>Manager: manager.name@kompas-nordic.com</li>
+                                            <li>Operations: operations.name@kompas-nordic.com</li>
+                                            <li>Sales: sales.name@kompas-nordic.com</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create shared mailboxes</div>
+                            <div class="step-description">Set up shared email addresses for departments</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>In Microsoft 365 admin center, go to <strong>"Teams & groups"</strong></li>
+                                        <li>Click <strong>"Shared mailboxes"</strong></li>
+                                        <li>Click <strong>"Add a shared mailbox"</strong></li>
+                                        <li>For the first shared mailbox:
+                                            <ul>
+                                                <li>Name: Kompas Nordic Info</li>
+                                                <li>Email address: info@kompas-nordic.com</li>
+                                                <li>Description: General information and inquiries</li>
+                                            </ul>
+                                        </li>
+                                        <li>Click <strong>"Add"</strong></li>
+                                        <li>Click on the created shared mailbox to manage permissions</li>
+                                        <li>Click <strong>"Edit"</strong> next to Members</li>
+                                        <li>Add users who should access this mailbox</li>
+                                        <li>Set permissions:
+                                            <ul>
+                                                <li><strong>Send As:</strong> Users who can send FROM this address</li>
+                                                <li><strong>Send on behalf:</strong> Users who can send on behalf of this address</li>
+                                                <li><strong>Read and manage:</strong> Users who can read emails</li>
+                                            </ul>
+                                        </li>
+                                        <li>Click <strong>"Save changes"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Repeat for each shared mailbox:</strong></p>
+                                    <ul>
+                                        <li>bookings@kompas-nordic.com (Booking inquiries)</li>
+                                        <li>sales@kompas-nordic.com (Sales and partnerships)</li>
+                                        <li>operations@kompas-nordic.com (Tour operations)</li>
+                                    </ul>
+                                    
+                                    <div class="info-box">
+                                        <strong>Shared mailboxes are free</strong> (up to 50GB) and don't require licenses for the mailbox itself, only for users accessing them.
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Test email delivery</div>
+                            <div class="step-description">Verify emails can be sent and received</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Go to <strong>outlook.office.com</strong></li>
+                                        <li>Sign in with admin account: admin@kompas-nordic.com</li>
+                                        <li>Click <strong>"New message"</strong></li>
+                                        <li>Send test email TO: your personal email address</li>
+                                        <li>FROM: admin@kompas-nordic.com</li>
+                                        <li>Subject: "Test - Microsoft 365 Setup"</li>
+                                        <li>Message: "Testing email delivery from new Microsoft 365 setup"</li>
+                                        <li>Click <strong>"Send"</strong></li>
+                                        <li>Check your personal email - should arrive within 5 minutes</li>
+                                        <li>Reply to the test email from your personal account</li>
+                                        <li>Check if reply arrives in Microsoft 365 mailbox</li>
+                                    </ol>
+                                    
+                                    <p><strong>Also test shared mailboxes:</strong></p>
+                                    <ol>
+                                        <li>In Outlook, click your profile picture (top right)</li>
+                                        <li>Click <strong>"Open another mailbox"</strong></li>
+                                        <li>Type: info@kompas-nordic.com</li>
+                                        <li>Send test email from shared mailbox to external address</li>
+                                        <li>Verify it's delivered and shows correct "From" address</li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success indicators:</strong>
+                                        <ul>
+                                            <li>Emails send without errors</li>
+                                            <li>External recipients receive emails</li>
+                                            <li>Replies come back to correct mailbox</li>
+                                            <li>No delay longer than 5 minutes</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="warning-box">
+                                        <strong>If emails don't work:</strong> Check DNS records again, wait longer for propagation, or contact Microsoft support.
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation-buttons">
+            <button class="nav-btn" onclick="previousPhase()" id="prev-btn" disabled>← Previous Phase</button>
+            <div id="phase-indicator">Phase 1 of 6</div>
+            <button class="nav-btn" onclick="nextPhase()" id="next-btn">Next Phase →</button>
+        </div>
+
+        <!-- Phase 3: Security & Compliance Setup -->
+        <div class="phase-container" data-phase="3">
+            <div class="phase-header" onclick="togglePhase(3)">
+                <div class="phase-title">
+                    <div class="phase-number" id="phase-3-number">3</div>
+                    <div class="phase-info">
+                        <h2>Security & Compliance Setup</h2>
+                        <p>Configure MFA, security policies, and compliance settings</p>
+                    </div>
+                </div>
+                <div class="phase-status">
+                    <div class="time-estimate">3-4 hours</div>
+                    <div class="completion-status" id="phase-3-status">0/5 completed</div>
+                    <div class="expand-icon">▼</div>
+                </div>
+            </div>
+            
+            <div class="phase-content" id="phase-3-content">
+                <div class="phase-summary">
+                    <h4>What you'll accomplish:</h4>
+                    <p>Set up Multi-Factor Authentication, security policies, and GDPR compliance settings to protect the client's business and customer data.</p>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">🔐 Multi-Factor Authentication Setup</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Enable MFA for all users</div>
+                            <div class="step-description">Require second factor authentication for security</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>In Microsoft 365 admin center, go to <strong>"Users"</strong> → <strong>"Active users"</strong></li>
+                                        <li>Click <strong>"Multi-factor authentication"</strong> at the top</li>
+                                        <li>Select all users (check the box next to each name)</li>
+                                        <li>On the right side, click <strong>"Enable"</strong> under Quick steps</li>
+                                        <li>Click <strong>"enable multi-factor auth"</strong> in popup</li>
+                                        <li>Users will be required to set up MFA on next login</li>
+                                    </ol>
+                                    
+                                    <p><strong>Alternative method (newer interface):</strong></p>
+                                    <ol>
+                                        <li>Go to <strong>portal.azure.com</strong></li>
+                                        <li>Search for <strong>"Azure Active Directory"</strong></li>
+                                        <li>Click <strong>"Security"</strong> → <strong>"MFA"</strong></li>
+                                        <li>Click <strong>"Additional cloud-based MFA settings"</strong></li>
+                                        <li>Select users and enable MFA</li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success indicator:</strong> All users show "Enabled" status in MFA column
+                                    </div>
+                                    
+                                    <div class="info-box">
+                                        <strong>What happens next:</strong> Users will get email notification and must set up authenticator app on next login
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Configure Microsoft Authenticator app</div>
+                            <div class="step-description">Set up the authenticator app for each user</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Help each user set up Microsoft Authenticator:</strong></p>
+                                    <ol>
+                                        <li>User downloads <strong>"Microsoft Authenticator"</strong> app from App Store/Google Play</li>
+                                        <li>User goes to <strong>office.com</strong> and signs in</li>
+                                        <li>System prompts: "More information required"</li>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Choose <strong>"Mobile app"</strong></li>
+                                        <li>Select <strong>"Receive notifications for verification"</strong></li>
+                                        <li>Click <strong>"Set up"</strong></li>
+                                        <li>QR code appears on screen</li>
+                                        <li>Open Microsoft Authenticator app</li>
+                                        <li>Tap <strong>"Add account"</strong> → <strong>"Work or school account"</strong></li>
+                                        <li>Scan QR code with phone camera</li>
+                                        <li>Account appears in app</li>
+                                        <li>Click <strong>"Next"</strong> on computer</li>
+                                        <li>Approve test notification on phone</li>
+                                        <li>Click <strong>"Done"</strong></li>
+                                    </ol>
+                                    
+                                    <div class="warning-box">
+                                        <strong>Important:</strong> Each user must have their phone with them during setup. Plan this with the client.
+                                    </div>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success test:</strong> User can sign out and sign back in, gets push notification on phone to approve
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">🛡️ Security Policies</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Configure conditional access policies</div>
+                            <div class="step-description">Set rules for when and how users can access Microsoft 365</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Go to <strong>portal.azure.com</strong></li>
+                                        <li>Search for <strong>"Azure Active Directory"</strong></li>
+                                        <li>Click <strong>"Security"</strong> in left menu</li>
+                                        <li>Click <strong>"Conditional Access"</strong></li>
+                                        <li>Click <strong>"New policy"</strong></li>
+                                        <li>Name: <strong>"Block Legacy Authentication"</strong></li>
+                                        <li>Under <strong>"Assignments"</strong>:</li>
+                                        <ul>
+                                            <li>Users: <strong>"All users"</strong></li>
+                                            <li>Cloud apps: <strong>"All cloud apps"</strong></li>
+                                            <li>Conditions → Client apps: Check <strong>"Exchange ActiveSync clients"</strong> and <strong>"Other clients"</strong></li>
+                                        </ul>
+                                        <li>Under <strong>"Access controls"</strong>:</li>
+                                        <ul>
+                                            <li>Grant: <strong>"Block access"</strong></li>
+                                        </ul>
+                                        <li>Enable policy: <strong>"On"</strong></li>
+                                        <li>Click <strong>"Create"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Create second policy - "Require MFA from outside office":</strong></p>
+                                    <ol>
+                                        <li>Click <strong>"New policy"</strong></li>
+                                        <li>Name: <strong>"Require MFA Outside Office"</strong></li>
+                                        <li>Users: <strong>"All users"</strong></li>
+                                        <li>Cloud apps: <strong>"All cloud apps"</strong></li>
+                                        <li>Conditions → Locations: <strong>"Any location"</strong></li>
+                                        <li>Access controls → Grant: <strong>"Grant access"</strong> + <strong>"Require multi-factor authentication"</strong></li>
+                                        <li>Enable policy: <strong>"On"</strong></li>
+                                        <li>Click <strong>"Create"</strong></li>
+                                    </ol>
+                                    
+                                    <div class="info-box">
+                                        <strong>What this does:</strong> Blocks old/insecure email apps and always requires MFA for security
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Set up data loss prevention (DLP)</div>
+                            <div class="step-description">Protect sensitive client data (passport numbers, payments)</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Go to <strong>compliance.microsoft.com</strong></li>
+                                        <li>Sign in with admin account</li>
+                                        <li>Click <strong>"Data loss prevention"</strong> in left menu</li>
+                                        <li>Click <strong>"Policies"</strong></li>
+                                        <li>Click <strong>"Create policy"</strong></li>
+                                        <li>Choose <strong>"Custom"</strong> → <strong>"Next"</strong></li>
+                                        <li>Name: <strong>"Protect Client Personal Data"</strong></li>
+                                        <li>Description: <strong>"Prevent sharing of passport numbers, payment info, and personal data"</strong></li>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Locations: Select <strong>"Exchange email"</strong>, <strong>"SharePoint sites"</strong>, <strong>"OneDrive accounts"</strong></li>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Under <strong>"Content contains"</strong>:</li>
+                                        <ul>
+                                            <li>Add <strong>"Credit card number"</strong></li>
+                                            <li>Add <strong>"EU passport number"</strong></li>
+                                            <li>Add <strong>"Netherlands national identification number"</strong></li>
+                                        </ul>
+                                        <li>Set conditions: <strong>"Content is shared with people outside my organization"</strong></li>
+                                        <li>Actions: <strong>"Block people from sharing and restrict access"</strong></li>
+                                        <li>User notifications: <strong>"On"</strong></li>
+                                        <li>Click <strong>"Next"</strong> → <strong>"Submit"</strong></li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Result:</strong> Users will get warning/blocked if trying to email passport scans or payment info externally
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Configure GDPR compliance settings</div>
+                            <div class="step-description">Set up data retention and privacy controls for GDPR</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>In <strong>compliance.microsoft.com</strong>, click <strong>"Data governance"</strong></li>
+                                        <li>Click <strong>"Retention policies"</strong></li>
+                                        <li>Click <strong>"New retention policy"</strong></li>
+                                        <li>Name: <strong>"GDPR Compliance - Travel Data"</strong></li>
+                                        <li>Choose locations:</li>
+                                        <ul>
+                                            <li>Exchange mailboxes: <strong>"All mailboxes"</strong></li>
+                                            <li>SharePoint sites: <strong>"All sites"</strong></li>
+                                            <li>OneDrive accounts: <strong>"All accounts"</strong></li>
+                                        </ul>
+                                        <li>Retention settings:</li>
+                                        <ul>
+                                            <li>Retain items for: <strong>"7 years"</strong> (travel industry standard)</li>
+                                            <li>At the end of retention period: <strong>"Delete items automatically"</strong></li>
+                                        </ul>
+                                        <li>Click <strong>"Create policy"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Set up Subject Rights Requests:</strong></p>
+                                    <ol>
+                                        <li>Click <strong>"Subject rights requests"</strong></li>
+                                        <li>Click <strong>"Create request"</strong></li>
+                                        <li>This sets up system for clients to request their data</li>
+                                        <li>Configure automated response templates</li>
+                                    </ol>
+                                    
+                                    <div class="info-box">
+                                        <strong>GDPR Compliance:</strong> This ensures client data is automatically deleted after legal retention period and enables data subject requests
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 4: SharePoint & Teams Setup -->
+        <div class="phase-container" data-phase="4">
+            <div class="phase-header" onclick="togglePhase(4)">
+                <div class="phase-title">
+                    <div class="phase-number" id="phase-4-number">4</div>
+                    <div class="phase-info">
+                        <h2>SharePoint & Teams Configuration</h2>
+                        <p>Set up collaboration tools and document management</p>
+                    </div>
+                </div>
+                <div class="phase-status">
+                    <div class="time-estimate">4-6 hours</div>
+                    <div class="completion-status" id="phase-4-status">0/7 completed</div>
+                    <div class="expand-icon">▼</div>
+                </div>
+            </div>
+            
+            <div class="phase-content" id="phase-4-content">
+                <div class="phase-summary">
+                    <h4>What you'll accomplish:</h4>
+                    <p>Create SharePoint sites for document storage and Microsoft Teams for collaboration, specifically organized for travel business operations.</p>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">📁 SharePoint Sites Creation</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create main company SharePoint site</div>
+                            <div class="step-description">Set up central document hub for the company</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Go to <strong>admin.microsoft.com</strong></li>
+                                        <li>Click <strong>"Show all"</strong> → <strong>"SharePoint"</strong></li>
+                                        <li>Click <strong>"Sites"</strong> → <strong>"Active sites"</strong></li>
+                                        <li>Click <strong>"Create"</strong></li>
+                                        <li>Choose <strong>"Team site"</strong></li>
+                                        <li>Site name: <strong>"Kompas Nordic Netherlands"</strong></li>
+                                        <li>Description: <strong>"Main document hub for Netherlands operations"</strong></li>
+                                        <li>Privacy: <strong>"Private"</strong></li>
+                                        <li>Language: <strong>"English"</strong></li>
+                                        <li>Time zone: <strong>"Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"</strong></li>
+                                        <li>Site owner: <strong>admin@kompas-nordic.com</strong></li>
+                                        <li>Click <strong>"Finish"</strong></li>
+                                        <li>Wait for site to be created (2-5 minutes)</li>
+                                        <li>Click on site name to open it</li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success indicator:</strong> You can access the SharePoint site and see default document library
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create document libraries for travel business</div>
+                            <div class="step-description">Set up organized folders for different types of documents</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Create document libraries:</strong></p>
+                                    <ol>
+                                        <li>In your SharePoint site, click <strong>"New"</strong> → <strong>"Document library"</strong></li>
+                                        <li>Name: <strong>"Client Files"</strong></li>
+                                        <li>Description: <strong>"Individual client folders with bookings and documents"</strong></li>
+                                        <li>Click <strong>"Create"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Repeat to create these libraries:</strong></p>
+                                    <ul>
+                                        <li><strong>"Operations"</strong> - Tour templates, supplier contracts, logistics</li>
+                                        <li><strong>"Marketing"</strong> - Brochures, photos, pricing sheets</li>
+                                        <li><strong>"Admin"</strong> - Company documents, policies, contracts</li>
+                                    </ul>
+                                    
+                                    <p><strong>Set up folder structure in "Client Files":</strong></p>
+                                    <ol>
+                                        <li>Click <strong>"Client Files"</strong> library</li>
+                                        <li>Click <strong>"New"</strong> → <strong>"Folder"</strong></li>
+                                        <li>Create folders:</li>
+                                        <ul>
+                                            <li><strong>"Active Bookings"</strong></li>
+                                            <li><strong>"Completed Tours"</strong></li>
+                                            <li><strong>"Client Profiles"</strong></li>
+                                            <li><strong>"Emergency Contacts"</strong></li>
+                                        </ul>
+                                    </ol>
+                                    
+                                    <div class="info-box">
+                                        <strong>Result:</strong> Organized structure where team can easily find and store client documents securely
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Configure permissions and sharing settings</div>
+                            <div class="step-description">Set who can access which documents</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>In SharePoint site, click <strong>⚙️ Settings</strong> (top right)</li>
+                                        <li>Click <strong>"Site permissions"</strong></li>
+                                        <li>Click <strong>"Advanced permissions settings"</strong></li>
+                                        <li>Click <strong>"Grant Permissions"</strong></li>
+                                        <li>Add all company users:</li>
+                                        <ul>
+                                            <li>Type user emails (john.smith@kompas-nordic.com)</li>
+                                            <li>Permission level: <strong>"Edit"</strong> (can add/modify documents)</li>
+                                        </ul>
+                                        <li>Click <strong>"Share"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Set up restricted access for sensitive documents:</strong></p>
+                                    <ol>
+                                        <li>Go to <strong>"Client Files"</strong> library</li>
+                                        <li>Right-click <strong>"Emergency Contacts"</strong> folder</li>
+                                        <li>Click <strong>"Manage access"</strong></li>
+                                        <li>Click <strong>"Advanced"</strong></li>
+                                        <li>Uncheck <strong>"Inherit permissions"</strong></li>
+                                        <li>Add only manager and operations staff</li>
+                                        <li>Permission level: <strong>"Read"</strong> or <strong>"Edit"</strong> as needed</li>
+                                    </ol>
+                                    
+                                    <div class="warning-box">
+                                        <strong>Important:</strong> Client personal data (passport scans) should have restricted access - not all employees need to see everything
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">👥 Microsoft Teams Setup</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create main company team</div>
+                            <div class="step-description">Set up central communication hub</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Go to <strong>teams.microsoft.com</strong></li>
+                                        <li>Sign in with admin account</li>
+                                        <li>Click <strong>"Create a team"</strong></li>
+                                        <li>Choose <strong>"From scratch"</strong></li>
+                                        <li>Choose <strong>"Private"</strong> (only team members can access)</li>
+                                        <li>Team name: <strong>"Kompas Nordic NL Team"</strong></li>
+                                        <li>Description: <strong>"Main communication hub for Netherlands operations"</strong></li>
+                                        <li>Click <strong>"Create"</strong></li>
+                                        <li>Add members:</li>
+                                        <ul>
+                                            <li>Type each user's email address</li>
+                                            <li>Set role: <strong>"Member"</strong> (or <strong>"Owner"</strong> for managers)</li>
+                                        </ul>
+                                        <li>Click <strong>"Add"</strong> → <strong>"Close"</strong></li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success indicator:</strong> All team members receive email notification and can see the team in their Teams app
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create department channels</div>
+                            <div class="step-description">Set up organized discussion channels</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>In the team, click <strong>"More options ..."</strong> next to team name</li>
+                                        <li>Click <strong>"Add channel"</strong></li>
+                                        <li>Channel name: <strong>"Bookings & Reservations"</strong></li>
+                                        <li>Description: <strong>"Discuss client bookings, reservations, and trip planning"</strong></li>
+                                        <li>Privacy: <strong>"Standard"</strong> (all team members can access)</li>
+                                        <li>Click <strong>"Add"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Repeat to create these channels:</strong></p>
+                                    <ul>
+                                        <li><strong>"Sales & Marketing"</strong> - New business, partnerships, marketing campaigns</li>
+                                        <li><strong>"Operations & Logistics"</strong> - Tour coordination, supplier management, logistics</li>
+                                        <li><strong>"Client Communications"</strong> - Important client updates and feedback</li>
+                                        <li><strong>"Admin & Finance"</strong> - Administrative tasks, invoicing, accounting</li>
+                                    </ul>
+                                    
+                                    <p><strong>Pin important files to channels:</strong></p>
+                                    <ol>
+                                        <li>Click on <strong>"Bookings & Reservations"</strong> channel</li>
+                                        <li>Click <strong>"Files"</strong> tab at top</li>
+                                        <li>Click <strong>"Upload"</strong> and add booking templates</li>
+                                        <li>Click <strong>"Pin"</strong> to make them easily accessible</li>
+                                    </ol>
+                                    
+                                    <div class="info-box">
+                                        <strong>Result:</strong> Team has organized spaces for different types of discussions and quick access to relevant files
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Configure Teams apps and integrations</div>
+                            <div class="step-description">Add useful apps for travel business</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>In Teams, click <strong>"Apps"</strong> in left sidebar</li>
+                                        <li>Search for <strong>"Planner"</strong></li>
+                                        <li>Click <strong>"Add"</strong> to add Microsoft Planner</li>
+                                        <li>Go back to your team</li>
+                                        <li>Click <strong>"+"</strong> to add a tab</li>
+                                        <li>Choose <strong>"Planner"</strong></li>
+                                        <li>Create new plan: <strong>"Tour Planning & Tasks"</strong></li>
+                                        <li>Add tab name: <strong>"Task Management"</strong></li>
+                                        <li>Click <strong>"Save"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Add other useful apps:</strong></p>
+                                    <ul>
+                                        <li><strong>"OneNote"</strong> - For meeting notes and documentation</li>
+                                        <li><strong>"SharePoint"</strong> - Direct access to document libraries</li>
+                                        <li><strong>"Calendar"</strong> - Shared team calendar</li>
+                                        <li><strong>"Forms"</strong> - For client feedback surveys</li>
+                                    </ul>
+                                    
+                                    <p><strong>Set up meeting policies:</strong></p>
+                                    <ol>
+                                        <li>Go to <strong>admin.teams.microsoft.com</strong></li>
+                                        <li>Click <strong>"Meetings"</strong> → <strong>"Meeting policies"</strong></li>
+                                        <li>Edit <strong>"Global (Org-wide default)"</strong></li>
+                                        <li>Allow <strong>"Recording"</strong> for training purposes</li>
+                                        <li>Enable <strong>"Transcription"</strong></li>
+                                        <li>Allow <strong>"Anonymous users to join meetings"</strong> (for client meetings)</li>
+                                        <li>Click <strong>"Save"</strong></li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Result:</strong> Team can manage tasks, take notes, access files, and hold professional client meetings
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Set up external sharing for client collaboration</div>
+                            <div class="step-description">Allow secure sharing with clients and suppliers</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Go to <strong>admin.microsoft.com</strong></li>
+                                        <li>Click <strong>"Settings"</strong> → <strong>"Org settings"</strong></li>
+                                        <li>Click <strong>"Security & privacy"</strong> tab</li>
+                                        <li>Click <strong>"Sharing"</strong></li>
+                                        <li>SharePoint and OneDrive sharing:</li>
+                                        <ul>
+                                            <li>External sharing: <strong>"New and existing guests"</strong></li>
+                                            <li>Check <strong>"Require sign-in"</strong></li>
+                                            <li>Link expiration: <strong>"30 days"</strong></li>
+                                            <li>Default link type: <strong>"Specific people"</strong></li>
+                                        </ul>
+                                        <li>Click <strong>"Save"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Test external sharing:</strong></p>
+                                    <ol>
+                                        <li>Go to SharePoint site</li>
+                                        <li>Create test document in Client Files</li>
+                                        <li>Right-click document → <strong>"Share"</strong></li>
+                                        <li>Enter external email address (your personal email)</li>
+                                        <li>Add message: "Test sharing for client collaboration"</li>
+                                        <li>Set expiration date: 30 days</li>
+                                        <li>Permission: <strong>"View"</strong> (or <strong>"Edit"</strong> if needed)</li>
+                                        <li>Click <strong>"Send"</strong></li>
+                                        <li>Check external email - should receive access link</li>
+                                        <li>Test access from external account</li>
+                                    </ol>
+                                    
+                                    <div class="warning-box">
+                                        <strong>Security Note:</strong> Always set expiration dates and minimum necessary permissions when sharing with external users
+                                    </div>
+                                    
+                                    <div class="success-box">
+                                        <strong>Result:</strong> You can securely share itineraries, photos, and documents with clients for review and approval
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 5: Intune Device Management -->
+        <div class="phase-container" data-phase="5">
+            <div class="phase-header" onclick="togglePhase(5)">
+                <div class="phase-title">
+                    <div class="phase-number" id="phase-5-number">5</div>
+                    <div class="phase-info">
+                        <h2>Intune Device Management</h2>
+                        <p>Enroll and secure all company devices</p>
+                    </div>
+                </div>
+                <div class="phase-status">
+                    <div class="time-estimate">3-5 hours</div>
+                    <div class="completion-status" id="phase-5-status">0/6 completed</div>
+                    <div class="expand-icon">▼</div>
+                </div>
+            </div>
+            
+            <div class="phase-content" id="phase-5-content">
+                <div class="phase-summary">
+                    <h4>What you'll accomplish:</h4>
+                    <p>Set up Microsoft Intune to manage and secure all company devices (computers, phones, tablets) with automatic app deployment and security policies.</p>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">⚙️ Intune Initial Setup</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Enable and configure Microsoft Intune</div>
+                            <div class="step-description">Turn on device management capabilities</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Go to <strong>endpoint.microsoft.com</strong></li>
+                                        <li>Sign in with admin account</li>
+                                        <li>If prompted, click <strong>"Get started"</strong> to set up Intune</li>
+                                        <li>Click <strong>"Tenant administration"</strong> in left menu</li>
+                                        <li>Click <strong>"Tenant status"</strong></li>
+                                        <li>Verify Intune service is <strong>"Active"</strong></li>
+                                        <li>Click <strong>"Customization"</strong></li>
+                                        <li>Company Portal branding:</li>
+                                        <ul>
+                                            <li>Company name: <strong>"Kompas Nordic Netherlands"</strong></li>
+                                            <li>IT department name: <strong>"PAM Solutions IT Support"</strong></li>
+                                            <li>IT department phone: <strong>+31 6 1133 1118</strong></li>
+                                            <li>IT department email: <strong>support@pamsolutions.nl</strong></li>
+                                            <li>Privacy statement URL: Leave blank for now</li>
+                                        </ul>
+                                        <li>Click <strong>"Save"</strong></li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success indicator:</strong> Intune dashboard loads and shows tenant status as "Healthy"
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create device compliance policies</div>
+                            <div class="step-description">Set security requirements for all devices</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Create Windows compliance policy:</strong></p>
+                                    <ol>
+                                        <li>In Intune admin center, click <strong>"Devices"</strong></li>
+                                        <li>Click <strong>"Compliance policies"</strong></li>
+                                        <li>Click <strong>"Create Policy"</strong></li>
+                                        <li>Platform: <strong>"Windows 10 and later"</strong></li>
+                                        <li>Click <strong>"Create"</strong></li>
+                                        <li>Name: <strong>"Windows Security Requirements"</strong></li>
+                                        <li>Description: <strong>"Basic security requirements for Windows devices"</strong></li>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Compliance settings:</li>
+                                        <ul>
+                                            <li>Device security → Require BitLocker: <strong>"Require"</strong></li>
+                                            <li>Device security → Firewall: <strong>"Require"</strong></li>
+                                            <li>Device security → Antivirus: <strong>"Require"</strong></li>
+                                            <li>System security → Password: <strong>"Require"</strong></li>
+                                            <li>System security → Minimum password length: <strong>"6"</strong></li>
+                                        </ul>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Actions for noncompliance:</li>
+                                        <ul>
+                                            <li>Mark device noncompliant: <strong>"Immediately"</strong></li>
+                                            <li>Add action: <strong>"Block access to corporate resources"</strong></li>
+                                            <li>Schedule: <strong>"1 day"</strong> after noncompliance</li>
+                                        </ul>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Assignments: <strong>"All users"</strong></li>
+                                        <li>Click <strong>"Next"</strong> → <strong>"Create"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Create mobile device policy:</strong></p>
+                                    <ol>
+                                        <li>Create new policy for <strong>"iOS/iPadOS"</strong></li>
+                                        <li>Name: <strong>"iOS Security Requirements"</strong></li>
+                                        <li>Settings:</li>
+                                        <ul>
+                                            <li>Device security → Jailbroken devices: <strong>"Block"</strong></li>
+                                            <li>Device security → Passcode required: <strong>"Require"</strong></li>
+                                            <li>Device security → Minimum passcode length: <strong>"6"</strong></li>
+                                        </ul>
+                                        <li>Repeat for <strong>"Android"</strong> platform</li>
+                                        <li>Android settings:</li>
+                                        <ul>
+                                            <li>Device security → Rooted devices: <strong>"Block"</strong></li>
+                                            <li>Device security → Encryption: <strong>"Require"</strong></li>
+                                            <li>Device security → Screen lock: <strong>"Require"</strong></li>
+                                        </ul>
+                                    </ol>
+                                    
+                                    <div class="info-box">
+                                        <strong>What this does:</strong> Devices must meet security requirements to access company email and files
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">📱 Device Enrollment</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Configure Windows Autopilot</div>
+                            <div class="step-description">Set up automatic enrollment for new Windows devices</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Click <strong>"Devices"</strong> → <strong>"Windows"</strong> → <strong>"Windows enrollment"</strong></li>
+                                        <li>Click <strong>"Devices"</strong> under Windows Autopilot</li>
+                                        <li>Click <strong>"Import"</strong></li>
+                                        <li>Download the PowerShell script to collect hardware hashes</li>
+                                        <li>On each Windows device, run PowerShell as Administrator:</li>
+                                        <div class="code-snippet">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+Install-Script -Name Get-WindowsAutoPilotInfo
+Get-WindowsAutoPilotInfo.ps1 -OutputFile AutoPilotHWID.csv</div>
+                                        <li>Upload the CSV file in Intune</li>
+                                        <li>Wait for sync (15-30 minutes)</li>
+                                        <li>Create deployment profile:</li>
+                                        <ul>
+                                            <li>Click <strong>"Deployment profiles"</strong></li>
+                                            <li>Click <strong>"Create profile"</strong> → <strong>"Windows PC"</strong></li>
+                                            <li>Name: <strong>"Kompas Nordic Autopilot"</strong></li>
+                                            <li>Convert all targeted devices: <strong>"Yes"</strong></li>
+                                            <li>Deployment mode: <strong>"User-driven"</strong></li>
+                                            <li>Join to Azure AD as: <strong>"Azure AD joined"</strong></li>
+                                            <li>User account type: <strong>"Standard"</strong></li>
+                                        </ul>
+                                        <li>Assign to device group</li>
+                                        <li>Click <strong>"Create"</strong></li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Result:</strong> New devices automatically configure themselves when connected to internet
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Enroll existing Windows devices</div>
+                            <div class="step-description">Add current company computers to management</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>For each existing Windows device:</strong></p>
+                                    <ol>
+                                        <li>On the device, go to <strong>Settings</strong> → <strong>Accounts</strong></li>
+                                        <li>Click <strong>"Access work or school"</strong></li>
+                                        <li>Click <strong>"Connect"</strong></li>
+                                        <li>Enter work email: <strong>username@kompas-nordic.com</strong></li>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Enter password and complete MFA if prompted</li>
+                                        <li>Windows will download and apply policies</li>
+                                        <li>Accept any permission requests</li>
+                                        <li>Click <strong>"Done"</strong> when completed</li>
+                                        <li>Restart the device</li>
+                                    </ol>
+                                    
+                                    <p><strong>Install Company Portal app:</strong></p>
+                                    <ol>
+                                        <li>Go to Microsoft Store</li>
+                                        <li>Search for <strong>"Company Portal"</strong></li>
+                                        <li>Install the app</li>
+                                        <li>Open Company Portal and sign in</li>
+                                        <li>Complete device compliance check</li>
+                                        <li>Follow any remediation steps if needed</li>
+                                    </ol>
+                                    
+                                    <p><strong>Verify enrollment in Intune:</strong></p>
+                                    <ol>
+                                        <li>Go back to <strong>endpoint.microsoft.com</strong></li>
+                                        <li>Click <strong>"Devices"</strong> → <strong>"All devices"</strong></li>
+                                        <li>Look for the device name</li>
+                                        <li>Status should show <strong>"Compliant"</strong></li>
+                                    </ol>
+                                    
+                                    <div class="warning-box">
+                                        <strong>Important:</strong> Have users save their work before starting - device may restart during enrollment
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Enroll mobile devices (iOS/Android)</div>
+                            <div class="step-description">Add company phones and tablets to management</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>For iOS devices:</strong></p>
+                                    <ol>
+                                        <li>Download <strong>"Microsoft Intune Company Portal"</strong> from App Store</li>
+                                        <li>Open the app</li>
+                                        <li>Tap <strong>"Sign in"</strong></li>
+                                        <li>Enter work email: <strong>username@kompas-nordic.com</strong></li>
+                                        <li>Enter password and complete MFA</li>
+                                        <li>Tap <strong>"Get started"</strong></li>
+                                        <li>Follow enrollment prompts</li>
+                                        <li>When prompted, tap <strong>"Install"</strong> for management profile</li>
+                                        <li>Go to <strong>Settings</strong> → <strong>General</strong> → <strong>VPN & Device Management</strong></li>
+                                        <li>Tap on management profile</li>
+                                        <li>Tap <strong>"Install"</strong> and enter device passcode</li>
+                                        <li>Return to Company Portal app</li>
+                                        <li>Complete device compliance check</li>
+                                    </ol>
+                                    
+                                    <p><strong>For Android devices:</strong></p>
+                                    <ol>
+                                        <li>Download <strong>"Microsoft Intune Company Portal"</strong> from Google Play</li>
+                                        <li>Open the app</li>
+                                        <li>Tap <strong>"Sign in"</strong></li>
+                                        <li>Enter work credentials</li>
+                                        <li>Tap <strong>"Begin"</strong></li>
+                                        <li>Choose <strong>"Set up work profile"</strong> (recommended)</li>
+                                        <li>Allow permissions for device management</li>
+                                        <li>Complete enrollment process</li>
+                                        <li>Install required apps from managed Google Play</li>
+                                    </ol>
+                                    
+                                    <div class="info-box">
+                                        <strong>Work Profile (Android):</strong> Creates separate space for work apps and data, keeping personal data private
+                                    </div>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success indicator:</strong> Device appears in Intune admin center with "Compliant" status
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">📦 Application Deployment</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Deploy Microsoft 365 Apps to all devices</div>
+                            <div class="step-description">Automatically install Office, Teams, OneDrive</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>In Intune admin center, click <strong>"Apps"</strong></li>
+                                        <li>Click <strong>"All apps"</strong></li>
+                                        <li>Click <strong>"Add"</strong></li>
+                                        <li>App type: <strong>"Microsoft 365 Apps"</strong> → <strong>"Windows 10 and later"</strong></li>
+                                        <li>Click <strong>"Select"</strong></li>
+                                        <li>App suite information:</li>
+                                        <ul>
+                                            <li>Name: <strong>"Microsoft 365 Apps - Kompas Nordic"</strong></li>
+                                            <li>Description: <strong>"Essential Office applications for business"</strong></li>
+                                        </ul>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Configure settings:</li>
+                                        <ul>
+                                            <li>Apps to include: Excel, Word, PowerPoint, Outlook, Teams, OneDrive</li>
+                                            <li>Architecture: <strong>"64-bit"</strong></li>
+                                            <li>Update channel: <strong>"Current Channel"</strong></li>
+                                            <li>Remove other versions: <strong>"Yes"</strong></li>
+                                        </ul>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Assignments:</li>
+                                        <ul>
+                                            <li>Add group: <strong>"All users"</strong></li>
+                                            <li>Assignment type: <strong>"Required"</strong></li>
+                                        </ul>
+                                        <li>Click <strong>"Next"</strong> → <strong>"Create"</strong></li>
+                                    </ol>
+                                    
+                                    <p><strong>Deploy mobile apps:</strong></p>
+                                    <ol>
+                                        <li>Create new app for iOS: <strong>"Microsoft Outlook"</strong></li>
+                                        <li>App type: <strong>"iOS store app"</strong></li>
+                                        <li>Search App Store for Outlook</li>
+                                        <li>Select app and configure</li>
+                                        <li>Assignment: <strong>"All users"</strong> → <strong>"Required"</strong></li>
+                                        <li>Repeat for:</li>
+                                        <ul>
+                                            <li>Microsoft Teams</li>
+                                            <li>OneDrive</li>
+                                            <li>Microsoft Authenticator</li>
+                                        </ul>
+                                        <li>For Android: Use <strong>"Managed Google Play"</strong> apps</li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Result:</strong> All devices automatically install required business apps without user intervention
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Configure app protection policies</div>
+                            <div class="step-description">Protect company data in mobile apps</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <ol>
+                                        <li>Click <strong>"Apps"</strong> → <strong>"App protection policies"</strong></li>
+                                        <li>Click <strong>"Create policy"</strong> → <strong>"iOS/iPadOS"</strong></li>
+                                        <li>Name: <strong>"iOS Data Protection"</strong></li>
+                                        <li>Description: <strong>"Protect company data in iOS apps"</strong></li>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Target apps:</li>
+                                        <ul>
+                                            <li>Select <strong>"Microsoft Outlook"</strong></li>
+                                            <li>Select <strong>"Microsoft Teams"</strong></li>
+                                            <li>Select <strong>"Microsoft OneDrive"</strong></li>
+                                        </ul>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Data protection settings:</li>
+                                        <ul>
+                                            <li>Backup org data to iTunes/iCloud: <strong>"Block"</strong></li>
+                                            <li>Send org data to other apps: <strong>"Policy managed apps"</strong></li>
+                                            <li>Save copies of org data: <strong>"Block"</strong></li>
+                                            <li>Copy and paste with other apps: <strong>"Policy managed apps"</strong></li>
+                                        </ul>
+                                        <li>Access requirements:</li>
+                                        <ul>
+                                            <li>PIN for access: <strong>"Require"</strong></li>
+                                            <li>PIN type: <strong>"Numeric"</strong></li>
+                                            <li>Simple PIN: <strong>"Block"</strong></li>
+                                            <li>PIN length: <strong>"4"</strong></li>
+                                        </ul>
+                                        <li>Conditional launch:</li>
+                                        <ul>
+                                            <li>Max PIN attempts: <strong>"5"</strong> → <strong>"Wipe data"</strong></li>
+                                            <li>Offline grace period: <strong>"720 minutes"</strong> → <strong>"Block access"</strong></li>
+                                        </ul>
+                                        <li>Click <strong>"Next"</strong></li>
+                                        <li>Assignments: <strong>"All users"</strong></li>
+                                        <li>Click <strong>"Next"</strong> → <strong>"Create"</strong></li>
+                                        <li>Repeat process for Android devices</li>
+                                    </ol>
+                                    
+                                    <div class="warning-box">
+                                        <strong>Important:</strong> Users will need to set up app PIN first time they open protected apps after policy applies
+                                    </div>
+                                    
+                                    <div class="success-box">
+                                        <strong>Result:</strong> Company data is protected even if device is lost or stolen - personal data remains private
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Test device management and compliance</div>
+                            <div class="step-description">Verify all policies are working correctly</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Test Windows device compliance:</strong></p>
+                                    <ol>
+                                        <li>On a Windows device, disable Windows Defender temporarily</li>
+                                        <li>Wait 5-10 minutes</li>
+                                        <li>Check Intune admin center → Devices → All devices</li>
+                                        <li>Device status should change to <strong>"Not compliant"</strong></li>
+                                        <li>Try to access company email from this device</li>
+                                        <li>Should be blocked with compliance message</li>
+                                        <li>Re-enable Windows Defender</li>
+                                        <li>Device should become compliant again</li>
+                                    </ol>
+                                    
+                                    <p><strong>Test mobile app protection:</strong></p>
+                                    <ol>
+                                        <li>Open Outlook app on mobile device</li>
+                                        <li>Should be prompted to set up app PIN</li>
+                                        <li>Set 4-digit PIN as required</li>
+                                        <li>Try to copy/paste email content to personal app</li>
+                                        <li>Should be blocked or restricted</li>
+                                        <li>Take screenshot of email - should show "managed by organization"</li>
+                                    </ol>
+                                    
+                                    <p><strong>Test app deployment:</strong></p>
+                                    <ol>
+                                        <li>Check all enrolled devices</li>
+                                        <li>Verify Microsoft 365 apps are installed automatically</li>
+                                        <li>Check app versions are up to date</li>
+                                        <li>Verify mobile devices have required apps</li>
+                                    </ol>
+                                    
+                                    <p><strong>Generate compliance report:</strong></p>
+                                    <ol>
+                                        <li>In Intune admin center, go to <strong>"Reports"</strong></li>
+                                        <li>Click <strong>"Device compliance"</strong></li>
+                                        <li>Click <strong>"Reports"</strong> → <strong>"Device compliance"</strong></li>
+                                        <li>Generate report to see all device status</li>
+                                        <li>Export report for client documentation</li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success indicators:</strong>
+                                        <ul>
+                                            <li>All devices show "Compliant" status</li>
+                                            <li>Non-compliant devices are blocked from email</li>
+                                            <li>Apps deploy automatically</li>
+                                            <li>Data protection policies prevent unauthorized sharing</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 6: Migration & Go-Live -->
+        <div class="phase-container" data-phase="6">
+            <div class="phase-header" onclick="togglePhase(6)">
+                <div class="phase-title">
+                    <div class="phase-number" id="phase-6-number">6</div>
+                    <div class="phase-info">
+                        <h2>Migration & Go-Live</h2>
+                        <p>Move existing data and launch the new system</p>
+                    </div>
+                </div>
+                <div class="phase-status">
+                    <div class="time-estimate">8-12 hours</div>
+                    <div class="completion-status" id="phase-6-status">0/8 completed</div>
+                    <div class="expand-icon">▼</div>
+                </div>
+            </div>
+            
+            <div class="phase-content" id="phase-6-content">
+                <div class="phase-summary">
+                    <h4>What you'll accomplish:</h4>
+                    <p>Migrate existing emails and files, train users, and successfully launch the new Microsoft 365 system with minimal business disruption.</p>
+                    
+                    <div class="danger-box">
+                        <strong>⚠️ CRITICAL - Before Starting Migration:</strong>
+                        <ul>
+                            <li>Complete backup of ALL existing data</li>
+                            <li>Test restore procedures</li>
+                            <li>Have rollback plan ready</li>
+                            <li>Schedule during low-activity period</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">📂 Data Migration</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Migrate existing emails</div>
+                            <div class="step-description">Move emails from current providers to Microsoft 365</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>For Gmail migration:</strong></p>
+                                    <ol>
+                                        <li>In each Gmail account, enable IMAP:</li>
+                                        <ul>
+                                            <li>Go to Gmail Settings → Forwarding and POP/IMAP</li>
+                                            <li>Enable IMAP access</li>
+                                        </ul>
+                                        <li>Create app password for Gmail:</li>
+                                        <ul>
+                                            <li>Go to Google Account settings</li>
+                                            <li>Security → 2-Step Verification → App passwords</li>
+                                            <li>Generate app password for "Mail"</li>
+                                            <li>Save this password securely</li>
+                                        </ul>
+                                        <li>In Microsoft 365 admin center:</li>
+                                        <ul>
+                                            <li>Go to <strong>"Setup"</strong> → <strong>"Data migration"</strong></li>
+                                            <li>Choose <strong>"Gmail"</strong></li>
+                                            <li>Click <strong>"Get started"</strong></li>
+                                        </ul>
+                                        <li>Add source Gmail account:</li>
+                                        <ul>
+                                            <li>Email address: user's Gmail address</li>
+                                            <li>Password: App password (not regular password)</li>
+                                        </ul>
+                                        <li>Map to destination: <strong>user@kompas-nordic.com</strong></li>
+                                        <li>Start migration and monitor progress</li>
+                                        <li>Migration time: 2-8 hours depending on email volume</li>
+                                    </ol>
+                                    
+                                    <p><strong>For Outlook.com migration:</strong></p>
+                                    <ol>
+                                        <li>Use Outlook desktop app migration:</li>
+                                        <li>Add old account to Outlook desktop</li>
+                                        <li>Add new Microsoft 365 account</li>
+                                        <li>Select all emails from old account</li>
+                                        <li>Drag and drop to new account folders</li>
+                                        <li>Let sync complete (may take several hours)</li>
+                                    </ol>
+                                    
+                                    <p><strong>Verify migration success:</strong></p>
+                                    <ol>
+                                        <li>Check sent items are preserved</li>
+                                        <li>Verify folder structure maintained</li>
+                                        <li>Test search functionality</li>
+                                        <li>Confirm calendar events migrated</li>
+                                        <li>Check contacts are available</li>
+                                    </ol>
+                                    
+                                    <div class="warning-box">
+                                        <strong>Important:</strong> Don't delete old email accounts until migration is verified and users are comfortable with new system
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Migrate files from on-premises server</div>
+                            <div class="step-description">Move server files to SharePoint and OneDrive</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Assess server data first:</strong></p>
+                                    <ol>
+                                        <li>Document all shared folders on server</li>
+                                        <li>Note folder permissions and who has access</li>
+                                        <li>Calculate total data size</li>
+                                        <li>Identify large files (>100MB) that need special handling</li>
+                                        <li>Check for any applications that depend on server files</li>
+                                    </ol>
+                                    
+                                    <p><strong>Use SharePoint Migration Tool:</strong></p>
+                                    <ol>
+                                        <li>Download SharePoint Migration Tool from Microsoft</li>
+                                        <li>Install on a computer with access to server</li>
+                                        <li>Launch tool and sign in with admin account</li>
+                                        <li>Choose <strong>"File share"</strong> as source</li>
+                                        <li>Enter server path: <code>\\servername\sharedfolder</code></li>
+                                        <li>Enter credentials for server access</li>
+                                        <li>Choose destination SharePoint site and library</li>
+                                        <li>Map folders to SharePoint structure</li>
+                                        <li>Start migration and monitor progress</li>
+                                        <li>Review and fix any errors</li>
+                                    </ol>
+                                    
+                                    <p><strong>Manual migration for small amounts:</strong></p>
+                                    <ol>
+                                        <li>Open SharePoint site in browser</li>
+                                        <li>Navigate to appropriate document library</li>
+                                        <li>Drag and drop files/folders from server</li>
+                                        <li>Wait for upload to complete</li>
+                                        <li>Verify files are accessible</li>
+                                        <li>Set appropriate permissions</li>
+                                    </ol>
+                                    
+                                    <p><strong>Set up OneDrive sync for users:</strong></p>
+                                    <ol>
+                                        <li>On each user's computer, open OneDrive</li>
+                                        <li>Sign in with new work account</li>
+                                        <li>Choose folders to sync locally</li>
+                                        <li>Move personal files to OneDrive folder</li>
+                                        <li>Wait for sync to complete</li>
+                                        <li>Verify files accessible from web and mobile</li>
+                                    </ol>
+                                    
+                                    <div class="info-box">
+                                        <strong>Migration Strategy:</strong>
+                                        <ul>
+                                            <li>Company files → SharePoint document libraries</li>
+                                            <li>Individual user files → OneDrive for Business</li>
+                                            <li>Department files → SharePoint department sites</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success indicators:</strong>
+                                        <ul>
+                                            <li>All critical files accessible in SharePoint</li>
+                                            <li>Users can access files from any device</li>
+                                            <li>Permissions work correctly</li>
+                                            <li>Search finds documents quickly</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Migrate individual PC files</div>
+                            <div class="step-description">Set up automatic backup of Desktop, Documents, Pictures</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Set up Known Folder Move (automatic backup):</strong></p>
+                                    <ol>
+                                        <li>On each user's PC, open OneDrive</li>
+                                        <li>Right-click OneDrive icon in system tray</li>
+                                        <li>Click <strong>"Settings"</strong></li>
+                                        <li>Go to <strong>"Backup"</strong> tab</li>
+                                        <li>Click <strong>"Manage backup"</strong></li>
+                                        <li>Select folders to back up:</li>
+                                        <ul>
+                                            <li>Desktop ✓</li>
+                                            <li>Documents ✓</li>
+                                            <li>Pictures ✓</li>
+                                        </ul>
+                                        <li>Click <strong>"Start backup"</strong></li>
+                                        <li>Wait for initial sync (may take hours for large amounts)</li>
+                                    </ol>
+                                    
+                                    <p><strong>Alternative: Manual file copy:</strong></p>
+                                    <ol>
+                                        <li>Create folder structure in OneDrive</li>
+                                        <li>Copy important files from:</li>
+                                        <ul>
+                                            <li>Desktop</li>
+                                            <li>Documents</li>
+                                            <li>Pictures</li>
+                                            <li>Downloads (if needed)</li>
+                                        </ul>
+                                        <li>Paste into corresponding OneDrive folders</li>
+                                        <li>Wait for sync to cloud</li>
+                                        <li>Verify files accessible from web portal</li>
+                                    </ol>
+                                    
+                                    <p><strong>Handle large files and special cases:</strong></p>
+                                    <ol>
+                                        <li>Files larger than 100GB:</li>
+                                        <ul>
+                                            <li>Consider keeping on local storage</li>
+                                            <li>Or use external storage solution</li>
+                                        </ul>
+                                        <li>Software installers and license files:</li>
+                                        <ul>
+                                            <li>Store in secure SharePoint library</li>
+                                            <li>Restricted access only</li>
+                                        </ul>
+                                        <li>Personal files mixed with work:</li>
+                                        <ul>
+                                            <li>Help user separate work vs personal</li>
+                                            <li>Only work files go to OneDrive</li>
+                                        </ul>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Result:</strong> Users' important files automatically backed up to cloud and accessible from anywhere
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">👨‍🏫 User Training</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Conduct basic Microsoft 365 training (3 hours)</div>
+                            <div class="step-description">Train users on essential functions</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Session 1: Email and Basic Setup (1 hour)</strong></p>
+                                    <ol>
+                                        <li>Help each user log in to office.com</li>
+                                        <li>Show Outlook web interface</li>
+                                        <li>Demonstrate sending and receiving emails</li>
+                                        <li>Show shared mailboxes (info@, bookings@)</li>
+                                        <li>Set up email signatures</li>
+                                        <li>Show calendar and scheduling</li>
+                                        <li>Set up mobile apps (Outlook, Teams)</li>
+                                        <li>Test MFA and authenticator app</li>
+                                    </ol>
+                                    
+                                    <p><strong>Session 2: File Storage and Collaboration (1 hour)</strong></p>
+                                    <ol>
+                                        <li>Show OneDrive personal storage</li>
+                                        <li>Demonstrate file upload and sync</li>
+                                        <li>Navigate SharePoint sites</li>
+                                        <li>Practice sharing files with clients</li>
+                                        <li>Show version history and recovery</li>
+                                        <li>Mobile file access demonstration</li>
+                                    </ol>
+                                    
+                                    <p><strong>Session 3: Microsoft Teams and Communication (1 hour)</strong></p>
+                                    <ol>
+                                        <li>Teams app overview</li>
+                                        <li>Channel navigation and posting</li>
+                                        <li>File sharing in Teams</li>
+                                        <li>Video calling and meetings</li>
+                                        <li>Meeting with external clients</li>
+                                        <li>Mobile Teams usage</li>
+                                    </ol>
+                                    
+                                    <p><strong>Create training materials:</strong></p>
+                                    <ul>
+                                        <li>Quick reference cards (laminated)</li>
+                                        <li>Step-by-step guides with screenshots</li>
+                                        <li>Emergency contact information</li>
+                                        <li>Common troubleshooting solutions</li>
+                                    </ul>
+                                    
+                                    <div class="info-box">
+                                        <strong>Training Tips:</strong>
+                                        <ul>
+                                            <li>Keep sessions short and practical</li>
+                                            <li>Focus on daily tasks they'll actually use</li>
+                                            <li>Have users practice on their own devices</li>
+                                            <li>Record sessions for future reference</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Create user guides and reference materials</div>
+                            <div class="step-description">Prepare documentation users can reference later</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Create Quick Reference Cards (to print and laminate):</strong></p>
+                                    
+                                    <p><strong>Card 1: Login and Basic Info</strong></p>
+                                    <div class="code-snippet">LOGIN INFORMATION
+Email: firstname.lastname@kompas-nordic.com
+Website: office.com
+Mobile Apps: Microsoft Outlook, Teams, OneDrive
+
+MULTI-FACTOR AUTHENTICATION
+1. Enter password
+2. Approve notification on phone
+3. If phone not working, call PAM Solutions: +31 6 1133 1118
+
+SUPPORT CONTACTS
+PAM Solutions: +31 6 1133 1118
+Email: support@pamsolutions.nl</div>
+                                    
+                                    <p><strong>Card 2: Common Tasks</strong></p>
+                                    <div class="code-snippet">EMAIL SIGNATURES
+Outlook → Settings → Compose and reply → Email signature
+
+SHARED MAILBOXES
+info@kompas-nordic.com - General inquiries
+bookings@kompas-nordic.com - Reservations
+sales@kompas-nordic.com - Sales
+operations@kompas-nordic.com - Operations
+
+FILE SHARING WITH CLIENTS
+1. Right-click file in SharePoint
+2. Click "Share"
+3. Enter client email
+4. Set expiration date (30 days max)
+5. Add message and click "Send"</div>
+                                    
+                                    <p><strong>Create detailed guides in SharePoint:</strong></p>
+                                    <ol>
+                                        <li>In SharePoint, create "Training Materials" library</li>
+                                        <li>Create documents with step-by-step guides:</li>
+                                        <ul>
+                                            <li>"How to Send Emails from Shared Mailboxes"</li>
+                                            <li>"How to Schedule Client Meetings in Teams"</li>
+                                            <li>"How to Share Tour Photos with Clients"</li>
+                                            <li>"How to Access Files While Traveling"</li>
+                                            <li>"What to Do When You Can't Login"</li>
+                                        </ul>
+                                        <li>Include screenshots for every step</li>
+                                        <li>Add troubleshooting sections</li>
+                                        <li>Pin documents to Teams channels</li>
+                                    </ol>
+                                    
+                                    <div class="success-box">
+                                        <strong>Result:</strong> Users have easy access to help materials when you're not available
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-group">
+                    <div class="step-group-title">🚀 Go-Live Activities</div>
+                    
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Final system testing</div>
+                            <div class="step-description">Complete end-to-end testing before launch</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Email Testing Checklist:</strong></p>
+                                    <ol>
+                                        <li>Send email from each user account to external address</li>
+                                        <li>Send email from each shared mailbox</li>
+                                        <li>Verify email signatures appear correctly</li>
+                                        <li>Test email delivery time (should be under 5 minutes)</li>
+                                        <li>Send email with attachment (PDF, Word doc)</li>
+                                        <li>Test calendar invite to external client</li>
+                                        <li>Verify mobile email works on each device</li>
+                                    </ol>
+                                    
+                                    <p><strong>File Access Testing:</strong></p>
+                                    <ol>
+                                        <li>Access SharePoint from different devices</li>
+                                        <li>Upload and download files</li>
+                                        <li>Test file sharing with external email</li>
+                                        <li>Verify mobile access to files</li>
+                                        <li>Test OneDrive sync on all PCs</li>
+                                        <li>Check permissions - users can only see what they should</li>
+                                    </ol>
+                                    
+                                    <p><strong>Teams and Collaboration:</strong></p>
+                                    <ol>
+                                        <li>Start video call between team members</li>
+                                        <li>Share screen during meeting</li>
+                                        <li>Record a meeting and verify playback</li>
+                                        <li>Invite external person to Teams meeting</li>
+                                        <li>Post messages in different channels</li>
+                                        <li>Share file through Teams chat</li>
+                                    </ol>
+                                    
+                                    <p><strong>Security and Compliance Testing:</strong></p>
+                                    <ol>
+                                        <li>Verify MFA works for all users</li>
+                                        <li>Test device compliance policies</li>
+                                        <li>Check that non-compliant device is blocked</li>
+                                        <li>Test app protection on mobile devices</li>
+                                        <li>Verify data loss prevention policies</li>
+                                        <li>Check audit logs are being generated</li>
+                                    </ol>
+                                    
+                                    <p><strong>Performance Testing:</strong></p>
+                                    <ol>
+                                        <li>Check email loading speed</li>
+                                        <li>Test file sync speed</li>
+                                        <li>Verify Teams video quality</li>
+                                        <li>Check SharePoint search functionality</li>
+                                        <li>Test mobile app performance</li>
+                                    </ol>
+                                    
+                                    <div class="danger-box">
+                                        <strong>Critical:</strong> Do not proceed to go-live if any critical functions are not working properly
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Execute go-live plan</div>
+                            <div class="step-description">Launch the system during planned maintenance window</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Go-Live Weekend Schedule:</strong></p>
+                                    
+                                    <p><strong>Friday Evening (6-8 PM):</strong></p>
+                                    <ol>
+                                        <li>Send final communication to all users about cutover</li>
+                                        <li>Perform final backup of all existing systems</li>
+                                        <li>Verify backup integrity and test restore</li>
+                                        <li>Complete final file migrations</li>
+                                        <li>Update any remaining DNS records</li>
+                                    </ol>
+                                    
+                                    <p><strong>Saturday (9 AM - 6 PM):</strong></p>
+                                    <ol>
+                                        <li>Update MX records to point to Microsoft 365</li>
+                                        <li>Wait 2-4 hours for DNS propagation</li>
+                                        <li>Test email flow thoroughly</li>
+                                        <li>Complete any remaining data migration</li>
+                                        <li>Update email signatures with new addresses</li>
+                                        <li>Test all shared mailboxes</li>
+                                        <li>Verify external email delivery</li>
+                                        <li>Update website contact forms if needed</li>
+                                        <li>Notify key partners of new email addresses</li>
+                                    </ol>
+                                    
+                                    <p><strong>Sunday (Optional - buffer day):</strong></p>
+                                    <ol>
+                                        <li>Address any issues discovered Saturday</li>
+                                        <li>Fine-tune configurations</li>
+                                        <li>Prepare for Monday go-live</li>
+                                        <li>Update user training materials if needed</li>
+                                    </ol>
+                                    
+                                    <p><strong>Communication plan:</strong></p>
+                                    <ul>
+                                        <li>Send status updates every 4 hours</li>
+                                        <li>Have client emergency contact available</li>
+                                        <li>Document any issues and resolutions</li>
+                                        <li>Prepare rollback plan if major issues arise</li>
+                                    </ul>
+                                    
+                                    <div class="info-box">
+                                        <strong>Success Criteria for Go-Live:</strong>
+                                        <ul>
+                                            <li>All users can send and receive email</li>
+                                            <li>Shared mailboxes work correctly</li>
+                                            <li>File access from all devices</li>
+                                            <li>Teams meetings work properly</li>
+                                            <li>Mobile apps functioning</li>
+                                            <li>No critical business disruption</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">First day support</div>
+                            <div class="step-description">Provide intensive support on launch day</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Monday Morning (8-10 AM) - On-site presence:</strong></p>
+                                    <ol>
+                                        <li>Arrive at client office before staff</li>
+                                        <li>Perform final system checks</li>
+                                        <li>Verify all services operational</li>
+                                        <li>Help first users log in</li>
+                                        <li>Address immediate login issues</li>
+                                        <li>Monitor system performance</li>
+                                        <li>Document any issues arising</li>
+                                    </ol>
+                                    
+                                    <p><strong>Throughout First Day:</strong></p>
+                                    <ol>
+                                        <li>Be available by phone/WhatsApp</li>
+                                        <li>Remote assistance for any issues</li>
+                                        <li>Check in every 2 hours</li>
+                                        <li>Monitor system health remotely</li>
+                                        <li>Help with any user questions</li>
+                                        <li>Address performance issues immediately</li>
+                                    </ol>
+                                    
+                                    <p><strong>End of Day Review (5-6 PM):</strong></p>
+                                    <ol>
+                                        <li>Gather feedback from all users</li>
+                                        <li>Document any ongoing issues</li>
+                                        <li>Plan fixes for any problems</li>
+                                        <li>Schedule follow-up training if needed</li>
+                                        <li>Update support documentation</li>
+                                        <li>Prepare daily status report</li>
+                                    </ol>
+                                    
+                                    <p><strong>Common First-Day Issues and Solutions:</strong></p>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Issue</th>
+                                            <th>Quick Solution</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Can't remember password</td>
+                                            <td>Reset in admin center, help user change</td>
+                                        </tr>
+                                        <tr>
+                                            <td>MFA not working</td>
+                                            <td>Re-register authenticator app</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Emails not syncing</td>
+                                            <td>Check Outlook configuration, restart app</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Can't find shared mailbox</td>
+                                            <td>Add shared mailbox to Outlook</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Files not syncing</td>
+                                            <td>Restart OneDrive, check internet connection</td>
+                                        </tr>
+                                    </table>
+                                    
+                                    <div class="success-box">
+                                        <strong>Success Indicators:</strong>
+                                        <ul>
+                                            <li>All users successfully working by end of day</li>
+                                            <li>No major system outages</li>
+                                            <li>Users comfortable with basic functions</li>
+                                            <li>Critical business functions operational</li>
+                                            <li>Positive user feedback</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-checkbox" onclick="toggleStep(this)"></div>
+                        <div class="step-content">
+                            <div class="step-title">Complete project documentation and handover</div>
+                            <div class="step-description">Document everything and transfer knowledge to client</div>
+                            <details class="step-details">
+                                <summary>Click for detailed step-by-step instructions</summary>
+                                <div class="detailed-steps">
+                                    <p><strong>Create comprehensive documentation package:</strong></p>
+                                    
+                                    <p><strong>1. System Configuration Document:</strong></p>
+                                    <ul>
+                                        <li>Microsoft 365 tenant details</li>
+                                        <li>User accounts and permissions</li>
+                                        <li>SharePoint site structure</li>
+                                        <li>Teams and channels setup</li>
+                                        <li>Security policies and settings</li>
+                                        <li>Intune device management configuration</li>
+                                    </ul>
+                                    
+                                    <p><strong>2. User Management Guide:</strong></p>
+                                    <ul>
+                                        <li>How to add/remove users</li>
+                                        <li>License management</li>
+                                        <li>Password reset procedures</li>
+                                        <li>Managing shared mailboxes</li>
+                                        <li>Device enrollment process</li>
+                                    </ul>
+                                    
+                                    <p><strong>3. Backup and Recovery Procedures:</strong></p>
+                                    <ul>
+                                        <li>Built-in Microsoft 365 backup</li>
+                                        <li>Data retention policies</li>
+                                        <li>How to restore deleted items</li>
+                                        <li>Emergency recovery procedures</li>
+                                    </ul>
+                                    
+                                    <p><strong>4. Support and Maintenance:</strong></p>
+                                    <ul>
+                                        <li>Monthly maintenance tasks</li>
+                                        <li>Health monitoring procedures</li>
+                                        <li>Common troubleshooting steps</li>
+                                        <li>When to call PAM Solutions</li>
+                                        <li>Microsoft support contact information</li>
+                                    </ul>
+                                    
+                                    <p><strong>Handover meeting with client:</strong></p>
+                                    <ol>
+                                        <li>Schedule 2-hour handover session</li>
+                                        <li>Walk through all documentation</li>
+                                        <li>Demonstrate admin functions</li>
+                                        <li>Show monitoring and reporting</li>
+                                        <li>Explain ongoing support process</li>
+                                        <li>Answer all questions</li>
+                                        <li>Get sign-off on project completion</li>
+                                    </ol>
+                                    
+                                    <p><strong>Final deliverables:</strong></p>
+                                    <ul>
+                                        <li>All documentation in SharePoint</li>
+                                        <li>Admin account credentials (secure)</li>
+                                        <li>License and subscription details</li>
+                                        <li>Support contact information</li>
+                                        <li>Monthly maintenance schedule</li>
+                                        <li>Project completion certificate</li>
+                                    </ul>
+                                    
+                                    <div class="success-box">
+                                        <strong>Project Complete When:</strong>
+                                        <ul>
+                                            <li>All users working productively</li>
+                                            <li>System stable for 1 week</li>
+                                            <li>Documentation complete</li>
+                                            <li>Client trained on basic admin tasks</li>
+                                            <li>Support transition complete</li>
+                                            <li>Client satisfaction confirmed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>: 8px;">
+                    <strong>Phase 6:</strong> Migration & Go-Live<br>
+                    <small>Data migration, training, testing</small>
+                </div>
+            </div>
+            <div class="info-box">
+                <strong>This is a preview of the full implementation wizard.</strong> The complete version includes all phases with detailed screenshots, troubleshooting guides, and interactive checklists for every step of the Microsoft 365 setup process.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPhase = 1;
+        const totalPhases = 6;
+        const phaseProgress = {
+            1: { completed: 0, total: 8 },
+            2: { completed: 0, total: 6 },
+            3: { completed: 0, total: 5 },
+            4: { completed: 0, total: 7 },
+            5: { completed: 0, total: 6 },
+            6: { completed: 0, total: 8 }
+        };
+
+        function togglePhase(phaseNum) {
+            const content = document.getElementById(`phase-${phaseNum}-content`);
+            const header = content.parentElement.querySelector('.phase-header');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                header.classList.remove('expanded');
+            } else {
+                // Close all phases first
+                document.querySelectorAll('.phase-content').forEach(el => {
+                    el.classList.remove('active');
+                    el.parentElement.querySelector('.phase-header').classList.remove('expanded');
+                });
+                
+                // Open selected phase
+                content.classList.add('active');
+                header.classList.add('expanded');
+                currentPhase = phaseNum;
+                updateNavigation();
+            }
+        }
+
+        function toggleStep(checkbox) {
+            const step = checkbox.parentElement;
+            const isCompleted = checkbox.classList.contains('checked');
+            
+            if (isCompleted) {
+                checkbox.classList.remove('checked');
+                step.classList.remove('completed');
+            } else {
+                checkbox.classList.add('checked');
+                step.classList.add('completed');
+            }
+            
+            updatePhaseProgress();
+            updateOverallProgress();
+        }
+
+        function updatePhaseProgress() {
+            for (let phase = 1; phase <= totalPhases; phase++) {
+                const phaseElement = document.querySelector(`[data-phase="${phase}"]`);
+                if (phaseElement) {
+                    const completedSteps = phaseElement.querySelectorAll('.step-checkbox.checked').length;
+                    const totalSteps = phaseElement.querySelectorAll('.step-checkbox').length;
+                    
+                    phaseProgress[phase].completed = completedSteps;
+                    phaseProgress[phase].total = totalSteps;
+                    
+                    // Update phase status text
+                    const statusElement = document.getElementById(`phase-${phase}-status`);
+                    if (statusElement) {
+                        statusElement.textContent = `${completedSteps}/${totalSteps} completed`;
+                    }
+                    
+                    // Update phase number indicator
+                    const numberElement = document.getElementById(`phase-${phase}-number`);
+                    if (numberElement) {
+                        if (completedSteps === totalSteps && totalSteps > 0) {
+                            numberElement.classList.add('completed');
+                            numberElement.textContent = '✓';
+                        } else {
+                            numberElement.classList.remove('completed');
+                            numberElement.textContent = phase;
+                        }
+                    }
+                }
+            }
+        }
+
+        function updateOverallProgress() {
+            let totalCompleted = 0;
+            let totalSteps = 0;
+            
+            for (let phase = 1; phase <= totalPhases; phase++) {
+                totalCompleted += phaseProgress[phase].completed;
+                totalSteps += phaseProgress[phase].total;
+            }
+            
+            const percentage = totalSteps > 0 ? Math.round((totalCompleted / totalSteps) * 100) : 0;
+            
+            document.getElementById('progress-fill').style.width = `${percentage}%`;
+            document.getElementById('progress-text').textContent = 
+                `${percentage}% Complete - ${totalCompleted}/${totalSteps} steps completed`;
+        }
+
+        function nextPhase() {
+            if (currentPhase < totalPhases) {
+                togglePhase(currentPhase + 1);
+            }
+        }
+
+        function previousPhase() {
+            if (currentPhase > 1) {
+                togglePhase(currentPhase - 1);
+            }
+        }
+
+        function updateNavigation() {
+            document.getElementById('prev-btn').disabled = (currentPhase === 1);
+            document.getElementById('next-btn').disabled = (currentPhase === totalPhases);
+            document.getElementById('phase-indicator').textContent = `Phase ${currentPhase} of ${totalPhases}`;
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Open first phase by default
+            togglePhase(1);
+            updatePhaseProgress();
+            updateOverallProgress();
+        });
+
+        // Save progress to localStorage
+        function saveProgress() {
+            const progress = {};
+            document.querySelectorAll('.step-checkbox.checked').forEach((checkbox, index) => {
+                const step = checkbox.closest('.step');
+                const phaseContainer = checkbox.closest('.phase-container');
+                const phaseNum = phaseContainer.getAttribute('data-phase');
+                const stepIndex = Array.from(phaseContainer.querySelectorAll('.step')).indexOf(step);
+                
+                if (!progress[phaseNum]) progress[phaseNum] = [];
+                progress[phaseNum].push(stepIndex);
+            });
+            
+            localStorage.setItem('kompas-nordic-progress', JSON.stringify(progress));
+        }
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('kompas-nordic-progress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                
+                Object.keys(progress).forEach(phaseNum => {
+                    const phaseContainer = document.querySelector(`[data-phase="${phaseNum}"]`);
+                    const steps = phaseContainer.querySelectorAll('.step');
+                    
+                    progress[phaseNum].forEach(stepIndex => {
+                        if (steps[stepIndex]) {
+                            const checkbox = steps[stepIndex].querySelector('.step-checkbox');
+                            toggleStep(checkbox);
+                        }
+                    });
+                });
+            }
+        }
+
+        // Auto-save progress when steps are completed
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('step-checkbox')) {
+                setTimeout(saveProgress, 100); // Small delay to ensure state is updated
+            }
+        });
+
+        // Load saved progress on page load
+        document.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>
