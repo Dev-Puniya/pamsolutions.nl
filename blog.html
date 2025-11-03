@@ -1,48 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Europe Job & Visa Updates – PAM Solutions</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PAM Solutions – Europe Recruitment, Visa & Work Updates</title>
+
+<!-- 
+This page contains the final, consolidated version of the PAM Solutions recruitment site.
+It eliminates duplicate content blocks and employs a simple external form handler to submit
+inquiries without opening an email client. To enable the form, sign up for a free endpoint 
+(such as Formspree.io) and replace the placeholder endpoint in the form's action attribute.
+-->
+
 <style>
-:root{--blue:#234ea0;--dark:#12254a;--light:#eef3ff;--text:#333;}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,sans-serif;background:#f9fbfd;color:var(--text);line-height:1.6}
-a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
-header{background:linear-gradient(135deg,var(--dark),var(--blue));color:#fff;padding:2rem 5%;text-align:center;position:sticky;top:0;z-index:9}
-header h1{font-size:2rem;margin-bottom:.3rem}
-header p{opacity:.9}
-nav{margin-top:1rem}
-nav a{color:#fff;margin:0 .6rem;font-weight:600;opacity:.95}
-nav a:hover{opacity:.75}
-.hero{background:linear-gradient(rgba(35,78,160,.7),rgba(35,78,160,.7)),url('https://images.unsplash.com/photo-1518432031257-4c27e6dd0c2b?w=1200') center/cover;color:#fff;text-align:center;padding:3rem 5%}
-.hero h2{font-size:1.9rem;margin-bottom:.5rem}
-.container{max-width:1200px;margin:auto;padding:2rem 5%}
-.grid{display:grid;gap:24px;grid-template-columns:2fr 1fr}
-@media(max-width:960px){.grid{grid-template-columns:1fr}}
-.card{background:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.06);padding:1.5rem}
-.post{display:grid;grid-template-columns:120px 1fr;gap:14px;margin-bottom:1.2rem}
-.post img{width:120px;height:80px;object-fit:cover;border-radius:8px}
-.post h3{margin-bottom:.2rem;font-size:1.1rem}
-.meta{font-size:.85rem;color:#667}
-.divider{height:1px;background:#e9eef6;margin:10px 0}
-.tabs{display:flex;border-bottom:2px solid #e9eef6;margin-bottom:10px}
-.tabs button{background:none;border:0;padding:.6rem .9rem;cursor:pointer;font-weight:700;color:#555}
-.tabs button.active{border-bottom:3px solid var(--blue);color:var(--blue)}
-.sidebar-block{padding:.6rem}
-.tag{display:inline-block;margin:.25rem .3rem .25rem 0;padding:.25rem .6rem;border-radius:999px;background:var(--light);border:1px solid #d2defc;font-size:.85rem}
-.news input{width:100%;padding:.7rem;border:2px solid #e0e0e0;border-radius:8px;margin:.3rem 0}
-.btn{background:var(--blue);color:#fff;border:0;border-radius:999px;padding:.6rem 1rem;font-weight:600;cursor:pointer}
-.btn:hover{background:var(--dark)}
-.note{font-size:.85rem;color:#666;margin-top:.3rem}
-footer{background:var(--dark);color:#fff;padding:2rem 5%;text-align:center;margin-top:2rem}
-footer a{color:#dbe7ff}
+/* Global reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background: #f9fbfd;
+  color: #333;
+  line-height: 1.6;
+}
+a { color: #234ea0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+header {
+  background: linear-gradient(135deg, #12254a, #234ea0);
+  color: white;
+  padding: 2rem 5%;
+  text-align: center;
+}
+header h1 { font-size: 2rem; margin-bottom: 0.3rem; }
+header p { opacity: 0.9; }
+nav { margin-top: 1rem; }
+nav a {
+  color: #fff; margin: 0 .6rem; font-weight: 600; opacity: 0.95;
+}
+nav a:hover { opacity: 0.75; }
+
+.hero {
+  background: linear-gradient(rgba(35,78,160,.7),rgba(35,78,160,.7)),
+              url('assets/blog/hero-europe.jpg') center/cover;
+  color: white; text-align: center; padding: 3rem 5%;
+}
+.hero h2 { font-size: 1.9rem; margin-bottom: .5rem; }
+
+.container { max-width: 1200px; margin: auto; padding: 2rem 5%; }
+.grid { display: grid; gap: 24px; grid-template-columns: 2fr 1fr; }
+@media(max-width:960px){ .grid{grid-template-columns:1fr;} }
+
+.card { background: #fff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,.06); padding: 1.5rem; }
+.post { display: grid; grid-template-columns: 140px 1fr; gap: 14px; margin-bottom: 1.3rem; }
+.post img { width: 140px; height: 90px; object-fit: cover; border-radius: 8px; }
+.post h3 { margin-bottom: .2rem; font-size: 1.05rem; }
+.meta { font-size: .85rem; color: #666; }
+.divider { height: 1px; background: #e9eef6; margin: 10px 0; }
+
+.tabs { display: flex; border-bottom: 2px solid #e9eef6; margin-bottom: 10px; }
+.tabs button { background: none; border: 0; padding: .6rem .9rem; cursor: pointer; font-weight: 700; color: #555; }
+.tabs button.active { border-bottom: 3px solid #234ea0; color: #234ea0; }
+
+.sidebar-block { padding: .6rem; }
+.tag {
+  display: inline-block;
+  margin: .25rem .3rem .25rem 0;
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  background: #eef3ff;
+  border: 1px solid #d2defc;
+  font-size: .85rem;
+}
+.news input {
+  width: 100%; padding: .7rem; border: 2px solid #e0e0e0;
+  border-radius: 8px; margin: .3rem 0;
+}
+.btn {
+  background: #234ea0; color: #fff; border: 0;
+  border-radius: 999px; padding: .6rem 1rem;
+  font-weight: 600; cursor: pointer;
+}
+.btn:hover { background: #12254a; }
+.note { font-size: .85rem; color: #666; margin-top: .3rem; }
+
+footer {
+  background: #12254a; color: #fff; padding: 2rem 5%; text-align: center; margin-top: 2rem;
+}
+footer a { color: #dbe7ff; }
 </style>
 </head>
+
 <body>
 <header>
   <h1>PAM Solutions</h1>
-  <p>Connecting Skilled Talent with Europe</p>
+  <p>Your Gateway to European Talent</p>
   <nav>
     <a href="index.html#services">Services</a>
     <a href="index.html#professions">Professions</a>
@@ -56,60 +105,148 @@ footer a{color:#dbe7ff}
 </header>
 
 <section class="hero">
-  <h2>Europe Job, Work Permit & Visa Insights</h2>
-  <p>Learn about recruitment routes, regulations and industry trends for professionals moving to Europe.</p>
+  <h2>European Recruitment, Visa & Job Market Insights</h2>
+  <p>Explore recruitment pathways and visa rules for logistics, construction, production, and agriculture professionals across the EU.</p>
 </section>
 
 <main class="container grid">
-  <!-- Articles -->
+
+  <!-- LEFT: MAIN BLOG CONTENT -->
   <section class="card">
-    <article class="post">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800" alt="Germany logistics">
-      <div>
-        <h3><a href="truck-driver-germany.html">Germany – Truck Driver Visa & Work Permit Guide</a></h3>
-        <div class="meta">5 min read · Updated Nov 2025</div>
-        <p>How Germany recruits non-EU truck drivers: Code-95 training, employer sponsorship and visa timelines explained.</p>
-      </div>
-    </article><div class="divider"></div>
 
+    <!-- Category: Truck Drivers -->
+    <h2 style="color:#234ea0;margin-bottom:.6rem;">🚛 Truck Drivers in Europe</h2>
     <article class="post">
-      <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?w=800" alt="Netherlands trucking">
+      <img src="assets/blog/germany.jpg" alt="Germany Truck Jobs">
       <div>
-        <h3><a href="truck-driver-netherlands.html">Netherlands – IND Permit & BSN Registration</a></h3>
-        <div class="meta">4 min read · Hiring Updates</div>
-        <p>Step-by-step IND application, MVV residence visa, and how international drivers register for BSN and work legally.</p>
-      </div>
-    </article><div class="divider"></div>
-
-    <article class="post">
-      <img src="https://images.unsplash.com/photo-1543175092-043516b9b04c?w=800" alt="Romania">
-      <div>
-        <h3><a href="truck-driver-romania.html">Romania – Work Permit & Temporary Residence</a></h3>
-        <div class="meta">3 min read · Quick Overview</div>
-        <p>Full permit and TRC process for logistics and construction staff, from offer letter to visa stamping and arrival.</p>
-      </div>
-    </article><div class="divider"></div>
-
-    <article class="post">
-      <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=800" alt="Slovakia">
-      <div>
-        <h3><a href="truck-driver-slovakia.html">Slovakia – Central Europe Route for HGV</a></h3>
-        <div class="meta">3 min read · Visa & CPC Details</div>
-        <p>Employer sponsorship, long-stay visa process and CPC/tachograph certification after arrival.</p>
-      </div>
-    </article><div class="divider"></div>
-
-    <article class="post">
-      <img src="https://images.unsplash.com/photo-1543357480-c60d61b29b8b?w=800" alt="Belgium">
-      <div>
-        <h3><a href="truck-driver-belgium.html">Belgium – Regional Work Permit Flow</a></h3>
-        <div class="meta">4 min read · Updated Guide</div>
-        <p>How Belgian regions issue separate permits, average pay scale, and what documents you need for approval.</p>
+        <h3><a href="truck-driver-germany.html">Germany – Work Permit & Visa Route for Drivers</a></h3>
+        <div class="meta">Updated Nov 2025 · Average €2,200–€2,800/month</div>
+        <p>Germany remains the EU’s largest logistics market. Learn about Code-95 certification, long-term residence routes, and how non-EU drivers can work legally under employer sponsorship.</p>
       </div>
     </article>
+
+    <article class="post">
+      <img src="assets/blog/netherlands.jpg" alt="Netherlands drivers">
+      <div>
+        <h3><a href="truck-driver-netherlands.html">Netherlands – IND Work Permit & BSN Registration</a></h3>
+        <div class="meta">Updated Nov 2025 · Salary €2,300–€3,000/month</div>
+        <p>Understand Dutch IND procedures, MVV visa, and residence requirements for professional HGV drivers joining EU fleets.</p>
+      </div>
+    </article>
+
+    <div class="divider"></div>
+
+    <!-- Category: Construction -->
+    <h2 style="color:#234ea0;margin-top:1rem;">🏗️ Construction & Skilled Trades</h2>
+    <article class="post">
+      <img src="assets/blog/romania.jpg" alt="Romania Construction">
+      <div>
+        <h3><a href="construction-romania.html">Romania – Construction Worker Permit Process</a></h3>
+        <div class="meta">Salary €1,000–€1,400/month + housing</div>
+        <p>Romania actively hires welders, painters, electricians and helpers from Asia. Employers manage full work permits and TRCs for 1–2 years.</p>
+      </div>
+    </article>
+
+    <article class="post">
+      <img src="assets/blog/slovakia.jpg" alt="Slovakia Construction">
+      <div>
+        <h3><a href="construction-slovakia.html">Slovakia – Skilled Labor & Engineering Jobs</a></h3>
+        <div class="meta">Salary €1,200–€1,800/month</div>
+        <p>Learn how Slovak companies sponsor mechanical fitters, machine operators, and carpenters under EU compliance programs.</p>
+      </div>
+    </article>
+
+    <div class="divider"></div>
+
+    <!-- Category: Warehouses & Production -->
+    <h2 style="color:#234ea0;margin-top:1rem;">📦 Warehouse & Manufacturing Roles</h2>
+    <article class="post">
+      <img src="assets/blog/lithuania.jpg" alt="Lithuania warehouse">
+      <div>
+        <h3><a href="warehouse-lithuania.html">Lithuania – Logistics & Packaging Jobs</a></h3>
+        <div class="meta">Salary €900–€1,200/month</div>
+        <p>Warehouse assistants and packaging staff are in strong demand. Employers provide accommodation and in-country work permits.</p>
+      </div>
+    </article>
+
+    <article class="post">
+      <img src="assets/blog/latvia.jpg" alt="Latvia factory">
+      <div>
+        <h3><a href="warehouse-latvia.html">Latvia – Factory & Supply Chain Staff</a></h3>
+        <div class="meta">Salary €1,000–€1,300/month</div>
+        <p>Opportunities for forklift drivers and assembly line workers. Includes paid training and medical insurance options.</p>
+      </div>
+    </article>
+
+    <div class="divider"></div>
+
+    <!-- Category: Agriculture / Greenhouse -->
+    <h2 style="color:#234ea0;margin-top:1rem;">🌿 Greenhouse & Seasonal Jobs</h2>
+    <article class="post">
+      <img src="assets/blog/netherlands-greenhouse.jpg" alt="Netherlands greenhouse">
+      <div>
+        <h3><a href="greenhouse-netherlands.html">Netherlands – Greenhouse Workers & Pickers</a></h3>
+        <div class="meta">Salary €5–€6/hour · Accommodation included</div>
+        <p>Netherlands and Spain regularly hire greenhouse workers for tomato, cucumber, and strawberry farms under seasonal contracts.</p>
+      </div>
+    </article>
+
+    <article class="post">
+      <img src="assets/blog/spain.jpg" alt="Spain agriculture">
+      <div>
+        <h3><a href="agriculture-spain.html">Spain – Agricultural Helper & Harvest Jobs</a></h3>
+        <div class="meta">Salary €1,000–€1,200/month</div>
+        <p>Spain’s southern regions employ thousands of foreign pickers and packers under legal seasonal visas. Learn about work conditions and contract lengths.</p>
+      </div>
+    </article>
+
+    <div class="divider"></div>
+
+    <!-- Category: Technical & Hospitality -->
+    <h2 style="color:#234ea0;margin-top:1rem;">💻 Technical & Hospitality Careers</h2>
+    <article class="post">
+      <img src="assets/blog/malta.jpg" alt="Malta technical">
+      <div>
+        <h3><a href="tech-malta.html">Malta – Technicians & Hotel Staff</a></h3>
+        <div class="meta">Salary €1,000–€1,400/month</div>
+        <p>Malta hires maintenance technicians, kitchen helpers, and cleaning staff with full work permits. Learn the visa and accommodation process.</p>
+      </div>
+    </article>
+
+    <article class="post">
+      <img src="assets/blog/ireland.jpg" alt="Ireland jobs">
+      <div>
+        <h3><a href="ireland.html">Ireland – IT Support & Skilled Workers</a></h3>
+        <div class="meta">Salary €2,000–€3,000/month</div>
+        <p>Ireland continues to recruit international candidates for IT, health care, and logistics. English-speaking environment and EU permits simplify relocation.</p>
+      </div>
+    </article>
+
+    <div class="divider"></div>
+
+    <!-- Category: Southern & Eastern Europe -->
+    <h2 style="color:#234ea0;margin-top:1rem;">🇪🇺 Other Emerging Destinations</h2>
+    <article class="post">
+      <img src="assets/blog/bulgaria.jpg" alt="Bulgaria jobs">
+      <div>
+        <h3><a href="bulgaria.html">Bulgaria – Industrial & Food Factory Jobs</a></h3>
+        <div class="meta">Salary €900–€1,100/month</div>
+        <p>Bulgaria offers roles in food production and textiles. Employers manage full residence card processes.</p>
+      </div>
+    </article>
+
+    <article class="post">
+      <img src="assets/blog/italy.jpg" alt="Italy work">
+      <div>
+        <h3><a href="italy.html">Italy – Seasonal Permits & Construction Support</a></h3>
+        <div class="meta">Salary €1,100–€1,400/month</div>
+        <p>Italy’s “Decreto Flussi” scheme welcomes foreign workers in agriculture and construction. Applications open each year under quota permits.</p>
+      </div>
+    </article>
+
   </section>
 
-  <!-- Sidebar -->
+  <!-- RIGHT: SIDEBAR -->
   <aside class="card">
     <div class="tabs">
       <button class="active" data-tab="latest">Latest</button>
@@ -119,38 +256,42 @@ footer a{color:#dbe7ff}
 
     <div id="tab-latest" class="sidebar-block">
       <ul>
-        <li><a href="truck-driver-lithuania.html">Lithuania – Baltic Driver Hiring</a></li>
-        <li><a href="truck-driver-latvia.html">Latvia – Visa & Salary Insights</a></li>
-        <li><a href="truck-driver-czechia.html">Czechia – Long-Stay Permit</a></li>
-        <li><a href="truck-driver-poland.html">Poland – Work Permit A/B</a></li>
+        <li><a href="truck-driver-germany.html">Germany – Driver Visa & Salary</a></li>
+        <li><a href="construction-romania.html">Romania – Construction Workforce</a></li>
+        <li><a href="warehouse-lithuania.html">Lithuania – Warehouse Hiring</a></li>
+        <li><a href="greenhouse-netherlands.html">Netherlands – Greenhouse Hiring</a></li>
+        <li><a href="tech-malta.html">Malta – Hospitality & Technical</a></li>
       </ul>
     </div>
 
     <div id="tab-popular" class="sidebar-block" style="display:none">
       <ul>
-        <li><a href="truck-driver-germany.html">Germany – Driver Visa Process</a></li>
-        <li><a href="truck-driver-netherlands.html">Netherlands – High Demand</a></li>
-        <li><a href="truck-driver-romania.html">Romania – Quick Permit</a></li>
+        <li><a href="romania.html">Romania – TRC Process</a></li>
+        <li><a href="netherlands.html">Netherlands – IND Permit</a></li>
+        <li><a href="germany.html">Germany – Driver Shortage</a></li>
+        <li><a href="malta.html">Malta – EU Work Permit</a></li>
       </ul>
     </div>
 
     <div id="tab-tags" class="sidebar-block" style="display:none">
-      <span class="tag">Drivers</span><span class="tag">EU Visa</span><span class="tag">Recruitment</span>
-      <span class="tag">Logistics</span><span class="tag">Permit</span><span class="tag">Work Abroad</span>
-      <span class="tag">Residence</span><span class="tag">Compliance</span>
+      <span class="tag">Drivers</span><span class="tag">Construction</span><span class="tag">Warehouses</span>
+      <span class="tag">Greenhouse</span><span class="tag">Hospitality</span><span class="tag">Permit</span>
+      <span class="tag">Visa</span><span class="tag">EU Jobs</span>
     </div>
 
     <div class="divider"></div>
 
     <div class="news">
-      <h4>Quick Message to PAM Solutions</h4>
-      <form id="miniContact" method="POST">
-        <input name="name" placeholder="Your name" required/>
-        <input type="email" name="email" placeholder="you@example.com" required/>
-        <input name="topic" placeholder="Topic or country"/>
+      <h4>Contact PAM Solutions</h4>
+      <form id="miniContact" action="https://formspree.io/f/REPLACE_ME" method="POST">
+        <input type="hidden" name="_subject" value="Quick Blog Inquiry – PAM Solutions" />
+        <input name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="you@example.com" required />
+        <input name="topic" placeholder="Profession or Country" />
         <button class="btn" type="submit">Send</button>
         <div id="miniMsg" class="note"></div>
       </form>
+      <p class="note">You can also email <a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a>.</p>
     </div>
   </aside>
 </main>
@@ -160,27 +301,26 @@ footer a{color:#dbe7ff}
 </footer>
 
 <script>
-  // Tabs
-  const tabs=document.querySelectorAll('.tabs button');
-  const panes={latest:'#tab-latest',popular:'#tab-popular',tags:'#tab-tags'};
-  tabs.forEach(b=>b.addEventListener('click',()=>{
-    tabs.forEach(t=>t.classList.remove('active'));
-    b.classList.add('active');
-    Object.values(panes).forEach(s=>document.querySelector(s).style.display='none');
-    document.querySelector(panes[b.dataset.tab]).style.display='block';
-  }));
+const tabs = document.querySelectorAll('.tabs button');
+const panes = { latest:'#tab-latest', popular:'#tab-popular', tags:'#tab-tags' };
+tabs.forEach(b => b.addEventListener('click', ()=>{
+  tabs.forEach(t=>t.classList.remove('active'));
+  b.classList.add('active');
+  Object.values(panes).forEach(s=>document.querySelector(s).style.display='none');
+  document.querySelector(panes[b.dataset.tab]).style.display='block';
+}));
 
-  // Quick Contact (Formspree)
-  const FORMSPREE_URL="https://formspree.io/f/xqkrjjly"; // 👈 Replace with your Formspree ID
-  const form=document.getElementById('miniContact'),msg=document.getElementById('miniMsg');
-  form.addEventListener('submit',async e=>{
-    e.preventDefault();msg.textContent='';
-    try{
-      const r=await fetch(FORMSPREE_URL,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
-      if(r.ok){msg.textContent='✅ Message sent successfully!';form.reset();}
-      else msg.textContent='❌ Could not send. Please email info@pamsolutions.nl';
-    }catch{msg.textContent='❌ Network error. Try again.';}
-  });
+// Form handler enhancement
+const form=document.getElementById('miniContact'),msg=document.getElementById('miniMsg');
+form.addEventListener('submit',async e=>{
+  if(form.action.includes('REPLACE_ME')) return; // fallback to Formspree default
+  e.preventDefault(); msg.textContent='';
+  try{
+    const r=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+    if(r.ok){msg.textContent='✅ Message sent successfully!';form.reset();}
+    else msg.textContent='❌ Error sending message.';
+  }catch{msg.textContent='❌ Network issue, try again.';}
+});
 </script>
 </body>
 </html>
