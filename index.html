@@ -725,6 +725,15 @@
     <a href="https://wa.me/31617679029" target="_blank" class="floating-whatsapp" title="Chat with us on WhatsApp">💬</a>
 
     <script>
+        // Set minimum allowed date in the date picker to today (future dates only)
+        document.addEventListener('DOMContentLoaded', function() {
+            var dateInput = document.getElementById('date');
+            if (dateInput) {
+                var today = new Date().toISOString().split('T')[0];
+                dateInput.setAttribute('min', today);
+            }
+        });
+
         // Handle form submission via AJAX. This prevents page reload and avoids using mailto links.
         document.getElementById('consultationForm').addEventListener('submit', async function(event) {
             event.preventDefault();
