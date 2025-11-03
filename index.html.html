@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAM Solutions – European Recruitment</title>
+    <!--
+      This page contains the final, consolidated version of the PAM Solutions recruitment
+      site. It eliminates duplicate content blocks and uses a small external form
+      handler to submit enquiries without opening an email client.  To enable
+      the form, sign up for a free endpoint (e.g., Formspree.io) and replace
+      the placeholder endpoint in the form's action attribute.
+    -->
+    <style>
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+            background: #f9fbfd;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2rem 5%;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        nav {
+            margin-top: 1rem;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 0.8rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(30, 60, 114, 0.75), rgba(30, 60, 114, 0.75)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f4f8" width="1200" height="600"/><circle cx="200" cy="150" r="80" fill="%23e8eef5" opacity="0.5"/><circle cx="900" cy="400" r="120" fill="%23e8eef5" opacity="0.5"/><circle cx="600" cy="300" r="100" fill="%23e8eef5" opacity="0.4"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        /* Services section */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .service-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        /* Professions section */
+        .professions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .profession-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profession-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .profession-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .profession-card h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .profession-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Countries section */
+        .countries {
+            background: #f8f9fa;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .countries h2 {
+            color: #1e3c72;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .country-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .country-tag {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        /* About section */
+        .about-section {
+            background: white;
+            padding: 3rem 5%;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text h2 {
+            color: #1e3c72;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Highlight section */
+        .highlight {
+            background: #eaf2fc;
+            padding: 2rem;
+            border-left: 4px solid #b3d4fc;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .highlight h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Appointment / contact section */
+        .appointment-section {
+            background: #f8f9fa;
+            padding: 3rem 5%;
+        }
+
+        .appointment-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .appointment-container h2 {
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1e3c72;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Call-to-action button in hero section */
+        .cta-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            background: #2a5298;
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .cta-btn:hover {
+            background: #1e3c72;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 5%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .services,
+            .professions {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* WhatsApp buttons */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 0.8rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background 0.3s ease;
+        }
+
+        .floating-whatsapp:hover {
+            background: #1ebe54;
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            background: #25D366;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1ebe54;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PAM Solutions</h1>
+        <p>Your Gateway to European Talent</p>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#professions">Professions</a>
+            <a href="#process">Process</a>
+            <a href="#about">About</a>
+            <a href="#partner">Partner</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h2>Connecting Europe's Best Talent with Leading Employers</h2>
+        <p>Specialised recruitment across Eastern Europe for German and Dutch markets</p>
+        <a href="#contact" class="cta-btn">Request a Consultation</a>
+    </div>
+
+    <section class="container" id="services">
+        <h2 style="text-align: center; color: #1e3c72; font-size: 2rem; margin-bottom: 2rem;">Our Services</h2>
+        <p style="text-align:center; color:#555; max-width:800px; margin:0 auto 2rem;">PAM Solutions provides a full suite of cross-border staffing solutions. Click on any service below to learn more about how we source, screen and deploy candidates in accordance with EU regulations.</p>
+        <div class="services">
+            <div class="service-card" onclick="document.getElementById('process').scrollIntoView({behavior:'smooth'});">
+                <h3>🌍 Pan-European Recruitment</h3>
+                <p>We source qualified professionals across Europe, including Eastern Europe and beyond.</p>
+            </div>
+            <div class="service-card" onclick="document.getElementById('process').scrollIntoView({behavior:'smooth'});">
+                <h3>📋 Posted Workers Services</h3>
+                <p>Comprehensive cross-border employment solutions for Germany and the Netherlands with full legal compliance.</p>
+            </div>
+            <div class="service-card" onclick="document.getElementById('process').scrollIntoView({behavior:'smooth'});">
+                <h3>⚡ End-to-End Support</h3>
+                <p>From candidate sourcing to visa processing and onboarding, we handle everything.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="professions">
+        <h2 style="text-align: center; color: #1e3c72; font-size: 2rem; margin: 3rem 0 2rem;">Professions We Recruit</h2>
+        <p style="text-align:center; color:#555; max-width:800px; margin:0 auto 2rem;">Our recruitment network spans multiple sectors. We source blue-collar and white-collar workers, seasonal personnel, technical specialists and IT professionals from across Europe.</p>
+        <div class="professions">
+            <div class="profession-card"><div class="profession-icon">🚛</div><h3>Drivers</h3><p>CE, C, truck drivers for international transport – pre-screened and licence-ready.</p></div>
+            <div class="profession-card"><div class="profession-icon">🏗️</div><h3>Construction</h3><p>Skilled labourers, electricians, welders and other trades.</p></div>
+            <div class="profession-card"><div class="profession-icon">🏭</div><h3>Production</h3><p>Factory workers, machine operators and manufacturing staff.</p></div>
+            <div class="profession-card"><div class="profession-icon">🔧</div><h3>Technical</h3><p>Mechanics, technicians and engineers for varied industries.</p></div>
+            <div class="profession-card"><div class="profession-icon">📦</div><h3>Logistics</h3><p>Warehouse staff, forklift operators and supply chain roles.</p></div>
+            <div class="profession-card"><div class="profession-icon">🍽️</div><h3>Hospitality</h3><p>Chefs, kitchen staff and service workers.</p></div>
+            <div class="profession-card"><div class="profession-icon">💻</div><h3>IT & Tech</h3><p>Developers, system administrators, network engineers and IT specialists.</p></div>
+        </div>
+        <div class="highlight">
+            <h3>Global Worker Categories</h3>
+            <p>We source candidates across the spectrum of blue-collar roles—such as construction labourers, electricians and professional drivers—as well as white-collar roles including hospitality workers and office staff. Our network also covers seasonal or agricultural positions like fruit pickers and greenhouse workers, and digital/IT specialists such as software developers and system administrators. This diverse candidate pool ensures employers get the right expertise for every project.</p>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About PAM Solutions</h2>
+                <p>Established in 2019, PAM Solutions has grown from providing enterprise IT services to becoming a trusted partner in European recruitment. Based in Amsterdam, Netherlands, we leverage our understanding of the Dutch and German markets to connect skilled professionals with opportunities across Europe.</p>
+                <p>We combine technical and recruitment expertise to understand the needs of modern businesses in logistics, production, construction and more. Our services include candidate sourcing, work permit support, posted worker documentation, accommodation assistance and full HR administration.</p>
+                <p><strong>Why Choose Us?</strong></p>
+                <ul style="margin-left: 1.5rem; color: #555;">
+                    <li>Proven track record since 2019</li>
+                    <li>Complete visa and work permit assistance</li>
+                    <li>Expertise in cross-border posting of workers</li>
+                    <li>Multi-country recruitment network</li>
+                    <li>Full compliance with EU labour regulations</li>
+                    <li>Ongoing support throughout the employment lifecycle</li>
+                </ul>
+            </div>
+            <div>
+                <div class="stats">
+                    <div class="stat-box"><div class="stat-number">5+</div><div class="stat-label">Years Experience</div></div>
+                    <div class="stat-box"><div class="stat-number">6</div><div class="stat-label">Countries of Focus</div></div>
+                    <div class="stat-box"><div class="stat-number">100%</div><div class="stat-label">EU Compliant</div></div>
+                    <div class="stat-box"><div class="stat-number">24/7</div><div class="stat-label">Support</div></div>
+                </div>
+                <div style="margin-top: 2rem; background: #f8f9fa; padding: 2rem; border-radius: 10px;">
+                    <h3 style="color: #1e3c72; margin-bottom: 1rem;">Our Services Include:</h3>
+                    <ul style="color: #555; line-height: 2;">
+                        <li>✓ Candidate sourcing & screening</li>
+                        <li>✓ Work permit & visa processing</li>
+                        <li>✓ Posted worker documentation</li>
+                        <li>✓ Accommodation assistance</li>
+                        <li>✓ Language training coordination</li>
+                        <li>✓ Payroll & HR administration</li>
+                        <li>✓ Legal compliance support</li>
+                        <li>✓ IT support & digital staffing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="countries" id="countries">
+        <h2>We Recruit From</h2>
+        <div class="country-list">
+            <div class="country-tag">Romania</div>
+            <div class="country-tag">Slovakia</div>
+            <div class="country-tag">Lithuania</div>
+            <div class="country-tag">Latvia</div>
+            <div class="country-tag">Malta</div>
+            <div class="country-tag">UAE</div>
+        </div>
+        <p style="margin-top: 2rem; font-size: 1.1rem; color: #555;">Our network spans the EU, focusing on Eastern Europe and the Gulf region, ensuring a legally compliant talent pool across logistics, manufacturing, hospitality, technical and IT sectors.</p>
+    </section>
+
+    <section class="container" id="process">
+        <h2 style="text-align:center; color:#1e3c72; font-size:2rem; margin:3rem 0 2rem;">How Our Recruitment Process Works</h2>
+        <p style="text-align:center; color:#555; max-width:800px; margin:0 auto 2rem;">We follow a rigorous and transparent process to ensure every hire meets both employer requirements and legal obligations.</p>
+        <ol style="max-width:800px; margin:0 auto; color:#333; line-height:1.8; padding-left:1.5rem;">
+            <li><strong>Share Your Hiring Needs</strong> – Provide the job role, qualifications, skills and salary range. The more detail you provide, the better we can match candidates.</li>
+            <li><strong>We Source & Pre-Screen</strong> – We search for qualified, pre-verified candidates and conduct initial screenings.</li>
+            <li><strong>Employer Documents</strong> – We help prepare offers, contracts and permits per local laws.</li>
+            <li><strong>Visa & Embassy Support</strong> – We coordinate applications, appointments and file preparation.</li>
+            <li><strong>Arrival & Onboarding Support</strong> – From airport pickup to accommodation setup and workplace transfers, we ensure a smooth arrival and integration.</li>
+        </ol>
+        <div class="highlight" style="margin-top:2rem;">
+            <h3>Why This Process Matters</h3>
+            <p>By following a compliance-first approach, we ensure that every recruitment aligns with EU labour and immigration laws. Our diverse candidate pool undergoes thorough pre-screening for qualifications and legal documentation, giving employers peace of mind and workers a solid foundation upon arrival. Post-arrival services such as accommodation support and local registration help candidates settle quickly.</p>
+        </div>
+        <div class="container partner-section" id="partner">
+            <div class="partner-text">
+                <h2 style="color:#1e3c72; font-size:2rem; margin-bottom:1rem;">Partner With Us</h2>
+                <p style="color:#555; margin-bottom:1rem;">Recruiters and employers can partner with PAM Solutions via flexible B2B contracts to supply vetted workers across Europe. We handle compliance so you can focus on delivery.</p>
+                <ul style="color:#555; margin-bottom:1.5rem; line-height:1.8;">
+                    <li>Access to a broad pool of pre-screened EU & Gulf talent</li>
+                    <li>Flexible contract terms tailored to project needs</li>
+                    <li>Full support with permits, onboarding and accommodation</li>
+                </ul>
+                <a href="#contact" class="submit-btn" style="width:auto; display:inline-block;">Contact for Partnership</a>
+            </div>
+        </div>
+        <div class="highlight" style="margin-top:2rem;">
+            <h3>Recruitment Best Practices</h3>
+            <p>To continually improve our services, we study industry best practices from established recruitment firms. A typical cooperation model involves four key steps: (1) employers share their hiring needs through an inquiry form; (2) a tailored offer is prepared covering job requirements, schedules, accommodation and legal documentation; (3) recruitment specialists manage the selection process from advertisements to interviews; and (4) arrival and onboarding are organised so workers start on time. By adopting these proven methods, <strong>PAM Solutions</strong> ensures our recruitment process remains efficient, compliant and client-focused.</p>
+        </div>
+    </section>
+
+    <section class="appointment-section" id="contact">
+        <div class="appointment-container">
+            <h2>Request a Consultation</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">Fill out the form below and our team will contact you within 24 hours.</p>
+            <!--
+              The form action should point to an external endpoint (e.g., Formspree) that forwards
+              submissions to info@pamsolutions.nl. Replace the URL with your own endpoint.
+            -->
+            <form id="consultationForm" action="https://formspree.io/f/your-endpoint" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="company">Company Name *</label>
+                    <input type="text" id="company" name="company" required placeholder="Your company name">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Contact Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="you@company.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+31…">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Preferred Contact Date</label>
+                        <input type="date" id="date" name="date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sector">Industry Sector *</label>
+                    <select id="sector" name="sector" required>
+                        <option value="">Select sector…</option>
+                        <option>Transport & Logistics</option>
+                        <option>Construction</option>
+                        <option>Production & Manufacturing</option>
+                        <option>Technical & Engineering</option>
+                        <option>Hospitality & Services</option>
+                        <option>Healthcare</option>
+                        <option>IT & Digital</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="workers">Number of Workers Needed</label>
+                        <input type="number" id="workers" name="workers" min="1" placeholder="e.g. 5">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Preferred Country</label>
+                        <select id="country" name="country">
+                            <option>Any</option>
+                            <option>Romania</option>
+                            <option>Slovakia</option>
+                            <option>Lithuania</option>
+                            <option>Latvia</option>
+                            <option>Malta</option>
+                            <option>UAE</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="4" required placeholder="Describe roles, requirements, start date, shifts, etc."></textarea>
+                </div>
+                <div style="display:flex; gap: 0.8rem; flex-wrap:wrap;">
+                    <button type="submit" class="submit-btn" id="submitBtn">Send Inquiry</button>
+                    <a href="https://wa.me/31617679029" target="_blank" class="whatsapp-btn">Message us on WhatsApp</a>
+                </div>
+                <p id="formSuccess" style="display:none; color: #155724; margin-top: 1rem;">✅ Thank you! We’ve received your inquiry and will reply within 24 hours.</p>
+                <p id="formError" style="display:none; color: #9b1c1c; margin-top: 1rem;">❌ Something went wrong. Please try again or email <a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a>.</p>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PAM Solutions</h3>
+                <p>Your trusted partner in European recruitment since 2019.</p>
+                <p style="margin-top: 1rem;">Amsterdam, Netherlands</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <a href="tel:+31617679029">+31 6 1767 9029</a>
+                <a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <a href="#services">Services</a>
+                <a href="#professions">Professions</a>
+                <a href="#process">Process</a>
+                <a href="#about">About</a>
+                <a href="#partner">Partner</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <a href="#legal">View Legal Notices</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PAM Solutions. All rights reserved. | Connecting talent across borders.</p>
+        </div>
+    </footer>
+
+    <section class="container" id="legal" style="background:#f8f9fa; padding:2rem 5%;">
+        <h2 style="color:#1e3c72; text-align:center; margin-bottom: 1rem;">Legal</h2>
+        <details open>
+            <summary style="font-weight:600; color:#1e3c72; cursor:pointer;">Privacy Policy (GDPR – Netherlands)</summary>
+            <p style="color:#555; margin-top: 0.5rem; font-size: 0.9rem;">
+                PAM Solutions (Amsterdam, Netherlands) is the data controller for recruitment services in the EU. We process only what is necessary to evaluate applications and provide staffing (GDPR Art. 6(1)(b)(f)). Typical data includes contact details, CV, work history, right-to-work documentation and client contact details. We retain data only as long as needed for recruitment or legal obligations, then delete or anonymise it. You can request access, correction, erasure, restriction, portability or object by emailing <a href="mailto:privacy@pamsolutions.nl">privacy@pamsolutions.nl</a>. You may lodge a complaint with the Dutch DPA (Autoriteit Persoonsgegevens).
+            </p>
+        </details>
+        <details style="margin-top:0.5rem;">
+            <summary style="font-weight:600; color:#1e3c72; cursor:pointer;">Cookie Policy</summary>
+            <p style="color:#555; margin-top: 0.5rem; font-size: 0.9rem;">
+                This site uses essential cookies for core functionality and anonymous analytics to improve your experience. We do not use marketing or tracking cookies. You can control cookie settings in your browser. If we enable analytics requiring consent in future, we will update this notice.
+            </p>
+        </details>
+        <details style="margin-top:0.5rem;">
+            <summary style="font-weight:600; color:#1e3c72; cursor:pointer;">Disclaimer</summary>
+            <p style="color:#555; margin-top: 0.5rem; font-size: 0.9rem;">
+                The information provided on this website is general guidance on recruitment and employment services and does not constitute legal advice. Hiring decisions are made by employers; we do not guarantee job placement. While we strive for accuracy, we do not warrant completeness or availability. Use of this site is subject to EU and Dutch law.
+            </p>
+        </details>
+        <p style="color:#888; margin-top: 0.5rem; font-size: 0.85rem; text-align: center;">Last updated: 03 Nov 2025 &bull; PAM Solutions</p>
+    </section>
+
+    <!-- Floating WhatsApp chat icon -->
+    <a href="https://wa.me/31617679029" target="_blank" class="floating-whatsapp" title="Chat with us on WhatsApp">💬</a>
+
+    <script>
+        // Handle form submission via AJAX. This prevents page reload and avoids using mailto links.
+        document.getElementById('consultationForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            // Hide any previous messages
+            const successEl = document.getElementById('formSuccess');
+            const errorEl = document.getElementById('formError');
+            if (successEl) successEl.style.display = 'none';
+            if (errorEl) errorEl.style.display = 'none';
+            // Disable button while submitting
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending…';
+            }
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    body: new FormData(this)
+                });
+                if (response.ok) {
+                    if (successEl) successEl.style.display = 'block';
+                    this.reset();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (e) {
+                if (errorEl) errorEl.style.display = 'block';
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Inquiry';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
