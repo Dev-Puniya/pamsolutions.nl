@@ -1,42 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Book a Consultation – PAM Solutions</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;line-height:1.6;color:#333;background:#f9fbfd}
-    header{background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%);color:#fff;padding:2rem 5%;text-align:center;position:sticky;top:0;z-index:1000}
-    header h1{font-size:2rem;margin-bottom:.3rem}
-    header p{font-size:1rem;opacity:.95}
-    nav{margin-top:1rem}
-    nav a{color:#fff;margin:0 .7rem;text-decoration:none;font-weight:600;transition:opacity .2s}
-    nav a:hover{opacity:.7}
-    .hero{background:linear-gradient(rgba(30,60,114,.75),rgba(30,60,114,.75));color:#fff;padding:4rem 5%;text-align:center}
-    .hero h2{font-size:2rem;margin-bottom:.5rem}
-    .container{max-width:960px;margin:0 auto;padding:3rem 5%}
-    .grid{display:grid;gap:24px}
-    @media (min-width:900px){.grid.two{grid-template-columns:1fr 1fr}}
-    .card{background:#fff;padding:2rem;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
-    .pricing-box h3{color:#1e3c72;margin-bottom:1rem;font-size:1.4rem}
-    label{display:block;margin:.3rem 0;font-weight:600;color:#333}
-    input[type="text"],input[type="email"],textarea,select{
-      width:100%;padding:.7rem .9rem;border:2px solid #e0e0e0;border-radius:8px;font-size:1rem
-    }
-    textarea{min-height:120px}
-    .row{display:flex;gap:14px;flex-wrap:wrap}
-    .row > label{flex:1}
-    .price-display{font-size:1.4rem;font-weight:700;color:#1e3c72;margin-top:.6rem}
-    .btn{background:#2a5298;color:#fff;padding:.9rem 2rem;border-radius:999px;border:0;font-size:1rem;font-weight:700;cursor:pointer}
-    .btn:hover{background:#1e3c72}
-    .muted{color:#666;font-size:.9rem}
-    .note{font-size:.85rem;color:#666;margin-top:.6rem}
-    .ok{color:#0a7c2e}
-    .err{color:#b00020}
-    .bank{background:#f3f7ff;border-left:4px solid #2a5298}
-    .kbd{font-family:ui-monospace,Menlo,Consolas,monospace;background:#eef3ff;border:1px solid #cfe0ff;border-radius:6px;padding:2px 6px}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Book a Consultation – PAM Solutions</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;line-height:1.6;background:#f9fbfd;color:#333}
+header{background:linear-gradient(135deg,#1e3c72,#2a5298);color:#fff;padding:2rem 5%;text-align:center;position:sticky;top:0;z-index:10}
+header h1{font-size:2rem;margin-bottom:.3rem}
+header p{opacity:.9}
+nav{margin-top:1rem}
+nav a{color:#fff;text-decoration:none;margin:0 .6rem;font-weight:600;opacity:.9}
+nav a:hover{opacity:.7}
+.hero{background:linear-gradient(rgba(30,60,114,.7),rgba(30,60,114,.7));color:#fff;text-align:center;padding:4rem 5%}
+.container{max-width:960px;margin:0 auto;padding:3rem 5%}
+.card{background:#fff;padding:2rem;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.1);margin-bottom:2rem}
+label{display:block;margin:.6rem 0 .3rem;font-weight:600}
+input,select,textarea{width:100%;padding:.7rem;border:2px solid #e0e0e0;border-radius:8px;font-size:1rem}
+textarea{min-height:100px}
+.btn{background:#2a5298;color:#fff;padding:.9rem 2rem;border:none;border-radius:999px;cursor:pointer;font-weight:600}
+.btn:hover{background:#1e3c72}
+.note{font-size:.9rem;color:#666}
+footer{background:#0d47a1;color:#fff;padding:3rem 5%;text-align:center}
+footer a{color:#dbe7ff;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.contact-grid{display:grid;gap:1.5rem;margin-top:1.5rem}
+@media(min-width:700px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
 </head>
 <body>
 <header>
@@ -54,225 +45,90 @@
   </nav>
 </header>
 
-<div class="hero">
+<section class="hero">
   <h2>Book Your Consultation</h2>
-  <p>Schedule a one-on-one session with our recruitment experts to discuss your hiring needs or career goals.</p>
-</div>
+  <p>Skip to booking section · Discuss your European job placement, visa process or recruitment needs with our expert consultants.</p>
+</section>
 
-<main class="container grid two">
-  <!-- Pricing & payment -->
-  <section class="card pricing-box">
-    <h3>Select Session & Currency</h3>
-
+<main class="container">
+  <div class="card">
+    <h3>Select a Consultation Type</h3>
     <label>Session Length:</label>
     <label><input type="radio" name="session" value="30" checked> 30 minutes (€50)</label>
     <label><input type="radio" name="session" value="60"> 60 minutes (€100)</label>
 
-    <div class="row" style="margin-top:8px">
-      <label style="flex:1">
-        Currency:
-        <select id="currency">
-          <option value="EUR">Euro (€)</option>
-          <option value="INR">Indian Rupee (₹)</option>
-        </select>
-      </label>
-      <label style="flex:1">
-        Live EUR→INR:
-        <input id="liveRate" type="text" readonly value="Fetching…" />
-      </label>
+    <label style="margin-top:1rem;">Currency:</label>
+    <select id="currency">
+      <option value="EUR">Euro (€)</option>
+      <option value="INR">Indian Rupee (₹)</option>
+    </select>
+
+    <div id="priceDisplay" style="font-weight:bold;color:#1e3c72;margin:1rem 0">Total: €51.50 (incl. 3% admin)</div>
+
+    <a id="bookButton" class="btn" href="https://app.10to8.com/book/gkmadalvheghjrkqpb/" target="_blank">Book Consultation</a>
+    <p class="note" style="margin-top:.8rem;">You’ll be redirected to our secure booking page to choose a date, time and make payment online.</p>
+  </div>
+
+  <div class="card">
+    <h3>Contact & Support</h3>
+    <div class="contact-grid">
+      <div>
+        <p><strong>Phone:</strong><br> +31 6 1767 9029</p>
+        <p><strong>Email:</strong><br><a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a></p>
+        <p><strong>Website:</strong><br><a href="https://pamsolutions.nl" target="_blank">pamsolutions.nl</a></p>
+      </div>
+      <div>
+        <p><strong>Follow Us:</strong></p>
+        <a href="#">LinkedIn</a><br>
+        <a href="#">Instagram</a><br>
+        <a href="#">Twitter</a><br>
+        <a href="#">Facebook</a>
+      </div>
     </div>
+    <p class="note" style="margin-top:1rem;">We offer consultations via video call, phone, or in-person at our Netherlands office.</p>
+  </div>
 
-    <div class="price-display" id="priceDisplay">Total: €51.50 (incl. 3% admin)</div>
-    <button id="payButton" class="btn" type="button">Proceed to Payment</button>
-    <p class="note">* Prices include a 3% administrative fee. Currency conversion uses the ECB reference rate (approx.; finalised by the processor).</p>
-
-    <div class="card bank" style="margin-top:16px">
-      <p class="muted"><strong>Bank Transfer (EU/SEPA or SWIFT)</strong></p>
-      <p><strong>Account Name:</strong> <span class="kbd">Manju Devi</span></p>
-      <p><strong>IBAN (SEPA):</strong> <span class="kbd">BE43 9671 7742 6201</span></p>
-      <p><strong>SWIFT/BIC:</strong> <span class="kbd">TRWIBEB1XXX</span></p>
-      <p><strong>Bank:</strong> Wise, Rue du Trône 100, 3rd floor, Brussels, 1050, Belgium</p>
-      <p class="note">After paying, submit the form on the right so we can match your payment quickly.</p>
-    </div>
-  </section>
-
-  <!-- Email form -->
-  <section class="card">
-    <h3>Send Consultation Request</h3>
-    <form id="consultForm" method="POST">
-      <input type="hidden" name="_subject" value="New Consultation Request – Website" />
-      <div class="row">
-        <label>Full Name
-          <input required name="name" placeholder="Your name"/>
-        </label>
-        <label>Email
-          <input required type="email" name="email" placeholder="you@example.com"/>
-        </label>
-      </div>
-      <div class="row">
-        <label>Phone / WhatsApp
-          <input name="phone" placeholder="+31 6 1767 9029"/>
-        </label>
-        <label>Preferred Country
-          <select name="country">
-            <option>Netherlands</option><option>Germany</option><option>Belgium</option>
-            <option>Romania</option><option>Slovakia</option><option>Lithuania</option><option>Latvia</option>
-          </select>
-        </label>
-      </div>
-      <label>Message
-        <textarea name="message" placeholder="Briefly describe your need"></textarea>
-      </label>
-      <div class="row">
-        <label style="flex:1">Selected Session
-          <input id="summarySession" name="session_summary" readonly class="kbd" />
-        </label>
-        <label style="flex:1">Quoted Total
-          <input id="summaryTotal" name="quoted_total" readonly class="kbd" />
-        </label>
-      </div>
-      <div id="formMsg" class="note" style="min-height:22px"></div>
-      <div class="row" style="margin-top:8px">
-        <button class="btn" id="sendBtn" type="submit">Send Request</button>
-        <a class="btn" href="https://wa.me/31617679029" target="_blank" rel="noopener">WhatsApp Us</a>
-      </div>
-      <p class="note">We reply within 24 hours to confirm your time slot and payment.</p>
-    </form>
-  </section>
+  <div class="card">
+    <h3>About PAM Solutions</h3>
+    <p>PAM Solutions is one of Europe’s trusted recruitment and consulting firms, connecting skilled professionals with employers across the EU. Based in Amsterdam, we provide end-to-end staffing, visa assistance, and international workforce solutions compliant with EU labour regulations.</p>
+    <p style="margin-top:1rem;"><strong>Registered Address:</strong><br> Amsterdam, Netherlands</p>
+    <p><strong>Office Visits:</strong> By appointment only</p>
+    <p class="note" style="margin-top:1rem;">Cancellation Policy: You can reschedule or cancel up to 24 hours before your appointment. Cancellations with less notice may be charged the full consultation fee.</p>
+  </div>
 </main>
 
 <footer>
-  <div class="container">
-    <p class="muted">© 2025 PAM Solutions. All rights reserved. | Connecting talent across borders.</p>
-  </div>
+  <p>&copy; 2025 PAM Solutions | All rights reserved</p>
+  <p><a href="#">General Terms</a> | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a></p>
 </footer>
 
 <script>
-/* ========= CONFIG — EDIT ME (put your real links/IDs) ========= */
-const STRIPE_30_EUR = "https://buy.stripe.com/your_30_eur";   // e.g., https://buy.stripe.com/livedoc
-const STRIPE_60_EUR = "https://buy.stripe.com/your_60_eur";
-const RZP_30_INR    = "https://rzp.io/l/your30";               // Razorpay payment page (30 min)
-const RZP_60_INR    = "https://rzp.io/l/your60";               // Razorpay payment page (60 min)
-const WISE_ME       = "https://wise.com/pay/me/manjudevi";     // Optional fallback
-
-// Formspree endpoint (create at https://formspree.io and paste here)
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/your_id";
-/* ============================================================= */
-
-const TAX_RATE = 0.03;
-const EUR_30 = 50;
-const EUR_60 = 100;
-
-const sessionRadios = document.getElementsByName('session');
-const currencySelect = document.getElementById('currency');
-const priceDisplay = document.getElementById('priceDisplay');
-const liveRateInput = document.getElementById('liveRate');
-const payButton = document.getElementById('payButton');
-
-const form = document.getElementById('consultForm');
-const formMsg = document.getElementById('formMsg');
-const sendBtn = document.getElementById('sendBtn');
-const summarySession = document.getElementById('summarySession');
-const summaryTotal = document.getElementById('summaryTotal');
-
-let EUR_INR = 95; // default fallback
-
-// Fetch live ECB rate (Frankfurter API)
-async function fetchRate(){
-  try{
-    const r = await fetch('https://api.frankfurter.dev/v1/latest?base=EUR&symbols=INR');
-    const data = await r.json();
-    if(data && data.rates && data.rates.INR){
-      EUR_INR = Number(data.rates.INR);
-      liveRateInput.value = `€1 = ₹${EUR_INR.toFixed(2)} (ECB)`;
-    } else {
-      throw new Error();
-    }
-  } catch(e){
-    liveRateInput.value = `€1 ≈ ₹${EUR_INR.toFixed(0)} (fallback)`;
-  }
-}
-
-// Helpers
-function selectedSession(){
-  for(const r of sessionRadios){ if(r.checked) return r.value; }
-  return "30";
-}
-function computeTotals(){
-  const s = selectedSession();
-  const base = (s === "60") ? EUR_60 : EUR_30;
-  const totalEUR = base * (1 + TAX_RATE);
-  const totalINR = Math.round(totalEUR * EUR_INR);
-  return { base, totalEUR, totalINR, label: (s==="60"?"60 minutes":"30 minutes") };
+const EUR_30=50,EUR_60=100,TAX=0.03;
+const currencySel=document.getElementById('currency');
+const priceDisplay=document.getElementById('priceDisplay');
+const radios=document.getElementsByName('session');
+async function updateRate(){
+ try{
+   const res=await fetch('https://api.frankfurter.dev/v1/latest?base=EUR&symbols=INR');
+   const data=await res.json();
+   window.EURINR=data.rates.INR;
+ }catch{window.EURINR=95;}
 }
 function updatePrice(){
-  const { totalEUR, totalINR } = computeTotals();
-  if(currencySelect.value === 'EUR'){
-    priceDisplay.textContent = `Total: €${totalEUR.toFixed(2)} (incl. 3% admin)`;
-    summaryTotal.value = `€${totalEUR.toFixed(2)}`;
-  } else {
-    priceDisplay.textContent = `Total: ₹${totalINR.toLocaleString()} (incl. 3% admin)`;
-    summaryTotal.value = `₹${totalINR.toLocaleString()}`;
-  }
-  summarySession.value = computeTotals().label;
+ let session='30';
+ for(const r of radios){if(r.checked)session=r.value;}
+ const base=session==='60'?EUR_60:EUR_30;
+ const totalEUR=base*(1+TAX);
+ if(currencySel.value==='EUR'){
+   priceDisplay.textContent=`Total: €${totalEUR.toFixed(2)} (incl. 3% admin)`;
+ }else{
+   const INR=(totalEUR*(window.EURINR||95)).toFixed(0);
+   priceDisplay.textContent=`Total: ₹${INR} (incl. 3% admin)`;
+ }
 }
-
-function proceedToPayment(){
-  const s = selectedSession();
-  let url = "";
-  if(currencySelect.value === 'EUR'){
-    url = (s === "60") ? STRIPE_60_EUR : STRIPE_30_EUR;
-  } else {
-    url = (s === "60") ? RZP_60_INR : RZP_30_INR;
-  }
-  // Fallback if links still placeholders
-  if(!url || /your_/.test(url) || url.includes("your")){
-    url = WISE_ME;
-  }
-  if(url){ window.location.href = url; }
-}
-
-// AJAX submit to Formspree (so we can show a success message without leaving the page)
-async function handleSubmit(e){
-  e.preventDefault();
-  formMsg.textContent = "";
-  sendBtn.disabled = true;
-
-  // Attach quoted values into the form
-  const totals = computeTotals();
-  summarySession.value = totals.label;
-  summaryTotal.value = (currencySelect.value === 'EUR')
-    ? `€${totals.totalEUR.toFixed(2)}`
-    : `₹${Math.round(totals.totalEUR * EUR_INR).toLocaleString()}`;
-
-  const data = new FormData(form);
-  try{
-    const r = await fetch(FORMSPREE_ENDPOINT, {
-      method: "POST",
-      body: data,
-      headers: { "Accept": "application/json" }
-    });
-    if(r.ok){
-      formMsg.innerHTML = "<span class='ok'>✅ Thanks! We’ll contact you within 24 hours.</span>";
-      form.reset();
-      updatePrice(); // reset totals display
-    } else {
-      formMsg.innerHTML = "<span class='err'>❌ Could not send. Please email info@pamsolutions.nl or WhatsApp us.</span>";
-    }
-  } catch(err){
-    formMsg.innerHTML = "<span class='err'>❌ Network error. Please try again later.</span>";
-  } finally {
-    sendBtn.disabled = false;
-  }
-}
-
-// Init
-fetchRate().then(updatePrice);
-currencySelect.addEventListener('change', updatePrice);
-sessionRadios.forEach(r => r.addEventListener('change', updatePrice));
-payButton.addEventListener('click', proceedToPayment);
-form.addEventListener('submit', handleSubmit);
-updatePrice();
+currencySel.addEventListener('change',updatePrice);
+radios.forEach(r=>r.addEventListener('change',updatePrice));
+updateRate().then(updatePrice);
 </script>
 </body>
 </html>
