@@ -64,10 +64,14 @@
         }
 
         .hero {
-            background: linear-gradient(rgba(30, 60, 114, 0.75), rgba(30, 60, 114, 0.75)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f4f8" width="1200" height="600"/><circle cx="200" cy="150" r="80" fill="%23e8eef5" opacity="0.5"/><circle cx="900" cy="400" r="120" fill="%23e8eef5" opacity="0.5"/><circle cx="600" cy="300" r="100" fill="%23e8eef5" opacity="0.4"/></svg>');
+            /* Use a single, professional image that conveys recruitment and partnership
+               across all sectors. A translucent gradient overlay ensures text remains
+               legible over the photo. You can replace hero.jpg with any other suitable
+               image placed in the assets folder. */
+            background-image: linear-gradient(rgba(30, 60, 114, 0.85), rgba(30, 60, 114, 0.85)), url('./assets/blog/hero.jpg');
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             color: white;
             padding: 4rem 5%;
             text-align: center;
@@ -470,6 +474,7 @@
         <nav>
             <a href="#services">Services</a>
             <a href="#professions">Professions</a>
+            <a href="#study">Study</a>
             <a href="#process">Process</a>
             <a href="#about">About</a>
             <a href="#partner">Partner</a>
@@ -508,13 +513,13 @@
         <h2 style="text-align: center; color: #1e3c72; font-size: 2rem; margin: 3rem 0 2rem;">Professions We Recruit</h2>
         <p style="text-align:center; color:#555; max-width:800px; margin:0 auto 2rem;">Our recruitment network spans multiple sectors. We source blue-collar and white-collar workers, seasonal personnel, technical specialists and IT professionals from across Europe.</p>
         <div class="professions">
-            <div class="profession-card"><div class="profession-icon">🚛</div><h3>Drivers</h3><p>CE, C, truck drivers for international transport – pre-screened and licence-ready.</p></div>
-            <div class="profession-card"><div class="profession-icon">🏗️</div><h3>Construction</h3><p>Skilled labourers, electricians, welders and other trades.</p></div>
-            <div class="profession-card"><div class="profession-icon">🏭</div><h3>Production</h3><p>Factory workers, machine operators and manufacturing staff.</p></div>
-            <div class="profession-card"><div class="profession-icon">🔧</div><h3>Technical</h3><p>Mechanics, technicians and engineers for varied industries.</p></div>
-            <div class="profession-card"><div class="profession-icon">📦</div><h3>Logistics</h3><p>Warehouse staff, forklift operators and supply chain roles.</p></div>
-            <div class="profession-card"><div class="profession-icon">🍽️</div><h3>Hospitality</h3><p>Chefs, kitchen staff and service workers.</p></div>
-            <div class="profession-card"><div class="profession-icon">💻</div><h3>IT & Tech</h3><p>Developers, system administrators, network engineers and IT specialists.</p></div>
+            <a href="truck-driver-germany.html" class="profession-card" style="text-decoration:none;color:inherit;"><div class="profession-icon">🚛</div><h3>Drivers</h3><p>CE, C, truck drivers for international transport – pre-screened and licence-ready.</p></a>
+            <a href="construction-romania.html" class="profession-card" style="text-decoration:none;color:inherit;"><div class="profession-icon">🏗️</div><h3>Construction</h3><p>Skilled labourers, electricians, welders and other trades.</p></a>
+            <a href="warehouse-lithuania.html" class="profession-card" style="text-decoration:none;color:inherit;"><div class="profession-icon">🏭</div><h3>Production</h3><p>Factory workers, machine operators and manufacturing staff.</p></a>
+            <a href="tech-romania.html" class="profession-card" style="text-decoration:none;color:inherit;"><div class="profession-icon">🔧</div><h3>Technical</h3><p>Mechanics, technicians and engineers for varied industries.</p></a>
+            <a href="warehouse-lithuania.html" class="profession-card" style="text-decoration:none;color:inherit;"><div class="profession-icon">📦</div><h3>Logistics</h3><p>Warehouse staff, forklift operators and supply chain roles.</p></a>
+            <a href="hotel-malta.html" class="profession-card" style="text-decoration:none;color:inherit;"><div class="profession-icon">🍽️</div><h3>Hospitality</h3><p>Chefs, kitchen staff and service workers.</p></a>
+            <a href="it-ireland.html" class="profession-card" style="text-decoration:none;color:inherit;"><div class="profession-icon">💻</div><h3>IT & Tech</h3><p>Developers, system administrators, network engineers and IT specialists.</p></a>
         </div>
         <div class="highlight">
             <h3>Global Worker Categories</h3>
@@ -525,8 +530,11 @@
     <section class="about-section" id="about">
         <div class="about-content">
             <div class="about-text">
-                <!-- Embedded about image using base64 to provide a professional visual without external dependencies -->
-                <img src="data:image/jpeg;base64,{{ABOUT_IMAGE_B64}}" alt="About PAM Solutions" style="width:100%; max-width:400px; height:auto; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); margin-bottom:1rem;" />
+                <!-- Embedded about image: use a local high‑quality image for a professional look -->
+                <!-- Use a relative path starting with ./ to ensure the image loads properly; if the image fails to load the alt text will be visible -->
+                <!-- Use the hero image for the about section to avoid highlighting a single industry.
+                     Feel free to replace hero.jpg with another professional image in the assets folder. -->
+                <img src="./assets/blog/hero.jpg" alt="About PAM Solutions" style="width:100%; max-width:400px; height:auto; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); margin-bottom:1rem;" />
                 <h2>About PAM Solutions</h2>
                 <p>Established in 2019, PAM Solutions has grown from providing enterprise IT services to becoming a trusted partner in European recruitment. Based in Amsterdam, Netherlands, we leverage our understanding of the Dutch and German markets to connect skilled professionals with opportunities across Europe.</p>
                 <p>We combine technical and recruitment expertise to understand the needs of modern businesses in logistics, production, construction and more. Our services include candidate sourcing, work permit support, posted worker documentation, accommodation assistance and full HR administration.</p>
@@ -577,6 +585,30 @@
         <p style="margin-top: 2rem; font-size: 1.1rem; color: #555;">Our network spans the EU, focusing on Eastern Europe and the Gulf region, ensuring a legally compliant talent pool across logistics, manufacturing, hospitality, technical and IT sectors.</p>
     </section>
 
+    <!-- Study Abroad & Education section -->
+    <section class="container" id="study">
+        <h2 style="text-align:center; color:#1e3c72; font-size:2rem; margin:3rem 0 2rem;">Study Abroad &amp; Education</h2>
+        <p style="text-align:center; color:#555; max-width:800px; margin:0 auto 2rem;">In addition to recruitment, PAM Solutions assists aspiring students in finding the right education opportunities in Europe. Our experienced team helps with university selection, application preparation and visa and permit processes.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; align-items:center;">
+            <div style="flex:1; min-width:280px; max-width:400px;">
+                <!-- Reuse the hero image for the study section as well to maintain visual consistency
+                     while not prioritising a particular profession. You can swap hero.jpg for
+                     another image if desired. -->
+                <img src="./assets/blog/hero.jpg" alt="Study in Europe" style="width:100%; height:auto; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="flex:1; min-width:280px; color:#555; max-width:500px;">
+                <ul style="line-height:1.8; list-style:none; padding-left:0;">
+                    <li>🎓 University selection &amp; programme matching</li>
+                    <li>📄 Application and documentation support</li>
+                    <li>🛂 Student visa &amp; residence permit processing</li>
+                    <li>🏠 Accommodation and arrival assistance</li>
+                    <li>💬 Language and cultural orientation</li>
+                </ul>
+                <p style="margin-top:1rem;">Ready to start your education journey? <a href="#contact" style="color:#234ea0; font-weight:bold; text-decoration:underline;">Contact us</a> for a personalised consultation.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="container" id="process">
         <h2 style="text-align:center; color:#1e3c72; font-size:2rem; margin:3rem 0 2rem;">How Our Recruitment Process Works</h2>
         <p style="text-align:center; color:#555; max-width:800px; margin:0 auto 2rem;">We follow a rigorous and transparent process to ensure every hire meets both employer requirements and legal obligations.</p>
@@ -617,7 +649,8 @@
               The form action should point to an external endpoint (e.g., Formspree) that forwards
               submissions to info@pamsolutions.nl. Replace the URL with your own endpoint.
             -->
-            <form id="consultationForm" action="https://formspree.io/f/your-endpoint" method="POST" novalidate>
+            <!-- Update the formspree action below with your Formspree endpoint to enable submissions -->
+            <form id="consultationForm" action="https://formspree.io/f/xdkprlrg" method="POST" novalidate>
                 <div class="form-group">
                     <label for="company">Company Name *</label>
                     <input type="text" id="company" name="company" required placeholder="Your company name">
@@ -734,11 +767,25 @@
             <!-- Column 4: Legal & Privacy summary -->
             <div class="footer-section">
                 <h3>Legal &amp; Privacy</h3>
-                <p style="font-size:0.9rem; color:#ccc; line-height:1.5;">
-                    <strong>Privacy Policy (GDPR – Netherlands):</strong> PAM Solutions (Amsterdam, Netherlands) is the data controller for recruitment services in the EU. We process only what is necessary to evaluate applications and provide staffing (GDPR Art. 6(1)(b)(f)). Typical data includes contact details, CV, work history, right‑to‑work documentation and client contact details. We retain data only as long as needed for recruitment or legal obligations, then delete or anonymise it. You can request access, correction, erasure, restriction, portability or object by emailing <a href="mailto:privacy@pamsolutions.nl">privacy@pamsolutions.nl</a>. You may lodge a complaint with the Dutch DPA (Autoriteit Persoonsgegevens).<br><br>
-                    <strong>Cookie Policy:</strong> Our website uses only essential cookies and anonymous analytics to improve functionality. We do not use marketing or tracking cookies. You can manage your preferences via your browser settings.<br><br>
-                    <strong>Disclaimer:</strong> The information provided on this website is general guidance on recruitment and employment services. While we strive to keep content accurate and up‑to‑date, it should not be considered legal advice. No employment outcome is guaranteed; hiring decisions are made by employers.
-                </p>
+                <!-- Use details elements to allow users to expand or collapse each policy. The 'open' attribute keeps them expanded by default. -->
+                <details style="font-size:0.9rem; color:#ccc; line-height:1.5; margin-bottom:0.6rem;">
+                    <summary style="color:#fff; cursor:pointer;">Privacy Policy (GDPR – Netherlands)</summary>
+                    <p style="margin-top:0.5rem;">
+                        PAM Solutions (Amsterdam, Netherlands) is the data controller for recruitment services in the EU. We process only what is necessary to evaluate applications and provide staffing (GDPR Art. 6(1)(b)(f)). Typical data includes contact details, CV, work history, right‑to‑work documentation and client contact details. We retain data only as long as needed for recruitment or legal obligations, then delete or anonymise it. You can request access, correction, erasure, restriction, portability or object by emailing <a href="mailto:privacy@pamsolutions.nl">privacy@pamsolutions.nl</a>. You may lodge a complaint with the Dutch DPA (Autoriteit Persoonsgegevens).
+                    </p>
+                </details>
+                <details style="font-size:0.9rem; color:#ccc; line-height:1.5; margin-bottom:0.6rem;">
+                    <summary style="color:#fff; cursor:pointer;">Cookie Policy</summary>
+                    <p style="margin-top:0.5rem;">
+                        Our website uses only essential cookies and anonymous analytics to improve functionality. We do not use marketing or tracking cookies. You can manage your preferences via your browser settings.
+                    </p>
+                </details>
+                <details style="font-size:0.9rem; color:#ccc; line-height:1.5;">
+                    <summary style="color:#fff; cursor:pointer;">Disclaimer</summary>
+                    <p style="margin-top:0.5rem;">
+                        The information provided on this website is general guidance on recruitment and employment services. While we strive to keep content accurate and up‑to‑date, it should not be considered legal advice. No employment outcome is guaranteed; hiring decisions are made by employers.
+                    </p>
+                </details>
             </div>
         </div>
         <div class="footer-bottom">
