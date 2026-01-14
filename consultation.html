@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Book a Consultation – PAM Solutions</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;line-height:1.6;background:#f9fbfd;color:#333}
+header{background:linear-gradient(135deg,#1e3c72,#2a5298);color:#fff;padding:2rem 5%;text-align:center;position:sticky;top:0;z-index:10}
+header h1{font-size:2rem;margin-bottom:.3rem}
+header p{opacity:.9}
+nav{margin-top:1rem}
+nav a{color:#fff;text-decoration:none;margin:0 .6rem;font-weight:600;opacity:.9}
+nav a:hover{opacity:.7}
+.hero{background:linear-gradient(rgba(30,60,114,.7),rgba(30,60,114,.7));color:#fff;text-align:center;padding:4rem 5%}
+.container{max-width:960px;margin:0 auto;padding:3rem 5%}
+.card{background:#fff;padding:2rem;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.1);margin-bottom:2rem}
+label{display:block;margin:.6rem 0 .3rem;font-weight:600}
+input,select,textarea{width:100%;padding:.7rem;border:2px solid #e0e0e0;border-radius:8px;font-size:1rem}
+textarea{min-height:100px}
+.btn{background:#2a5298;color:#fff;padding:.9rem 2rem;border:none;border-radius:999px;cursor:pointer;font-weight:600}
+.btn:hover{background:#1e3c72}
+.note{font-size:.9rem;color:#666}
+footer{background:#0d47a1;color:#fff;padding:3rem 5%;text-align:center}
+footer a{color:#dbe7ff;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.contact-grid{display:grid;gap:1.5rem;margin-top:1.5rem}
+@media(min-width:700px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
+.success{background:#e8f5e9;border:1px solid #a5d6a7;color:#1b5e20;padding:1rem;border-radius:8px;margin-top:1rem;display:none}
+.error{background:#ffebee;border:1px solid #ef9a9a;color:#b71c1c;padding:1rem;border-radius:8px;margin-top:1rem;display:none}
+.small{font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>PAM Solutions</h1>
+  <p>Your Gateway to European Talent</p>
+  <nav>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#professions">Professions</a>
+    <a href="index.html#process">Process</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#partner">Partner</a>
+    <a href="blog.html">Blog</a>
+    <a href="consultation.html">Consultation</a>
+    <a href="#book">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Book Your Consultation</h2>
+  <p>Skip to booking section · Discuss your European job placement, visa process or recruitment needs with our expert consultants.</p>
+</section>
+
+<main class="container">
+  <div class="card">
+    <h3>Select a Consultation Type</h3>
+    <label>Session Length:</label>
+    <label><input type="radio" name="session" value="30" checked> 30 minutes (€50)</label>
+    <label><input type="radio" name="session" value="60"> 60 minutes (€100)</label>
+
+    <label style="margin-top:1rem;">Currency:</label>
+    <select id="currency">
+      <option value="EUR">Euro (€)</option>
+      <option value="INR">Indian Rupee (₹)</option>
+    </select>
+
+    <div id="priceDisplay" style="font-weight:bold;color:#1e3c72;margin:1rem 0">Total: €51.50 (incl. 3% admin)</div>
+
+    <!-- Changed: now scrolls to on-page form instead of external site -->
+    <a id="bookButton" class="btn" href="#book">Proceed to Contact Form</a>
+    <p class="note" style="margin-top:.8rem;">Choose your session, fill the form below, and we’ll confirm your slot by email.</p>
+  </div>
+
+  <!-- Contact & Support -->
+  <div class="card">
+    <h3>Contact & Support</h3>
+    <div class="contact-grid">
+      <div>
+        <p><strong>Phone:</strong><br> +31 6 1767 9029</p>
+        <p><strong>Email:</strong><br><a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a></p>
+        <p><strong>Website:</strong><br><a href="https://pamsolutions.nl" target="_blank" rel="noopener">pamsolutions.nl</a></p>
+      </div>
+      <div>
+        <p><strong>Follow Us:</strong></p>
+        <a href="#">LinkedIn</a><br>
+        <a href="#">Instagram</a><br>
+        <a href="#">Twitter</a><br>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+    <p class="note" style="margin-top:1rem;">We offer consultations via video call, phone, or in-person at our Netherlands office.</p>
+  </div>
+
+  <!-- NEW: Booking/Contact Form -->
+  <div id="book" class="card">
+    <h3>Consultation Request Form</h3>
+    <p class="note">Submit your details and we’ll reply with available slots and a secure payment link.</p>
+
+    <form id="consultForm" novalidate>
+      <!-- honeypot -->
+      <input type="text" name="company_website" style="display:none" tabindex="-1" autocomplete="off">
+
+      <label for="fullName">Full Name *</label>
+      <input id="fullName" name="fullName" type="text" required placeholder="Your name" />
+
+      <label for="email">Email *</label>
+      <input id="email" name="email" type="email" required placeholder="you@example.com" />
+
+      <label for="phone">Phone (with country code)</label>
+      <input id="phone" name="phone" type="tel" placeholder="+31 6 1767 9029" />
+
+      <label for="sessionLength">Session Length *</label>
+      <select id="sessionLength" name="sessionLength" required>
+        <option value="30">30 minutes (€50)</option>
+        <option value="60">60 minutes (€100)</option>
+      </select>
+
+      <label for="currencySelForm">Currency *</label>
+      <select id="currencySelForm" name="currencySelForm" required>
+        <option value="EUR">Euro (€)</option>
+        <option value="INR">Indian Rupee (₹)</option>
+      </select>
+
+      <label for="message">What would you like to discuss?</label>
+      <textarea id="message" name="message" placeholder="Briefly describe your case (job placement, visa, recruitment, etc.)"></textarea>
+
+      <p class="small"><strong>Estimated Total:</strong> <span id="estTotal">€51.50</span> <span class="note">(incl. 3% admin)</span></p>
+
+      <label style="margin-top:.6rem">
+        <input type="checkbox" id="consent" required> I agree to be contacted regarding my consultation request.
+      </label>
+
+      <button class="btn" type="submit" style="margin-top:1rem">Send Request</button>
+
+      <div id="formSuccess" class="success">Thanks! Your request was sent. We’ll email you shortly to confirm a time.</div>
+      <div id="formError" class="error">Sorry, something went wrong. Please try again or email <a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a>.</div>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>About PAM Solutions</h3>
+    <p>PAM Solutions is one of Europe’s trusted recruitment and consulting firms, connecting skilled professionals with employers across the EU. Based in Amsterdam, we provide end-to-end staffing, visa assistance, and international workforce solutions compliant with EU labour regulations.</p>
+    <p style="margin-top:1rem;"><strong>Registered Address:</strong><br> Amsterdam, Netherlands</p>
+    <p><strong>Office Visits:</strong> By appointment only</p>
+    <p class="note" style="margin-top:1rem;">Cancellation Policy: You can reschedule or cancel up to 24 hours before your appointment. Cancellations with less notice may be charged the full consultation fee.</p>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2025 PAM Solutions | All rights reserved</p>
+  <p><a href="#">General Terms</a> | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a></p>
+</footer>
+
+<script>
+/* ---- Pricing & FX ---- */
+const EUR_30=50,EUR_60=100,TAX=0.03;
+const currencySel=document.getElementById('currency');
+const priceDisplay=document.getElementById('priceDisplay');
+const radios=document.getElementsByName('session');
+const formCurrency=document.getElementById('currencySelForm');
+const formSession=document.getElementById('sessionLength');
+const estTotal=document.getElementById('estTotal');
+
+async function updateRate(){
+  try{
+    const res=await fetch('https://api.frankfurter.dev/v1/latest?base=EUR&symbols=INR');
+    const data=await res.json();
+    window.EURINR=data.rates.INR;
+  }catch{
+    window.EURINR=95; // fallback
+  }
+}
+function calcTotal(sessionValue, inEUR=true){
+  const base=(sessionValue==='60'||sessionValue===60)?EUR_60:EUR_30;
+  const totalEUR=base*(1+TAX);
+  if(inEUR) return {label:`€${totalEUR.toFixed(2)}`, value:totalEUR};
+  const inr=(totalEUR*(window.EURINR||95)).toFixed(0);
+  return {label:`₹${inr}`, value:Number(inr)};
+}
+function updatePrice(){
+  let session='30';
+  for(const r of radios){if(r.checked)session=r.value;}
+  const inEUR = currencySel.value==='EUR';
+  const total=calcTotal(session,inEUR);
+  priceDisplay.textContent=`Total: ${total.label} (incl. 3% admin)`;
+}
+function syncFormEstimate(){
+  const inEUR = formCurrency.value==='EUR';
+  const total=calcTotal(formSession.value,inEUR);
+  estTotal.textContent=total.label;
+}
+currencySel.addEventListener('change',updatePrice);
+radios.forEach(r=>r.addEventListener('change',updatePrice));
+formCurrency.addEventListener('change',syncFormEstimate);
+formSession.addEventListener('change',syncFormEstimate);
+
+/* ---- Form submit (no external redirects) ----
+   Replace FORM_ENDPOINT with your own:
+   - Formspree example: https://formspree.io/f/xxxxxxx
+   - Or your backend:   /api/contact
+*/
+const FORM_ENDPOINT = "https://formspree.io/f/xxxxxxx"; // TODO: replace
+const consultForm=document.getElementById('consultForm');
+const formSuccess=document.getElementById('formSuccess');
+const formError=document.getElementById('formError');
+
+consultForm.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  formSuccess.style.display='none';
+  formError.style.display='none';
+
+  // basic validation
+  const hp = consultForm.querySelector('input[name="company_website"]').value;
+  if(hp){ return; } // honeypot
+
+  const payload = {
+    fullName: consultForm.fullName.value.trim(),
+    email: consultForm.email.value.trim(),
+    phone: consultForm.phone.value.trim(),
+    sessionLength: consultForm.sessionLength.value,
+    currency: consultForm.currencySelForm.value,
+    message: consultForm.message.value.trim(),
+    estimate: estTotal.textContent
+  };
+
+  if(!payload.fullName || !payload.email || !consultForm.consent.checked){
+    formError.textContent = 'Please complete required fields (Name, Email, consent).';
+    formError.style.display='block';
+    return;
+  }
+
+  try{
+    const res = await fetch(FORM_ENDPOINT, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if(res.ok){
+      consultForm.reset();
+      syncFormEstimate();
+      formSuccess.style.display='block';
+      // optional: scroll to success
+      formSuccess.scrollIntoView({behavior:'smooth', block:'center'});
+    }else{
+      formError.style.display='block';
+    }
+  }catch(err){
+    formError.style.display='block';
+  }
+});
+
+/* init */
+updateRate().then(()=>{ updatePrice(); syncFormEstimate(); });
+</script>
+</body>
+</html>

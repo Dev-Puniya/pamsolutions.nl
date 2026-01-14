@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PAM Solutions – Modern IT Infrastructure &amp; Cloud Services</title>
+    <!-- Google fonts for clean typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font‑Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-........" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /*
+         * Colour palette and design tokens
+         * Using CSS custom properties makes it easy to support a dark mode.
+         * When the body has the class `dark-mode` these variables are overridden.
+         */
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #1f2937;
+            --primary-color: #0066cc;
+            --secondary-color: #00b894;
+            --accent-color: #ff6b1a;
+            --muted-color: #6b7280;
+            --card-bg: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.05);
+        }
+        /* Dark mode overrides */
+        body.dark-mode {
+            --bg-color: #0a192f;
+            --text-color: #e2e8f0;
+            --card-bg: #14213d;
+            --card-shadow: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Header and navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            box-shadow: 0 2px 6px var(--card-shadow);
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .nav-links a {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .nav-links a:hover {
+            background: rgba(0, 102, 204, 0.1);
+        }
+        #theme-toggle {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        /* Hero section */
+        .hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Leave room for the fixed header so content doesn't hide beneath it */
+            height: 85vh;
+            padding-top: 4rem;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Apply a gentle dark overlay on top of the hero background image. A lighter gradient allows the
+               underlying network illustration to shine through. */
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('hero-bg.png') center/cover no-repeat;
+            z-index: -1;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+        .hero .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-primary {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: #fff;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        /* Section generic styles */
+        section {
+            padding: 4rem 1rem;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -6px;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        .section-description {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            color: var(--muted-color);
+        }
+        /* Features / Services grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 24px var(--card-shadow);
+        }
+        .card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .card p {
+            font-size: 0.95rem;
+            color: var(--muted-color);
+            margin-bottom: 1rem;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+        .card ul li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+        .card ul li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+        /* Why choose us */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .benefit {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            transition: transform 0.2s;
+        }
+        .benefit:hover {
+            transform: translateY(-5px);
+        }
+        .benefit h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .benefit p {
+            font-size: 0.95rem;
+            color: var(--muted-color);
+        }
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            position: relative;
+        }
+        .testimonial::before {
+            content: '\f10d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 3rem;
+            color: var(--primary-color);
+            opacity: 0.1;
+        }
+        .testimonial p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: var(--muted-color);
+        }
+        .testimonial .author {
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        /* Blog/insights */
+        .blog {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .blog-post {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-post img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        .blog-post-content {
+            padding: 1.5rem;
+            flex: 1;
+        }
+        .blog-post-content h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        .blog-post-content p {
+            font-size: 0.9rem;
+            color: var(--muted-color);
+            margin-bottom: 1rem;
+        }
+        .blog-post-content a {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        /* Contact */
+        .contact-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-section form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .contact-section form .full {
+            grid-column: span 2;
+        }
+        .contact-section label {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        .contact-section input,
+        .contact-section textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        .contact-section input:focus,
+        .contact-section textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+        }
+        .contact-section button {
+            grid-column: span 2;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            background: var(--primary-color);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .contact-section button:hover {
+            background: #004b99;
+            transform: translateY(-2px);
+        }
+
+        /* Privacy policy styles */
+        .privacy-policy {
+            padding: 4rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        .policy-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        .policy-content p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--muted-color);
+        }
+        .policy-content a {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 3rem 1rem;
+        }
+        footer .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        footer h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        footer p, footer a {
+            font-size: 0.9rem;
+            color: #e1effa;
+        }
+        footer a:hover {
+            color: #ffffff;
+        }
+        footer .credits {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+        }
+        /* Scroll animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .scroll-reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 768px) {
+            .contact-section form {
+                grid-template-columns: 1fr;
+            }
+            .contact-section button {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header and navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">PAM Solutions</div>
+            <nav class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#why">Why Us</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#blog">Insights</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+    <!-- Hero section -->
+    <section class="hero" id="home">
+        <div>
+            <h1>Modern IT Infrastructure &amp; Cloud Excellence</h1>
+            <p>Delivering enterprise‑grade network, cloud and datacenter solutions across the Netherlands. Empower your business with our certified experts and 24/7 professional support.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"><i class="fas fa-paper-plane"></i> Request Support</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})"><i class="fas fa-cubes"></i> Our Services</button>
+            </div>
+        </div>
+    </section>
+    <!-- Services section -->
+    <section id="services">
+        <h2 class="section-title scroll-reveal">Our Services</h2>
+        <p class="section-description scroll-reveal">Comprehensive IT infrastructure solutions tailored for your business: network hardware, Azure cloud, Office&nbsp;365, smart hands and more.</p>
+        <div class="grid">
+            <!-- Network Infrastructure -->
+            <div class="card scroll-reveal">
+                <i class="fas fa-network-wired"></i>
+                <h3>Enterprise Networking</h3>
+                <p>Design, deploy and manage high‑performance LAN/WAN architectures with advanced security.</p>
+                <ul>
+                    <li>Switches, routers &amp; firewalls</li>
+                    <li>VLAN &amp; QoS configuration</li>
+                    <li>Performance monitoring</li>
+                </ul>
+            </div>
+            <!-- Azure Cloud -->
+            <div class="card scroll-reveal">
+                <i class="fab fa-microsoft"></i>
+                <h3>Azure Cloud</h3>
+                <p>Scalable and secure cloud infrastructure built on Microsoft Azure for modern workloads.</p>
+                <ul>
+                    <li>VM &amp; container services</li>
+                    <li>Hybrid networking &amp; VPN</li>
+                    <li>Security &amp; compliance</li>
+                </ul>
+            </div>
+            <!-- Office 365 -->
+            <div class="card scroll-reveal">
+                <i class="fas fa-envelope-open-text"></i>
+                <h3>Office&nbsp;365</h3>
+                <p>Boost productivity with streamlined Exchange, SharePoint, Teams and advanced compliance.</p>
+                <ul>
+                    <li>Migration &amp; optimisation</li>
+                    <li>Collaboration &amp; security</li>
+                    <li>Training &amp; support</li>
+                </ul>
+            </div>
+            <!-- Smart Hands -->
+            <div class="card scroll-reveal">
+                <i class="fas fa-hands-helping"></i>
+                <h3>Smart Hands</h3>
+                <p>On‑site datacenter support for hardware installation, cabling and emergency response.</p>
+                <ul>
+                    <li>24/7 availability</li>
+                    <li>Server &amp; storage setup</li>
+                    <li>Cable management</li>
+                </ul>
+            </div>
+            <!-- Server Management -->
+            <div class="card scroll-reveal">
+                <i class="fas fa-server"></i>
+                <h3>Server Management</h3>
+                <p>End‑to‑end administration for Windows &amp; Linux systems, ensuring optimal performance.</p>
+                <ul>
+                    <li>Proactive monitoring</li>
+                    <li>Patching &amp; upgrades</li>
+                    <li>Disaster recovery</li>
+                </ul>
+            </div>
+            <!-- Cybersecurity -->
+            <div class="card scroll-reveal">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Cybersecurity</h3>
+                <p>Protect your infrastructure with next‑gen firewalls, threat detection and compliance.</p>
+                <ul>
+                    <li>Firewall management</li>
+                    <li>Threat detection</li>
+                    <li>Compliance audits</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- Why choose us section -->
+    <section id="why">
+        <h2 class="section-title scroll-reveal">Why Choose Us</h2>
+        <p class="section-description scroll-reveal">We combine expertise, responsiveness and coverage to deliver unmatched IT services.</p>
+        <div class="benefits">
+            <div class="benefit scroll-reveal">
+                <h4>Rapid Response</h4>
+                <p>Our certified team responds in under 2 hours, minimising downtime and business impact.</p>
+            </div>
+            <div class="benefit scroll-reveal">
+                <h4>Certified Experts</h4>
+                <p>Azure, Office&nbsp;365 and network specialists provide deep technical knowledge for your environment.</p>
+            </div>
+            <div class="benefit scroll-reveal">
+                <h4>Nationwide Coverage</h4>
+                <p>We operate across the Netherlands with remote support throughout the EU.</p>
+            </div>
+            <div class="benefit scroll-reveal">
+                <h4>Modern Solutions</h4>
+                <p>Following the latest web design trends such as micro‑interactions, accessibility and sustainable design.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials section -->
+    <section id="testimonials">
+        <h2 class="section-title scroll-reveal">What Clients Say</h2>
+        <p class="section-description scroll-reveal">Our clients trust us for their mission‑critical infrastructure. Here’s what they think.</p>
+        <div class="testimonials">
+            <div class="testimonial scroll-reveal">
+                <p>“PAM Solutions upgraded our network and provided lightning‑fast response times. Their expertise and friendly service exceeded our expectations.”</p>
+                <div class="author">— Jeroen, Manufacturing CTO</div>
+            </div>
+            <div class="testimonial scroll-reveal">
+                <p>“We migrated to Azure seamlessly thanks to PAM’s strategic planning and 24/7 support. Their dedication ensured zero downtime.”</p>
+                <div class="author">— Anika, HR SaaS Founder</div>
+            </div>
+            <div class="testimonial scroll-reveal">
+                <p>“Our datacenter operations run smoothly thanks to PAM’s smart hands team. Their professionalism and knowledge make them invaluable partners.”</p>
+                <div class="author">— Mark, Datacenter Director</div>
+            </div>
+        </div>
+    </section>
+    <!-- Insights section -->
+    <section id="blog">
+        <h2 class="section-title scroll-reveal">Insights &amp; Resources</h2>
+        <p class="section-description scroll-reveal">Stay informed with our latest articles on infrastructure, security and cloud computing.</p>
+        <div class="blog">
+            <div class="blog-post scroll-reveal">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=60" alt="Server racks in a datacenter">
+                <div class="blog-post-content">
+                    <h4>Maximising Network Performance in 2025</h4>
+                    <p>Discover best practices for designing and optimising enterprise networks to meet future demands.</p>
+                    <a href="#">Read more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-post scroll-reveal">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=60" alt="Cloud computing illustration">
+                <div class="blog-post-content">
+                    <h4>Cloud Trends: Micro‑interactions &amp; AI</h4>
+                    <p>Learn how micro‑interactions, AI‑generated visuals and personalised experiences are shaping cloud services.</p>
+                    <a href="#">Read more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-post scroll-reveal">
+                <img src="https://images.unsplash.com/photo-1526404808735-1350602b52d1?auto=format&fit=crop&w=400&q=60" alt="Cybersecurity concept">
+                <div class="blog-post-content">
+                    <h4>Building Accessible &amp; Sustainable IT</h4>
+                    <p>Explore techniques for crafting inclusive websites and lean infrastructure that reduce environmental impact.</p>
+                    <a href="#">Read more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact section -->
+    <section id="contact">
+        <h2 class="section-title scroll-reveal">Get in Touch</h2>
+        <p class="section-description scroll-reveal">Ready to modernise your IT infrastructure? Reach out to our certified specialists.</p>
+        <div class="contact-section scroll-reveal">
+            <form action="#" method="POST" onsubmit="event.preventDefault(); showSubmissionMessage();">
+                <div>
+                    <label for="name">Name*</label>
+                    <input type="text" id="name" name="name" required aria-required="true" />
+                </div>
+                <div>
+                    <label for="company">Company*</label>
+                    <input type="text" id="company" name="company" required aria-required="true" />
+                </div>
+                <div>
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" name="email" required aria-required="true" />
+                </div>
+                <div>
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" />
+                </div>
+                <div class="full">
+                    <label for="message">How can we help?*</label>
+                    <textarea id="message" name="message" rows="4" required aria-required="true" placeholder="Tell us about your project or problem"></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="form-message" style="display:none; margin-top:1rem; font-weight:600;"></div>
+        </div>
+    </section>
+
+    <!-- Privacy Statement section -->
+    <section id="privacy-statement" class="privacy-policy">
+        <h2 class="section-title scroll-reveal">Privacy Statement</h2>
+        <p class="section-description scroll-reveal">A concise summary of how we protect your data</p>
+        <div class="policy-content">
+            <p>We are committed to safeguarding your personal information and respecting your privacy.  
+            This privacy statement summarises our data practices under the EU GDPR. We collect only the minimum personal data required to respond to your enquiries and deliver our services. We never sell your information and only share it with trusted service providers or authorities when legally required. You have the right to access, correct or delete your data and to object to or restrict our processing. For full details please read our <a href="#privacy">Privacy Policy</a>. To exercise your rights, contact us at <a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a>.</p>
+        </div>
+    </section>
+
+    <!-- Privacy Policy section -->
+    <section id="privacy" class="privacy-policy">
+        <h2 class="section-title scroll-reveal">Privacy Policy</h2>
+        <p class="section-description scroll-reveal">Last updated: 24 July 2025</p>
+        <div class="policy-content">
+            <!-- Introductory statement emphasising GDPR compliance -->
+            <p>We respect your privacy and are committed to protecting your personal data.  
+            This policy explains how we collect, use and safeguard your information in line with the EU
+            <strong>General Data Protection Regulation (GDPR)</strong> and other applicable laws.  
+            By using our website or providing your personal data you acknowledge that you have read and understand this privacy policy.  
+            Our aim is to handle your data responsibly and transparently so that you feel confident about engaging with us online.</p>
+            <h3>1. Who we are</h3>
+            <p>PAM Solutions (“we”, “us” or “our”) is a provider of professional IT infrastructure and cloud services based in Eindhoven, Netherlands. We are responsible for the personal data you provide to us through this website. If you have any questions about this policy or wish to exercise your rights, please contact us at <a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a> or call +31 6 1767 9029.</p>
+
+            <h3>2. What data we collect</h3>
+            <p>We collect and process personal data that you voluntarily submit via our contact form, such as your name, company name, email address, phone number and any details you include in your message. We also collect technical information like your IP address, browser type and usage data through cookies when you visit our website.</p>
+
+            <h3>3. How we use your data and legal basis</h3>
+            <p>We use your personal data to respond to your enquiries, manage and deliver our services, maintain network security, improve our website and comply with legal obligations.  
+            Our lawful bases for processing include our legitimate interests in operating and marketing our business, taking steps at your request prior to entering into a contract, performing a contract with you and complying with legal requirements.  
+            Where a specific legal basis is required – for example, sending direct marketing emails – we will obtain your clear and informed consent before processing your data.  
+            You will be informed about our identity, the purpose of the processing, how long we will keep your data and your data protection rights before you consent.  
+            You may withdraw your consent at any time. The GDPR requires that privacy notices be concise, transparent and written in plain language.</p>
+
+            <h3>4. How we share your data</h3>
+            <p>We do not sell your personal data. We may share it with trusted service providers (such as email hosting, CRM and analytics providers) who process data on our behalf under strict confidentiality. We may also share data with public authorities if required by law. If we transfer data outside the European Economic Area, we implement appropriate safeguards such as standard contractual clauses to ensure adequate protection.</p>
+
+            <h3>5. Data retention</h3>
+            <p>We retain your personal data only as long as necessary to fulfil the purposes described above. For example, we keep contact form submissions for up to three years after our last communication, unless legal or contractual obligations require longer retention.</p>
+
+            <h3>6. Your rights</h3>
+            <p>Under the GDPR, you have the right to request access to, rectification or erasure of your personal data; to restrict or object to our processing of your data; and the right to data portability. Where we process your data based on consent, you have the right to withdraw that consent at any time. To exercise these rights, please contact us using the details above. You also have the right to lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens) if you believe that our processing of your personal data infringes the GDPR.</p>
+
+            <h3>7. Cookies</h3>
+            <p>Our website uses cookies to ensure essential functionality and help us understand how visitors use our site. Cookies are small text files placed on your device that collect standard Internet log information and visitor behaviour information. You can set your browser to refuse cookies or to notify you when a cookie is set. For more information about the types of cookies we use and how to manage them, please see our cookie policy. According to GDPR guidelines, privacy notices should clearly state how cookies are used and what types of data they collect.</p>
+
+            <h3>8. Security and design</h3>
+            <p>We take appropriate technical and organisational measures to protect personal data against unauthorised access, disclosure, alteration and destruction. In line with the EU’s principles of <em>data protection by design and by default</em>, we integrate data protection into our systems and ensure that the most privacy-friendly settings are used by default.</p>
+
+            <h3>9. Changes to this policy</h3>
+            <p>We may update this privacy policy from time to time to reflect changes to our practices or for other operational, legal or regulatory reasons. We encourage you to review this page regularly for any updates. The date at the top of this page indicates when the policy was last revised.</p>
+
+        </div>
+    </section>
+
+    <!-- Disclaimer section -->
+    <section id="disclaimer" class="privacy-policy">
+        <h2 class="section-title scroll-reveal">Disclaimer</h2>
+        <p class="section-description scroll-reveal">Important information about this website</p>
+        <div class="policy-content">
+            <p>The information on this website is provided for general informational purposes only and does not constitute professional advice. While we strive to ensure that the content is accurate and up‑to‑date, we make no guarantees regarding its completeness or accuracy. We accept no liability for any loss or damage arising from reliance on information contained here. External links are provided for convenience and do not signify endorsement; we are not responsible for the content of external websites. Always seek appropriate professional advice before acting on any information found here. Your use of this site is at your own risk.</p>
+        </div>
+    </section>
+
+    <!-- Consent Preferences section -->
+    <section id="consent-preferences" class="privacy-policy">
+        <h2 class="section-title scroll-reveal">Consent Preferences</h2>
+        <p class="section-description scroll-reveal">Manage how we use your information</p>
+        <div class="policy-content">
+            <p>We respect your choices about how your personal data is used. When you submit your contact details or sign up for updates, you can opt in to receive marketing communications. We will not send you marketing emails or newsletters without your explicit consent, and each message includes an unsubscribe link that allows you to withdraw your consent easily.  
+            You can also manage cookie preferences via your browser settings. Most browsers allow you to block or delete cookies, and we honour “Do Not Track” signals.  
+            If you have any questions about your consent preferences or wish to change them, please contact us at <a href="mailto:info@pamsolutions.nl">info@pamsolutions.nl</a>.</p>
+        </div>
+    </section>
+
+    <!-- Cookie Policy section -->
+    <section id="cookie-policy" class="privacy-policy">
+        <h2 class="section-title scroll-reveal">Cookie Policy</h2>
+        <p class="section-description scroll-reveal">Understanding how we use cookies</p>
+        <div class="policy-content">
+            <p>Cookies are small text files stored on your device that help us provide and improve our services. We use several types of cookies:</p>
+            <ul>
+                <li><strong>Strictly necessary cookies:</strong> required for the website to function properly. These cookies enable core features such as security, network management and accessibility. They are always active and do not require your consent.</li>
+                <li><strong>Preferences cookies:</strong> remember your choices (such as language or region) to provide a more personalised experience.</li>
+                <li><strong>Analytics cookies:</strong> collect aggregated, anonymous data about how visitors use our site. This helps us improve performance and usability. We use these cookies only when you consent to them.</li>
+                <li><strong>Marketing cookies:</strong> track your online activity to deliver targeted advertising. We do <em>not</em> use marketing cookies on our site. If we introduce marketing cookies in the future, we will request your explicit consent beforehand.</li>
+            </ul>
+            <p>Under the GDPR and ePrivacy Directive, we seek your consent for any non‑essential cookies. You may refuse optional cookies without affecting your access to our services. To manage or delete cookies, adjust your browser settings. For more information about cookies and how to control them, visit <a href="https://gdpr.eu/cookies/" target="_blank" rel="noopener noreferrer">gdpr.eu</a>.</p>
+        </div>
+    </section>
+
+    <!-- Data Subject Access Request (DSAR) section -->
+    <section id="dsar" class="privacy-policy">
+        <h2 class="section-title scroll-reveal">Data Subject Access Request (DSAR)</h2>
+        <p class="section-description scroll-reveal">Exercise your right to access personal data</p>
+        <div class="policy-content">
+            <p>As an individual in the EU, you have the right to obtain confirmation of whether we process your personal data and to access that data.  
+            You may submit a data subject access request (DSAR) by completing the form below or by contacting us directly via email or post.  
+            We may need to verify your identity before fulfilling your request and will respond within one month, with the possibility of a two‑month extension for complex or numerous requests【794343200064811†L350-L370】【794343200064811†L501-L507】.</p>
+            <div class="contact-section scroll-reveal">
+                <form id="dsar-form" action="#" method="POST" onsubmit="event.preventDefault(); showDsarMessage();">
+                    <div>
+                        <label for="dsar-name">Full Name*</label>
+                        <input type="text" id="dsar-name" name="dsar-name" required aria-required="true" />
+                    </div>
+                    <div>
+                        <label for="dsar-email">Email*</label>
+                        <input type="email" id="dsar-email" name="dsar-email" required aria-required="true" />
+                    </div>
+                    <div>
+                        <label for="dsar-relationship">Your Relationship to Us*</label>
+                        <select id="dsar-relationship" name="dsar-relationship" required aria-required="true">
+                            <option value="">Select...</option>
+                            <option value="client">Client / Customer</option>
+                            <option value="supplier">Supplier / Partner</option>
+                            <option value="candidate">Job Applicant</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="dsar-right">Right Exercising*</label>
+                        <select id="dsar-right" name="dsar-right" required aria-required="true">
+                            <option value="">Select...</option>
+                            <option value="access">Access My Data</option>
+                            <option value="rectify">Rectify My Data</option>
+                            <option value="erase">Erase My Data</option>
+                            <option value="restrict">Restrict Processing</option>
+                            <option value="portability">Portability of My Data</option>
+                            <option value="object">Object to Processing</option>
+                        </select>
+                    </div>
+                    <div class="full">
+                        <label for="dsar-details">Additional Details</label>
+                        <textarea id="dsar-details" name="dsar-details" rows="4" placeholder="Provide any details that will help us process your request"></textarea>
+                    </div>
+                    <button type="submit">Submit Request</button>
+                </form>
+                <div id="dsar-message" style="display:none; margin-top:1rem; font-weight:600;"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>About PAM Solutions</h4>
+                <p>Established in 2019, PAM Solutions provides enterprise‑grade IT services across the Netherlands. We specialise in networking, cloud, security and datacenter operations.</p>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <p>Networking</p>
+                <p>Azure &amp; Cloud</p>
+                <p>Office&nbsp;365</p>
+                <p>Smart Hands</p>
+                <p>Server Management</p>
+                <p>Cybersecurity</p>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p><i class="fas fa-phone"></i> +31&nbsp;6&nbsp;1767&nbsp;9029</p>
+                <p><i class="fas fa-envelope"></i> info@pamsolutions.nl</p>
+                <p><i class="fas fa-map-marker-alt"></i> Eindhoven, NL</p>
+            </div>
+            <div>
+                <h4>Follow Us</h4>
+                <p><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a></p>
+                <p><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i> Twitter</a></p>
+                <p><a href="#" aria-label="GitHub"><i class="fab fa-github"></i> GitHub</a></p>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <p><a href="#privacy-statement">Privacy Statement</a></p>
+                <p><a href="#privacy">Privacy Policy</a></p>
+                <p><a href="#cookie-policy">Cookie Policy</a></p>
+                <p><a href="#consent-preferences">Consent Preferences</a></p>
+                <p><a href="#dsar">DSAR</a></p>
+                <p><a href="#disclaimer">Disclaimer</a></p>
+            </div>
+        </div>
+        <div class="credits">&copy; 2025 PAM Solutions. All rights reserved.</div>
+    </footer>
+    <script>
+    // Dark mode toggle implementation
+    const themeToggle = document.getElementById('theme-toggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    // Initialise theme based on localStorage or system preference
+    function initTheme() {
+        const storedTheme = localStorage.getItem('pam-theme');
+        if (storedTheme) {
+            document.body.classList.toggle('dark-mode', storedTheme === 'dark');
+            updateToggleIcon();
+        } else if (prefersDarkScheme.matches) {
+            document.body.classList.add('dark-mode');
+            updateToggleIcon();
+        }
+    }
+    function updateToggleIcon() {
+        const icon = themeToggle.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    }
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+        localStorage.setItem('pam-theme', newTheme);
+        updateToggleIcon();
+    });
+    initTheme();
+    
+    // Scroll reveal animations using IntersectionObserver
+    const observerOptions = {
+        threshold: 0.1
+    };
+    const revealCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+    const observer = new IntersectionObserver(revealCallback, observerOptions);
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    
+    // Form submission message
+    function showSubmissionMessage() {
+        const formMessage = document.getElementById('form-message');
+        formMessage.textContent = 'Thank you! Your message has been sent.';
+        formMessage.style.color = varComputed('--primary-color');
+        formMessage.style.display = 'block';
+        // Reset form fields
+        setTimeout(() => {
+            document.querySelector('#contact form').reset();
+            formMessage.style.display = 'none';
+        }, 5000);
+    }
+
+    // DSAR form submission message
+    function showDsarMessage() {
+        const dsarMessage = document.getElementById('dsar-message');
+        dsarMessage.textContent = 'Thank you! Your data subject access request has been submitted. We will respond within one month.';
+        dsarMessage.style.color = varComputed('--primary-color');
+        dsarMessage.style.display = 'block';
+        setTimeout(() => {
+            const dsarForm = document.getElementById('dsar-form');
+            if (dsarForm) dsarForm.reset();
+            dsarMessage.style.display = 'none';
+        }, 5000);
+    }
+    // Helper to compute CSS variable in JS
+    function varComputed(name) {
+        return getComputedStyle(document.body).getPropertyValue(name);
+    }
+    </script>
+</body>
+</html>
