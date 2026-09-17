@@ -113,6 +113,12 @@
             transform: translateY(0);
         }
         
+        .access-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
         .error-message {
             color: #e74c3c;
             margin-top: 15px;
@@ -122,6 +128,16 @@
             border-left: 4px solid #e74c3c;
             display: none;
             animation: shake 0.5s ease-in-out;
+        }
+        
+        .expired-message {
+            color: #e67e22;
+            margin-top: 15px;
+            padding: 12px;
+            background: #fef9e7;
+            border-radius: 8px;
+            border-left: 4px solid #f39c12;
+            display: none;
         }
         
         @keyframes shake {
@@ -162,6 +178,30 @@
             backdrop-filter: blur(10px);
         }
         
+        .session-timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+        
+        .session-timer.warning {
+            background: rgba(231, 76, 60, 0.9);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
         @media (max-width: 480px) {
             .login-container {
                 padding: 30px 20px;
@@ -171,10 +211,21 @@
             .github-badge {
                 display: none;
             }
+            
+            .session-timer {
+                top: 10px;
+                right: 10px;
+                font-size: 0.7rem;
+                padding: 6px 10px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="session-timer" id="sessionTimer">
+        ⏱️ Session expires in: <span id="timeRemaining">30:00</span>
+    </div>
+    
     <div class="login-container" id="loginContainer">
         <div class="logo">PAM Solutions</div>
         <div class="tagline">Professional IT Infrastructure Services</div>
@@ -190,7 +241,7 @@
                 <input type="password" id="clientCode" placeholder="Enter your access code" required autocomplete="off">
             </div>
             
-            <button type="submit" class="access-btn">
+            <button type="submit" class="access-btn" id="submitBtn">
                 🔓 Access Confidential Proposal
             </button>
         </form>
@@ -199,9 +250,13 @@
             ❌ Invalid access code. Please verify your code or contact PAM Solutions.
         </div>
         
+        <div class="expired-message" id="expiredMessage">
+            ⏰ Session has expired for security reasons. Please refresh the page to start a new session.
+        </div>
+        
         <div class="security-note">
             🔒 <strong>Confidential Document</strong><br>
-            This proposal contains proprietary and confidential information. Access is restricted to authorized personnel only. Session will auto-expire after 30 minutes of inactivity.
+            This proposal contains proprietary and confidential information. Access is restricted to authorized personnel only. Session will auto-expire after 30 minutes for security.
         </div>
         
         <div class="contact-info">
@@ -223,13 +278,95 @@
             'PAM-PROPOSAL-KN25'
         ];
         
-        // Initialize form handling
+        // Session management
+        const SESSION_DURATION = 30 * 60 * 1000; // 30 minutes in milliseconds
+        const WARNING_TIME = 5 * 60 * 1000; // Show warning 5 minutes before expiry
+        
+        let sessionStartTime = Date.now();
+        let sessionTimer;
+        let timerDisplay;
+        let isSessionExpired = false;
+        
+        // Initialize session timer
+        function initializeSession() {
+            sessionStartTime = Date.now();
+            isSessionExpired = false;
+            
+            const sessionTimerEl = document.getElementById('sessionTimer');
+            sessionTimerEl.style.display = 'block';
+            
+            updateTimerDisplay();
+            timerDisplay = setInterval(updateTimerDisplay, 1000);
+            
+            // Set expiry timer
+            sessionTimer = setTimeout(() => {
+                expireSession();
+            }, SESSION_DURATION);
+        }
+        
+        function updateTimerDisplay() {
+            const elapsed = Date.now() - sessionStartTime;
+            const remaining = Math.max(0, SESSION_DURATION - elapsed);
+            
+            if (remaining === 0) {
+                expireSession();
+                return;
+            }
+            
+            const minutes = Math.floor(remaining / 60000);
+            const seconds = Math.floor((remaining % 60000) / 1000);
+            const timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            const timeRemainingEl = document.getElementById('timeRemaining');
+            const sessionTimerEl = document.getElementById('sessionTimer');
+            
+            timeRemainingEl.textContent = timeString;
+            
+            // Show warning styling when < 5 minutes remain
+            if (remaining <= WARNING_TIME) {
+                sessionTimerEl.classList.add('warning');
+            }
+        }
+        
+        function expireSession() {
+            isSessionExpired = true;
+            clearInterval(timerDisplay);
+            clearTimeout(sessionTimer);
+            
+            // Disable form
+            const form = document.getElementById('accessForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const codeInput = document.getElementById('clientCode');
+            
+            form.style.opacity = '0.5';
+            form.style.pointerEvents = 'none';
+            submitBtn.disabled = true;
+            codeInput.disabled = true;
+            
+            // Show expired message
+            document.getElementById('expiredMessage').style.display = 'block';
+            
+            // Hide timer
+            document.getElementById('sessionTimer').style.display = 'none';
+            
+            // Auto-refresh after 10 seconds
+            setTimeout(() => {
+                window.location.reload();
+            }, 10000);
+        }
+        
+        // Form handling
         document.getElementById('accessForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            if (isSessionExpired) {
+                alert('Session has expired. Please refresh the page.');
+                return;
+            }
+            
             const enteredCode = document.getElementById('clientCode').value.trim().toUpperCase();
             const errorMessage = document.getElementById('errorMessage');
-            const submitBtn = document.querySelector('.access-btn');
+            const submitBtn = document.getElementById('submitBtn');
             
             // Show loading state
             submitBtn.innerHTML = '🔄 Verifying...';
@@ -242,14 +379,21 @@
                     submitBtn.innerHTML = '✅ Access Granted';
                     submitBtn.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
                     
+                    // Clear session timers before redirect
+                    clearInterval(timerDisplay);
+                    clearTimeout(sessionTimer);
+                    
                     setTimeout(() => {
-                        window.location.href = './proposal.html';
+                        // In a real implementation, you would redirect to the actual proposal
+                        alert('Access granted! In a real implementation, you would be redirected to the secure proposal document.');
+                        // window.location.href = './proposal.html';
                     }, 1000);
                     
                     // Optional: Track successful access
                     console.log('Proposal accessed:', {
                         timestamp: new Date(),
                         code: enteredCode,
+                        sessionDuration: Date.now() - sessionStartTime,
                         userAgent: navigator.userAgent
                     });
                     
@@ -269,39 +413,10 @@
                         errorMessage.style.display = 'none';
                     }, 5000);
                 }
-            }, 1500); // 1.5 second delay for security appearance
+            }, 1500);
         });
         
-        // Security features
-        let inactivityTimer;
-        let warningTimer;
-        
-        function resetInactivityTimer() {
-            clearTimeout(inactivityTimer);
-            clearTimeout(warningTimer);
-            
-            // Warning after 25 minutes
-            warningTimer = setTimeout(() => {
-                if (confirm('Session will expire in 5 minutes due to inactivity. Continue?')) {
-                    resetInactivityTimer();
-                }
-            }, 25 * 60 * 1000);
-            
-            // Auto-expire after 30 minutes
-            inactivityTimer = setTimeout(() => {
-                alert('Session expired due to inactivity. Please refresh to continue.');
-                window.location.reload();
-            }, 30 * 60 * 1000);
-        }
-        
-        // Track user activity
-        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-            document.addEventListener(event, resetInactivityTimer, true);
-        });
-        
-        resetInactivityTimer();
-        
-        // Disable right-click and F12 for added security
+        // Additional security features
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
@@ -312,6 +427,18 @@
         // Focus on input field when page loads
         window.addEventListener('load', () => {
             document.getElementById('clientCode').focus();
+            initializeSession();
+        });
+        
+        // Handle page visibility changes (user switches tabs/minimizes)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                console.log('Page hidden - session continues in background');
+            } else {
+                console.log('Page visible - checking session status');
+                // Session continues counting even when page is hidden
+                // This is intentional for security
+            }
         });
     </script>
 </body>
